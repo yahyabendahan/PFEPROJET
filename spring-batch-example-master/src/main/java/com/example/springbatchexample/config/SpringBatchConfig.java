@@ -24,26 +24,16 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import com.example.springbatchexample.DOC.DocDTO;
-import com.example.springbatchexample.DOC.ProcessorDoc;
-import com.example.springbatchexample.DOC.WriterDoc;
-import com.example.springbatchexample.ECH.EchDTO;
-import com.example.springbatchexample.ECH.ProcessorEch;
-import com.example.springbatchexample.ECH.WriterEch;
-import com.example.springbatchexample.EFA.EfaDTO;
-import com.example.springbatchexample.EFA.ProcessorEfa;
-import com.example.springbatchexample.EFA.WriterEfa;
-import com.example.springbatchexample.ESC.EscDTO;
-import com.example.springbatchexample.ESC.ProcessorEsc;
-import com.example.springbatchexample.ESC.WriterEsc;
-import com.example.springbatchexample.MCN.McnDTO;
-import com.example.springbatchexample.MCN.ProcessorMcn;
-import com.example.springbatchexample.MCN.WriterMcn;
-import com.example.springbatchexample.SBF.ProcessorSbf;
-import com.example.springbatchexample.SBF.SbfDTO;
-import com.example.springbatchexample.SBF.WriterSbf;
+import com.example.springbatchexample.DOC.*;
+import com.example.springbatchexample.ECH.*;
+import com.example.springbatchexample.EFA.*;
+import com.example.springbatchexample.ESC.*;
+import com.example.springbatchexample.MCN.*;
+import com.example.springbatchexample.SBF.*;
 import com.example.springbatchexample.constantes.Constantes;
-import com.example.springbatchexample.model.ImpayesCDLModel;
+import com.example.springbatchexample.model.*;
+import com.example.springbatchexample.traitementCompte.*;
+
 
 @Configuration
 @EnableBatchProcessing
@@ -112,6 +102,15 @@ public class SpringBatchConfig {
 				.reader(itemReaderEfa())
 				.processor(itemProcessorEfa())
 				.writer(writerEfa())
+				.build();
+		
+		Step step7 = stepBuilderFactory
+				.get("COMPTE-STEP")
+				.<CompteModel, ImpayesCDLModel>chunk(10)
+				//.<CompteModel, ImpayesCDLModel>chunk(10)
+				//.reader(itemReaderTC())
+				//.processor(itemProcessorTC())
+			//	.writer(writerTC())
 				.build();
 		
 
@@ -191,13 +190,23 @@ public class SpringBatchConfig {
 	public ProcessorEfa itemProcessorEfa() {
 		return new ProcessorEfa();
 	}
+	//COMPTE
+	@Bean("CompteWriter")
+	public WriterTC writerTC() {
+		return new WriterTC(dataSource());
+	}
+	@Bean("CompteProcessor")
+	public ProcessorTC itemProcessorTC() {
+		return new ProcessorTC();
+	}
+		
 	
 	
-	//ItemReader
+	//ReadCompte
 	@Bean
-	public ItemReader<ImpayesCDLModel> itemReaderTC(DataSource dataSource) {
+	public ItemReader<ImpayesCDLModel> itemReaderTC() {    //not used
 	    JdbcCursorItemReader<ImpayesCDLModel> reader = new JdbcCursorItemReader<>();
-	    reader.setDataSource(dataSource);
+	    reader.setDataSource(dataSource());
 	    reader.setSql("SELECT CPT FROM IMPAYES_CDL");
 	    reader.setRowMapper(new BeanPropertyRowMapper<>(ImpayesCDLModel.class));
 	    return reader;

@@ -8,6 +8,6 @@ import com.example.springbatchexample.model.ImpayesCDLModel;
 
 
 @Repository
-public interface ImpayesCDLRepository extends JpaRepository<ImpayesCDLModel, Long> {
+public interface ImpayesCDLRepository extends JpaRepository<ImpayesCDLModel, String> {
 
 }
