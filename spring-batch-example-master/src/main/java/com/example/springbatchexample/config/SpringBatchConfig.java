@@ -32,8 +32,7 @@ import com.example.springbatchexample.MCN.*;
 import com.example.springbatchexample.SBF.*;
 import com.example.springbatchexample.constantes.Constantes;
 import com.example.springbatchexample.model.*;
-import com.example.springbatchexample.traitementCompte.*;
-
+//import com.example.springbatchexample.TraitementCompte.*;
 
 @Configuration
 @EnableBatchProcessing
@@ -104,7 +103,7 @@ public class SpringBatchConfig {
 				.writer(writerEfa())
 				.build();
 		
-		Step step7 = stepBuilderFactory
+	/*	Step step7 = stepBuilderFactory
 				.get("COMPTE-STEP")
 				.<CompteModel, ImpayesCDLModel>chunk(10)
 				//.<CompteModel, ImpayesCDLModel>chunk(10)
@@ -112,7 +111,7 @@ public class SpringBatchConfig {
 				//.processor(itemProcessorTC())
 			//	.writer(writerTC())
 				.build();
-		
+	*/
 
 
 		Job job = jobBuilderFactory
@@ -191,18 +190,18 @@ public class SpringBatchConfig {
 		return new ProcessorEfa();
 	}
 	//COMPTE
-	@Bean("CompteWriter")
+/*	@Bean("CompteWriter")
 	public WriterTC writerTC() {
 		return new WriterTC(dataSource());
 	}
 	@Bean("CompteProcessor")
 	public ProcessorTC itemProcessorTC() {
 		return new ProcessorTC();
-	}
+	}*/
 		
 	
 	
-	//ReadCompte
+	//Compte
 	@Bean
 	public ItemReader<ImpayesCDLModel> itemReaderTC() {    //not used
 	    JdbcCursorItemReader<ImpayesCDLModel> reader = new JdbcCursorItemReader<>();

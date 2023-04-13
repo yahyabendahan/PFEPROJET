@@ -1,4 +1,4 @@
-package com.example.springbatchexample.traitementCompte;
+package com.example.springbatchexample.TraitementCompte;
 
 
 

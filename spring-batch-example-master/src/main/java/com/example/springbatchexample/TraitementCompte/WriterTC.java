@@ -1,4 +1,4 @@
-package com.example.springbatchexample.traitementCompte;
+package com.example.springbatchexample.TraitementCompte;
 
 import javax.sql.DataSource;
 
@@ -16,7 +16,7 @@ public class WriterTC extends JdbcBatchItemWriter<CompteModel>{
 	        this.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
 
 	        this.setSql("INSERT INTO COMPTE (CODE,NUMERO_COMPTE_EMPRUNTEUR, ENCOURS_EES_CONSO, ENCOURS_EES_COMM, ENCOURS_ESB, ENCOURS_ESI, SOLDE, ENCOURS_DECLASSE, ENCOURS_RISQUE, TYPE_CLIENT, NUM_TIERS ) " +
-	        		"VALUES (:code, :numeroCompteEmprunteur, :encoursEESConso, :encoursEESComm, :encoursESB, :encoursESI, :solde, :encoursDeclasse, :encoursRisque, typeClient, numTiers;)");
+	        		"VALUES (:code, :numeroCompteEmprunteur, :encoursEESConso, :encoursEESComm, :encoursESB, :encoursESI, :solde, :encoursDeclasse, :encoursRisque, :typeClient, :numTiers)");
 	        this.setDataSource(dataSource);
 	    }
 	}

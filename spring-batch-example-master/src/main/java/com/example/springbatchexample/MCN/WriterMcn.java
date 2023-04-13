@@ -19,4 +19,6 @@ public class WriterMcn extends JdbcBatchItemWriter<ImpayesCDLModel>{
 	        this.setDataSource(dataSource);
 
 	    }
-	}
+}
+
+	
