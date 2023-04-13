@@ -1,0 +1,2 @@
+com.example.springbatchexample.model.EchDTO@70d7467e
+com.example.springbatchexample.model.EchDTO@4889ef0a
