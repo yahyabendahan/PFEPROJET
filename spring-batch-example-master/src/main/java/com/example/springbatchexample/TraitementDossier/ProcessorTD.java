@@ -1,18 +1,11 @@
 package com.example.springbatchexample.TraitementDossier;
 
-import java.util.List;
-
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.example.springbatchexample.model.*;
 
 
 public class ProcessorTD implements ItemProcessor<ImpayesCDLModel, DossierModel> {
-	
-    private JdbcTemplate jdbcTemplate;
-
 
 	@Override
 	public DossierModel process(ImpayesCDLModel impayescdl) throws Exception {

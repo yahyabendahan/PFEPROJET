@@ -16,12 +16,14 @@ import com.example.springbatchexample.model.DossierModel;
 public class WriterTD extends JdbcBatchItemWriter<DossierModel>{
 	
 	DossierModel d = new DossierModel();
-    private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+    JdbcTemplate jdbcTemplate;
 
 
 	String sql0 = "SELECT CLE_DOSSIER FROM DOSSIER";
 	List<DossierModel> listDossier = jdbcTemplate.query(sql0, new BeanPropertyRowMapper<>(DossierModel.class));
-
+//jdbcTemplate = null ?????????????????????????????????
 	
 	    
 	    @SuppressWarnings("unlikely-arg-type")
