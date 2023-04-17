@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class CompteModel {
 	@Id
 	@Column(name = "CODE")
-	private String code;
+	private Double code;
 
 	@Column(name = "NUMERO_COMPTE_EMPRUNTEUR")
 	private String numeroCompteEmprunteur;
@@ -62,11 +62,11 @@ public class CompteModel {
 	@Column(name = "RAISON_SOCIALE")
 	private String raisonSociale;
 
-	public String getCode() {
+	public Double getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(Double code) {
 		this.code = code;
 	}
 

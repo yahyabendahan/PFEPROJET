@@ -28,44 +28,44 @@ public class ProcessorTC implements ItemProcessor<ImpayesCDLModel, CompteModel> 
 
     @Override
     public CompteModel process(ImpayesCDLModel impayesCDLModel) throws Exception {
-        String compteId = impayesCDLModel.getCpt();
-        CompteModel compte = new CompteModel();
+        String ncp = impayesCDLModel.getNumComptePayeur();
+        CompteModel comptemodel = new CompteModel();
 
-        String sql = "SELECT * FROM COMPTE WHERE CODE = ?";
-        List<CompteModel> comptes = jdbcTemplate.query(sql, new Object[]{compteId}, new BeanPropertyRowMapper<>(CompteModel.class));
+        String sql = "SELECT * FROM COMPTE WHERE NumeroCompteEmprunteur = ?";
+        List<CompteModel> comptes = jdbcTemplate.query(sql, new Object[]{ncp}, new BeanPropertyRowMapper<>(CompteModel.class));
         
         if (!comptes.isEmpty()) {
         	
         	//row with code different to cpt insert into COMPTE
-        	String sql1 = "SELECT * FROM COMPTE WHERE CODE != ?";
-        	List<ImpayesCDLModel> comptes1 = jdbcTemplate.query(sql1, new Object[]{compteId}, new BeanPropertyRowMapper<>(ImpayesCDLModel.class));
-        	
-        	// compte.setCode(comptes1.get(1));
-               compte.setCode(impayesCDLModel.getCpt());
-        	   compte.setNumeroCompteEmprunteur(impayesCDLModel.getNumComptePayeur());
-               compte.setEncoursEESConso(impayesCDLModel.getEncoursEESConso());
-               compte.setEncoursEESComm(impayesCDLModel.getEncoursEESComm());
-               compte.setEncoursESB(impayesCDLModel.getEncoursESB());
-               compte.setEncoursESI(impayesCDLModel.getEncoursESI());
-               compte.setSolde(impayesCDLModel.getSolde());
-               compte.setEncoursDeclasse(impayesCDLModel.getEncoursDeclasse());
-               compte.setEncoursRisque(impayesCDLModel.getEncoursRisque());
-               compte.setTypeClient(impayesCDLModel.getTypeClient());
-               compte.setNumTiers(impayesCDLModel.getNumTiers());
+        	String sql1 = "SELECT * FROM COMPTE WHERE NumeroCompteEmprunteur != ?";
+        	List<ImpayesCDLModel> comptes1 = jdbcTemplate.query(sql1, new Object[]{ncp}, new BeanPropertyRowMapper<>(ImpayesCDLModel.class));
+        	double i = 1 ;
+        	comptemodel.setCode(i++);
+        	comptemodel.setNumeroCompteEmprunteur(impayesCDLModel.getNumComptePayeur());
+        	comptemodel.setEncoursEESConso(impayesCDLModel.getEncoursEESConso());
+        	comptemodel.setEncoursEESComm(impayesCDLModel.getEncoursEESComm());
+        	comptemodel.setEncoursESB(impayesCDLModel.getEncoursESB());
+        	comptemodel.setEncoursESI(impayesCDLModel.getEncoursESI());
+        	comptemodel.setSolde(impayesCDLModel.getSolde());
+        	comptemodel.setEncoursDeclasse(impayesCDLModel.getEncoursDeclasse());
+        	comptemodel.setEncoursRisque(impayesCDLModel.getEncoursRisque());
+        	comptemodel.setTypeClient(impayesCDLModel.getTypeClient());
+        	comptemodel.setNumTiers(impayesCDLModel.getNumTiers());
            // return comptes1.get(0);
         } else {
-            compte.setCode(compteId);
-            compte.setNumeroCompteEmprunteur(impayesCDLModel.getNumComptePayeur());
-            compte.setEncoursEESConso(impayesCDLModel.getEncoursEESConso());
-            compte.setEncoursEESComm(impayesCDLModel.getEncoursEESComm());
-            compte.setEncoursESB(impayesCDLModel.getEncoursESB());
-            compte.setEncoursESI(impayesCDLModel.getEncoursESI());
-            compte.setSolde(impayesCDLModel.getSolde());
-            compte.setEncoursDeclasse(impayesCDLModel.getEncoursDeclasse());
-            compte.setEncoursRisque(impayesCDLModel.getEncoursRisque());
-            compte.setTypeClient(impayesCDLModel.getTypeClient());
-            compte.setNumTiers(impayesCDLModel.getNumTiers());
+        	double i = 1 ;
+        	comptemodel.setCode(i++);
+        	comptemodel.setNumeroCompteEmprunteur(impayesCDLModel.getNumComptePayeur());
+        	comptemodel.setEncoursEESConso(impayesCDLModel.getEncoursEESConso());
+        	comptemodel.setEncoursEESComm(impayesCDLModel.getEncoursEESComm());
+        	comptemodel.setEncoursESB(impayesCDLModel.getEncoursESB());
+        	comptemodel.setEncoursESI(impayesCDLModel.getEncoursESI());
+        	comptemodel.setSolde(impayesCDLModel.getSolde());
+        	comptemodel.setEncoursDeclasse(impayesCDLModel.getEncoursDeclasse());
+        	comptemodel.setEncoursRisque(impayesCDLModel.getEncoursRisque());
+        	comptemodel.setTypeClient(impayesCDLModel.getTypeClient());
+        	comptemodel.setNumTiers(impayesCDLModel.getNumTiers());
         }
-        return compte;
+        return comptemodel;
     }
 }

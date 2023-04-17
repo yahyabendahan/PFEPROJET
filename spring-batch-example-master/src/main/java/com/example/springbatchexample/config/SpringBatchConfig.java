@@ -8,8 +8,6 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.item.database.JdbcCursorItemReader;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
@@ -21,7 +19,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.example.springbatchexample.DOC.*;
@@ -30,9 +27,11 @@ import com.example.springbatchexample.EFA.*;
 import com.example.springbatchexample.ESC.*;
 import com.example.springbatchexample.MCN.*;
 import com.example.springbatchexample.SBF.*;
+import com.example.springbatchexample.TraitementCompte.*;
+import com.example.springbatchexample.TraitementDossier.*;
 import com.example.springbatchexample.constantes.Constantes;
 import com.example.springbatchexample.model.*;
-//import com.example.springbatchexample.TraitementCompte.*;
+
 
 @Configuration
 @EnableBatchProcessing
@@ -103,16 +102,22 @@ public class SpringBatchConfig {
 				.writer(writerEfa())
 				.build();
 		
-	/*	Step step7 = stepBuilderFactory
-				.get("COMPTE-STEP")
-				.<CompteModel, ImpayesCDLModel>chunk(10)
-				//.<CompteModel, ImpayesCDLModel>chunk(10)
-				//.reader(itemReaderTC())
-				//.processor(itemProcessorTC())
-			//	.writer(writerTC())
+		Step step7 = stepBuilderFactory
+				.get("compte")
+				.<ImpayesCDLModel,CompteModel>chunk(10)
+			    //.reader()
+				.processor(itemProcessorTC())
+				.writer(writerTC())
 				.build();
-	*/
-
+		
+		Step step8 = stepBuilderFactory
+				.get("compte")
+				.<ImpayesCDLModel, DossierModel>chunk(10)
+			    //.reader()
+				.processor(itemProcessorTD())
+				.writer(writerTD())
+				.build();
+	
 
 		Job job = jobBuilderFactory
 				.get("CDL-JOB")
@@ -123,6 +128,8 @@ public class SpringBatchConfig {
 				.next(step4)
 				.next(step5)
 				.next(step6)
+				.next(step7)
+				.next(step8)
 				.build();
 
 		return job;
@@ -189,27 +196,29 @@ public class SpringBatchConfig {
 	public ProcessorEfa itemProcessorEfa() {
 		return new ProcessorEfa();
 	}
+	
 	//COMPTE
-/*	@Bean("CompteWriter")
-	public WriterTC writerTC() {
-		return new WriterTC(dataSource());
-	}
-	@Bean("CompteProcessor")
-	public ProcessorTC itemProcessorTC() {
-		return new ProcessorTC();
-	}*/
+		@Bean("CompteWriter")
+		public WriterTC writerTC() {
+			return new WriterTC(dataSource());
+		}
+		@Bean("CompteProcessor")
+		public ProcessorTC itemProcessorTC() {
+			return new ProcessorTC();
+		}
+	
+	
+	//DOSSIER
+		@Bean("DossierWriter")
+		public WriterTD writerTD() {
+			return new WriterTD(dataSource());
+		}
+		@Bean("DossierProcessor")
+		public ProcessorTD itemProcessorTD() {
+			return new ProcessorTD();
+		}
 		
-	
-	
-	//Compte
-	@Bean
-	public ItemReader<ImpayesCDLModel> itemReaderTC() {    //not used
-	    JdbcCursorItemReader<ImpayesCDLModel> reader = new JdbcCursorItemReader<>();
-	    reader.setDataSource(dataSource());
-	    reader.setSql("SELECT CPT FROM IMPAYES_CDL");
-	    reader.setRowMapper(new BeanPropertyRowMapper<>(ImpayesCDLModel.class));
-	    return reader;
-	}
+
 	//ECH
 	@Bean
     public FlatFileItemReader<EchDTO> itemReaderEch() {
