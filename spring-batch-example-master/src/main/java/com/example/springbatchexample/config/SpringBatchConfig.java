@@ -8,6 +8,8 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.database.JdbcCursorItemReader;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
@@ -19,6 +21,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.example.springbatchexample.DOC.*;
@@ -105,7 +108,7 @@ public class SpringBatchConfig {
 		Step step7 = stepBuilderFactory
 				.get("compte")
 				.<ImpayesCDLModel,CompteModel>chunk(10)
-			    //.reader()
+			    .reader(itemReaderTC(dataSource()))
 				.processor(itemProcessorTC())
 				.writer(writerTC())
 				.build();
@@ -113,7 +116,7 @@ public class SpringBatchConfig {
 		Step step8 = stepBuilderFactory
 				.get("dossier")
 				.<ImpayesCDLModel, DossierModel>chunk(10)
-			    //.reader()
+			    .reader(itemReaderTC(dataSource()))
 				.processor(itemProcessorTD())
 				.writer(writerTD())
 				.build();
@@ -200,7 +203,7 @@ public class SpringBatchConfig {
 	//COMPTE
 		@Bean("CompteWriter")
 		public WriterTC writerTC() {
-			return new WriterTC(dataSource());
+			return new WriterTC(dataSource()); 
 		}
 		@Bean("CompteProcessor")
 		public ProcessorTC itemProcessorTC() {
@@ -216,6 +219,17 @@ public class SpringBatchConfig {
 		@Bean("DossierProcessor")
 		public ProcessorTD itemProcessorTD() {
 			return new ProcessorTD();
+		}
+		
+		//ItemReader
+		@Bean
+		public JdbcCursorItemReader<ImpayesCDLModel> itemReaderTC(DataSource dataSource) {
+		    JdbcCursorItemReader<ImpayesCDLModel> reader = new JdbcCursorItemReader<>();
+		    reader.setDataSource(dataSource);
+		    reader.setName("ItemReaderJustForShow");
+		    reader.setSql("SELECT CPT FROM IMPAYES_CDL");
+		    reader.setRowMapper(new BeanPropertyRowMapper<>(ImpayesCDLModel.class));
+		    return reader;
 		}
 		
 

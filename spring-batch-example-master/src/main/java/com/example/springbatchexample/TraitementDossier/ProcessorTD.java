@@ -18,11 +18,11 @@ public class ProcessorTD implements ItemProcessor<ImpayesCDLModel, DossierModel>
 		//String sql0 = "SELECT CLE_DOSSIER FROM DOSSIER";
 		//List<DossierModel> listDossier = jdbcTemplate.query(sql0, new BeanPropertyRowMapper<>(DossierModel.class));
 		
-		double i=1;
+		//double i=1;
 		
 		 if (impayescdl.getNateng()!="ESC") {
 			 d.setCLE_DOSSIER(impayescdl.getNateng()+impayescdl.getNoDossier()+impayescdl.getDateRemise());
-			 d.setCODE(i++);
+			// d.setCODE(i++);
 			 d.setNUMERO_DOSSIER(impayescdl.getNoDossier());
 			 d.setNUM_DOSSIER_COMPLET(impayescdl.getNumDossierComplet());
 			 d.setNUMERO_LIGNE(impayescdl.getNumeroLigne());
@@ -45,7 +45,7 @@ public class ProcessorTD implements ItemProcessor<ImpayesCDLModel, DossierModel>
 		        //List<ImpayesCDLModel> listImpayes = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ImpayesCDLModel.class));
 		        
 		     d.setCLE_DOSSIER(sql);
-		   	 d.setCODE(i++);
+		   	// d.setCODE(i++);
 			 d.setNUMERO_DOSSIER(impayescdl.getNoDossier());
 			 d.setNUM_DOSSIER_COMPLET(impayescdl.getNumDossierComplet());
 			 d.setNUMERO_LIGNE(impayescdl.getNumeroLigne());

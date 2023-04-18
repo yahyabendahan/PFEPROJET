@@ -43,7 +43,7 @@ public class CompteModel {
 
 	@Column(name = "NUM_TIERS")
 	private String numTiers;
-
+//blow is not much use
 	@Column(name = "TYPE_PROPOSITION")
 	private String typeProposition;
 

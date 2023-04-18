@@ -26,21 +26,22 @@ public class ProcessorTC implements ItemProcessor<ImpayesCDLModel, CompteModel> 
 	@Autowired
 	private DataSource dataSource;
 
-	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
  
     @Override
     public CompteModel process(ImpayesCDLModel impayesCDLModel) throws Exception {
         String ncp = impayesCDLModel.getNumComptePayeur();
         CompteModel comptemodel = new CompteModel();
+    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
-        String sql = "SELECT * FROM COMPTE WHERE NumeroCompteEmprunteur = ?";
+
+        String sql = "SELECT * FROM COMPTE WHERE NUMERO_COMPTE_EMPRUNTEUR = ?";
         List<CompteModel> comptes = jdbcTemplate.query(sql, new Object[]{ncp}, new BeanPropertyRowMapper<>(CompteModel.class));
         
         if (!comptes.isEmpty()) {
-        	//work in WriterTC
-        	double i = 1 ;
-        	comptemodel.setCode(i++);
+        	//condition in WriterTC
+        	//double i = 1 ;
+        	//comptemodel.setCode(i++);
         	comptemodel.setNumeroCompteEmprunteur(impayesCDLModel.getNumComptePayeur());
         	comptemodel.setEncoursEESConso(impayesCDLModel.getEncoursEESConso());
         	comptemodel.setEncoursEESComm(impayesCDLModel.getEncoursEESComm());
@@ -53,8 +54,8 @@ public class ProcessorTC implements ItemProcessor<ImpayesCDLModel, CompteModel> 
         	comptemodel.setNumTiers(impayesCDLModel.getNumTiers());
 
         } else {
-        	double j = 1 ;
-        	comptemodel.setCode(j++);
+        	//double j = 1 ;
+        	//comptemodel.setCode(j++);
         	comptemodel.setNumeroCompteEmprunteur(impayesCDLModel.getNumComptePayeur());
         	comptemodel.setEncoursEESConso(impayesCDLModel.getEncoursEESConso());
         	comptemodel.setEncoursEESComm(impayesCDLModel.getEncoursEESComm());

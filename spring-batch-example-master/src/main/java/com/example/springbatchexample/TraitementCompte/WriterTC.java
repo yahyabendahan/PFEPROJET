@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -14,33 +15,36 @@ import com.example.springbatchexample.model.CompteModel;
 import com.example.springbatchexample.model.DossierModel;
 import com.example.springbatchexample.model.ImpayesCDLModel;
 
+
+//@ComponentScan(basePackages = "com.example.springbatchexample.config")
 @Component
 public class WriterTC extends JdbcBatchItemWriter<CompteModel>{
 	
+	//@Autowired
+	//private DataSource dataSource;
 	
-	@Autowired
-	private DataSource dataSource;
-	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
-
-	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-	//jdbcTemplate.setDataSource(dataSource);
 	
-	String sql = "SELECT NumeroCompteEmprunteur FROM COMPTE";
-	List<CompteModel> listCompte = jdbcTemplate.query(
-            sql,
-            new BeanPropertyRowMapper<CompteModel>(CompteModel.class));
-	
-	    
-	    
 	    //@Autowired
 	    @SuppressWarnings("unlikely-arg-type")
 		public WriterTC(DataSource dataSource) {
+
+	    	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
+
+	    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+	    	
+	    	String sql = "SELECT NUMERO_COMPTE_EMPRUNTEUR FROM COMPTE";
+	    	List<CompteModel> listCompte = jdbcTemplate.query(
+	                sql,
+	                new BeanPropertyRowMapper<CompteModel>(CompteModel.class));
+	    	
+	    	    
 	        this.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
 	    	
 	        if (!listCompte.contains(impayesCDLModel.getNumComptePayeur())) {
-	        this.setSql("INSERT INTO COMPTE (CODE,NUMERO_COMPTE_EMPRUNTEUR, ENCOURS_EES_CONSO, ENCOURS_EES_COMM, ENCOURS_ESB, ENCOURS_ESI, SOLDE, ENCOURS_DECLASSE, ENCOURS_RISQUE, TYPE_CLIENT, NUM_TIERS ) " +
-	        		"VALUES (:code, :numeroCompteEmprunteur, :encoursEESConso, :encoursEESComm, :encoursESB, :encoursESI, :solde, :encoursDeclasse, :encoursRisque, :typeClient, :numTiers)");
+	        this.setSql("INSERT INTO COMPTE (NUMERO_COMPTE_EMPRUNTEUR, ENCOURS_EES_CONSO, ENCOURS_EES_COMM, ENCOURS_ESB, ENCOURS_ESI, SOLDE, ENCOURS_DECLASSE, ENCOURS_RISQUE, TYPE_CLIENT, NUM_TIERS ) " +
+	        		"VALUES (:numeroCompteEmprunteur, :encoursEESConso, :encoursEESComm, :encoursESB, :encoursESI, :solde, :encoursDeclasse, :encoursRisque, :typeClient, :numTiers)");
 	        }
+	        
 	        this.setDataSource(dataSource);
 	    }
 	}
