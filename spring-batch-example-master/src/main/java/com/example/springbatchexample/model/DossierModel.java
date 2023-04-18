@@ -9,13 +9,13 @@ import javax.persistence.Table;
 @Table(name = "DOSSIER")
 public class DossierModel {
 	
+	@Id
+	@Column
+	private Double CODE;
 	@Column
 	private String NUMERO_DOSSIER;
 	@Column
 	private Double ENCOURS;
-	@Id
-	@Column
-	private Double CODE;
 	@Column
 	private Double CODE_COMPTE;
 	@Column

@@ -7,27 +7,34 @@ import javax.sql.DataSource;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import com.example.springbatchexample.model.DossierModel;
 
+
+@ComponentScan(basePackages = "com.example.springbatchexample.config")
 @Component
 public class WriterTD extends JdbcBatchItemWriter<DossierModel>{
 	
 	DossierModel d = new DossierModel();
 	
+	
 	@Autowired
-    JdbcTemplate jdbcTemplate;
+	private DataSource dataSource;
 
-
-	String sql0 = "SELECT CLE_DOSSIER FROM DOSSIER";
-	List<DossierModel> listDossier = jdbcTemplate.query(sql0, new BeanPropertyRowMapper<>(DossierModel.class));
-//jdbcTemplate = null ?????????????????????????????????
+	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+	//jdbcTemplate.setDataSource(dataSource);
+	
+	String sql = "SELECT CLE_DOSSIER FROM DOSSIER";
+	List<DossierModel> listDossier = jdbcTemplate.query(
+            sql,
+            new BeanPropertyRowMapper<DossierModel>(DossierModel.class));
 	
 	    
 	    @SuppressWarnings("unlikely-arg-type")
-		@Autowired
+	
 	    public WriterTD(DataSource dataSource) {
 	        this.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
 	        

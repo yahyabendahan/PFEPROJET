@@ -3,29 +3,32 @@ package com.example.springbatchexample.TraitementCompte;
 
 
 import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.example.springbatchexample.MCN.McnDTO;
 import com.example.springbatchexample.model.CompteModel;
 import com.example.springbatchexample.model.ImpayesCDLModel;
+
+
+@ComponentScan(basePackages = "com.example.springbatchexample.config")
 
 @Component
 public class ProcessorTC implements ItemProcessor<ImpayesCDLModel, CompteModel> {
 
 
-    private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private DataSource dataSource;
 
-   /* @Autowired
-    public ProcessorTC(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }*/
+	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
+ 
     @Override
     public CompteModel process(ImpayesCDLModel impayesCDLModel) throws Exception {
         String ncp = impayesCDLModel.getNumComptePayeur();
@@ -35,10 +38,7 @@ public class ProcessorTC implements ItemProcessor<ImpayesCDLModel, CompteModel> 
         List<CompteModel> comptes = jdbcTemplate.query(sql, new Object[]{ncp}, new BeanPropertyRowMapper<>(CompteModel.class));
         
         if (!comptes.isEmpty()) {
-        	
-        	//row with code different to cpt insert into COMPTE
-        	String sql1 = "SELECT * FROM COMPTE WHERE NumeroCompteEmprunteur != ?";
-        	List<ImpayesCDLModel> comptes1 = jdbcTemplate.query(sql1, new Object[]{ncp}, new BeanPropertyRowMapper<>(ImpayesCDLModel.class));
+        	//work in WriterTC
         	double i = 1 ;
         	comptemodel.setCode(i++);
         	comptemodel.setNumeroCompteEmprunteur(impayesCDLModel.getNumComptePayeur());
@@ -51,10 +51,10 @@ public class ProcessorTC implements ItemProcessor<ImpayesCDLModel, CompteModel> 
         	comptemodel.setEncoursRisque(impayesCDLModel.getEncoursRisque());
         	comptemodel.setTypeClient(impayesCDLModel.getTypeClient());
         	comptemodel.setNumTiers(impayesCDLModel.getNumTiers());
-           // return comptes1.get(0);
+
         } else {
-        	double i = 1 ;
-        	comptemodel.setCode(i++);
+        	double j = 1 ;
+        	comptemodel.setCode(j++);
         	comptemodel.setNumeroCompteEmprunteur(impayesCDLModel.getNumComptePayeur());
         	comptemodel.setEncoursEESConso(impayesCDLModel.getEncoursEESConso());
         	comptemodel.setEncoursEESComm(impayesCDLModel.getEncoursEESComm());

@@ -1,10 +1,11 @@
 package com.example.springbatchexample.TraitementDossier;
 
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.stereotype.Component;
 
 import com.example.springbatchexample.model.*;
 
-
+@Component
 public class ProcessorTD implements ItemProcessor<ImpayesCDLModel, DossierModel> {
 
 	@Override

@@ -111,7 +111,7 @@ public class SpringBatchConfig {
 				.build();
 		
 		Step step8 = stepBuilderFactory
-				.get("compte")
+				.get("dossier")
 				.<ImpayesCDLModel, DossierModel>chunk(10)
 			    //.reader()
 				.processor(itemProcessorTD())
