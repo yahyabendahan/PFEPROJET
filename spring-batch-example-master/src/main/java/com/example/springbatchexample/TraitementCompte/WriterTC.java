@@ -32,6 +32,10 @@ public class WriterTC extends JdbcBatchItemWriter<CompteModel>{
 
 	    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 	    	
+	    	 String deleteSql = "DELETE FROM COMPTE";//TEMPORAIRE
+	         new JdbcTemplate(dataSource).update(deleteSql);
+	         System.out.println("WriterCOMPTE: ");
+	    	
 	    	String sql = "SELECT NUMERO_COMPTE_EMPRUNTEUR FROM COMPTE";
 	    	List<CompteModel> listCompte = jdbcTemplate.query(
 	                sql,
@@ -41,8 +45,8 @@ public class WriterTC extends JdbcBatchItemWriter<CompteModel>{
 	        this.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
 	    	
 	        if (!listCompte.contains(impayesCDLModel.getNumComptePayeur())) {
-	        this.setSql("INSERT INTO COMPTE (NUMERO_COMPTE_EMPRUNTEUR, ENCOURS_EES_CONSO, ENCOURS_EES_COMM, ENCOURS_ESB, ENCOURS_ESI, SOLDE, ENCOURS_DECLASSE, ENCOURS_RISQUE, TYPE_CLIENT, NUM_TIERS ) " +
-	        		"VALUES (:numeroCompteEmprunteur, :encoursEESConso, :encoursEESComm, :encoursESB, :encoursESI, :solde, :encoursDeclasse, :encoursRisque, :typeClient, :numTiers)");
+	        this.setSql("INSERT INTO COMPTE ( NUMERO_COMPTE_EMPRUNTEUR, ENCOURS_EES_CONSO, ENCOURS_EES_COMM, ENCOURS_ESB, ENCOURS_ESI, SOLDE, ENCOURS_DECLASSE, ENCOURS_RISQUE, TYPE_CLIENT, NUM_TIERS, CODE ) " +
+	        		"VALUES ( :numeroCompteEmprunteur, :encoursEESConso, :encoursEESComm, :encoursESB, :encoursESI, :solde, :encoursDeclasse, :encoursRisque, :typeClient, :numTiers, :code)");
 	        }
 	        
 	        this.setDataSource(dataSource);

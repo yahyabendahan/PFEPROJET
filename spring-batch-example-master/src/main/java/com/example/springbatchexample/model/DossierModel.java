@@ -30,6 +30,12 @@ public class DossierModel {
 	private String NUMERO_TIRAGE;
 	@Column
 	private String ANCIEN_NUMERO_DOSSIER;
+	public Double getCODE() {
+		return CODE;
+	}
+	public void setCODE(Double cODE) {
+		CODE = cODE;
+	}
 	public String getNUMERO_DOSSIER() {
 		return NUMERO_DOSSIER;
 	}
@@ -41,12 +47,6 @@ public class DossierModel {
 	}
 	public void setENCOURS(Double eNCOURS) {
 		ENCOURS = eNCOURS;
-	}
-	public Double getCODE() {
-		return CODE;
-	}
-	public void setCODE(Double cODE) {
-		CODE = cODE;
 	}
 	public Double getCODE_COMPTE() {
 		return CODE_COMPTE;
@@ -90,5 +90,6 @@ public class DossierModel {
 	public void setANCIEN_NUMERO_DOSSIER(String aNCIEN_NUMERO_DOSSIER) {
 		ANCIEN_NUMERO_DOSSIER = aNCIEN_NUMERO_DOSSIER;
 	}
-
+	
+	
 }

@@ -197,7 +197,6 @@ public class CompteModel {
 	public void setRaisonSociale(String raisonSociale) {
 		this.raisonSociale = raisonSociale;
 	}
-	
-	
 
+	
 }

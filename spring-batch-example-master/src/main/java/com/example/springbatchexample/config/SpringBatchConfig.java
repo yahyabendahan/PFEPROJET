@@ -227,7 +227,7 @@ public class SpringBatchConfig {
 		    JdbcCursorItemReader<ImpayesCDLModel> reader = new JdbcCursorItemReader<>();
 		    reader.setDataSource(dataSource);
 		    reader.setName("ItemReaderJustForShow");
-		    reader.setSql("SELECT CPT FROM IMPAYES_CDL");
+		    reader.setSql("SELECT * FROM IMPAYES_CDL");
 		    reader.setRowMapper(new BeanPropertyRowMapper<>(ImpayesCDLModel.class));
 		    return reader;
 		}
