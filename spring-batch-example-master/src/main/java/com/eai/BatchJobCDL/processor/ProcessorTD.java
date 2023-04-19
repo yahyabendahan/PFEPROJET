@@ -1,0 +1,76 @@
+package com.eai.BatchJobCDL.processor;
+
+import java.util.List;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import org.springframework.batch.item.ItemProcessor;
+
+import org.springframework.stereotype.Component;
+
+import com.eai.BatchJobCDL.model.*;
+
+@Component
+public class ProcessorTD implements ItemProcessor<ImpayesCDLModel, DossierModel> {
+	
+	//@Autowired
+	//private DataSource dataSource;
+	double i=1;
+
+
+	@Override
+	public DossierModel process(ImpayesCDLModel impayescdl) throws Exception {
+		
+		DossierModel d = new DossierModel();
+        System.out.println("ProcessorTdossier: ");
+
+        //CompteModel c = new CompteModel();
+        //TypeDossierModel td = new TypeDossierModel();
+     
+        //JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+		//String sql0 = "SELECT CLE_DOSSIER FROM DOSSIER";
+		//List<DossierModel> listDossier = jdbcTemplate.query(sql0, new BeanPropertyRowMapper<>(DossierModel.class));
+		
+		
+		 if (impayescdl.getNateng()!="ESC") {
+			 d.setCLE_DOSSIER(impayescdl.getNateng()+impayescdl.getNoDossier()+impayescdl.getDateRemise());
+			 d.setCODE(i++);
+			 d.setNUMERO_DOSSIER(impayescdl.getNoDossier());
+			 d.setNUM_DOSSIER_COMPLET(impayescdl.getNumDossierComplet());
+			 d.setNUMERO_LIGNE(impayescdl.getNumeroLigne());
+			 d.setNUMERO_TIRAGE(impayescdl.getNumeroTirage());
+			// d.setCODE_COMPTE(c.getCode()); // select code from compte ;
+			 d.setTYPE_DOSSIER(impayescdl.getType());
+			 //ANCIEN_NUMERO_DOSSIER=NULL and ENCOURS=NULL
+			 		 }
+		 else {
+			 //sql substr
+			  String sql = "SELECT NATENG FROM IMPAYES_CDL"+
+					  "SELECT NO_DOSSIER FROM IMPAYES_CDL"+
+					  "SELECT DATE_REMISE FROM IMPAYES_CDL"+
+					  "SELECT substr(CPT, 1, 3) FROM IMPAYES_CDL"+
+					  "SELECT substr(CPT, 8, 2) FROM IMPAYES_CDL"+
+					  "SELECT substr(CPT, 15, 5) FROM IMPAYES_CDL"+
+					  "SELECT substr(MONTANT_CREANCE, 0, longueur(MONTANT_CREANCE) - 7) FROM IMPAYES_CDL";
+			  
+			  
+		       // List<ImpayesCDLModel> listImpayes = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ImpayesCDLModel.class));
+		        
+		     d.setCLE_DOSSIER(sql);
+		   	 d.setCODE(i++);
+			 d.setNUMERO_DOSSIER(impayescdl.getNoDossier());
+			 d.setNUM_DOSSIER_COMPLET(impayescdl.getNumDossierComplet());
+			 d.setNUMERO_LIGNE(impayescdl.getNumeroLigne());
+			 d.setNUMERO_TIRAGE(impayescdl.getNumeroTirage());
+			// d.setCODE_COMPTE(c.getCode());   // select code from compte ;
+			 d.setTYPE_DOSSIER(impayescdl.getType());//td.getLIBELLE_COURT()
+			 //ANCIEN_NUMERO_DOSSIER=NULL and ENCOURS=NULL
+		        
+		 }
+		
+		return d;
+	}
+}
