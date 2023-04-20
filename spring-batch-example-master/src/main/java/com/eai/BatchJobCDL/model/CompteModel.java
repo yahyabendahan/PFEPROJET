@@ -1,6 +1,6 @@
 package com.eai.BatchJobCDL.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,7 +48,7 @@ public class CompteModel {
 	private String typeProposition;
 
 	@Column(name = "DATE_PROPOSITION")
-	private LocalDate dateProposition;
+	private Date dateProposition;
 
 	@Column(name = "NATURE_PROPOSITION")
 	private String natureProposition;
@@ -57,7 +57,7 @@ public class CompteModel {
 	private String statut;
 
 	@Column(name = "DATE_STATUT")
-	private LocalDate dateStatut;
+	private Date dateStatut;
 
 	@Column(name = "RAISON_SOCIALE")
 	private String raisonSociale;
@@ -158,11 +158,11 @@ public class CompteModel {
 		this.typeProposition = typeProposition;
 	}
 
-	public LocalDate getDateProposition() {
+	public Date getDateProposition() {
 		return dateProposition;
 	}
 
-	public void setDateProposition(LocalDate dateProposition) {
+	public void setDateProposition(Date dateProposition) {
 		this.dateProposition = dateProposition;
 	}
 
@@ -182,11 +182,11 @@ public class CompteModel {
 		this.statut = statut;
 	}
 
-	public LocalDate getDateStatut() {
+	public Date getDateStatut() {
 		return dateStatut;
 	}
 
-	public void setDateStatut(LocalDate dateStatut) {
+	public void setDateStatut(Date dateStatut) {
 		this.dateStatut = dateStatut;
 	}
 

@@ -8,13 +8,14 @@ import org.springframework.batch.item.ItemProcessor;
 import com.eai.BatchJobCDL.DTO.EfaDTO;
 import com.eai.BatchJobCDL.DTO.EfaFail;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
+import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
 
 public class ProcessorEfa  implements ItemProcessor<EfaDTO, ImpayesCDLModel>  {
 
 	@Override
 	public ImpayesCDLModel process(EfaDTO item) throws Exception {
 		ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
-		EfaFail efaFail = new EfaFail();
+		ImpayesCdlRejetModel efaFail = new ImpayesCdlRejetModel();
 		if (item.getNateng().equals("EFA")) {
 			impayesCDLModel.setNateng(item.getNateng());
         	impayesCDLModel.setType(item.getType());
