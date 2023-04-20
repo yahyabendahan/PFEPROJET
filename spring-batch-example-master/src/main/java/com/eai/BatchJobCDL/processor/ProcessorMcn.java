@@ -8,13 +8,17 @@ import org.springframework.batch.item.ItemProcessor;
 import com.eai.BatchJobCDL.DTO.McnDTO;
 import com.eai.BatchJobCDL.DTO.McnFail;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
+import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
 
 public class ProcessorMcn  implements ItemProcessor<McnDTO, ImpayesCDLModel>  {
 
 	@Override
 	public ImpayesCDLModel process(McnDTO item) throws Exception {
+		
 		ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
-		McnFail mcnFail = new McnFail();
+    	ImpayesCdlRejetModel mcnFail = new ImpayesCdlRejetModel();
+		
+		
 		if (item.getNateng().equals("MCN")) {
 			impayesCDLModel.setNateng(item.getNateng());
         	impayesCDLModel.setType(item.getType());
@@ -36,13 +40,8 @@ public class ProcessorMcn  implements ItemProcessor<McnDTO, ImpayesCDLModel>  {
         	mcnFail.setDateEcheance(item.getDateEcheance());
         	mcnFail.setDateMiseImpaye(item.getDateMiseImpaye());
         	mcnFail.setRefferenceValeur(item.getRefferenceValeur());
-            try (FileWriter writer = new FileWriter("C:\\Users\\acer\\Desktop\\pfe\\fichier donnees\\FichierRejet\\CDL_MCN_FAILS.creances", true)) {
-                
-                writer.write(mcnFail.toString() + "\n");
-            
-	        } catch (IOException e) {
-	            System.err.println("Erreur lors de l'écriture dans le fichier echfails.txt : " + e.getMessage());
-	        }
+        	mcnFail.setDateRejet(null);//date rejet
+        	mcnFail.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
 		}
 		return impayesCDLModel;
 	}

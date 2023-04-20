@@ -42,12 +42,12 @@ public class ProcessorTD implements ItemProcessor<ImpayesCDLModel, DossierModel>
 			 d.setNUM_DOSSIER_COMPLET(impayescdl.getNumDossierComplet());
 			 d.setNUMERO_LIGNE(impayescdl.getNumeroLigne());
 			 d.setNUMERO_TIRAGE(impayescdl.getNumeroTirage());
-			// d.setCODE_COMPTE(c.getCode()); // select code from compte ;
+			 // d.setCODE_COMPTE(c.getCode()); // select code from compte ;
 			 d.setTYPE_DOSSIER(impayescdl.getType());
 			 //ANCIEN_NUMERO_DOSSIER=NULL and ENCOURS=NULL
 			 		 }
 		 else {
-			 //sql substr
+			
 			  String sql = "SELECT NATENG FROM IMPAYES_CDL"+
 					  "SELECT NO_DOSSIER FROM IMPAYES_CDL"+
 					  "SELECT DATE_REMISE FROM IMPAYES_CDL"+
@@ -65,7 +65,7 @@ public class ProcessorTD implements ItemProcessor<ImpayesCDLModel, DossierModel>
 			 d.setNUM_DOSSIER_COMPLET(impayescdl.getNumDossierComplet());
 			 d.setNUMERO_LIGNE(impayescdl.getNumeroLigne());
 			 d.setNUMERO_TIRAGE(impayescdl.getNumeroTirage());
-			// d.setCODE_COMPTE(c.getCode());   // select code from compte ;
+			 // d.setCODE_COMPTE(c.getCode());   // select code from compte ;
 			 d.setTYPE_DOSSIER(impayescdl.getType());//td.getLIBELLE_COURT()
 			 //ANCIEN_NUMERO_DOSSIER=NULL and ENCOURS=NULL
 		        

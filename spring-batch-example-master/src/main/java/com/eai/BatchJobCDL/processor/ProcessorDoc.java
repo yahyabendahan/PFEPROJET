@@ -7,15 +7,19 @@ import java.io.IOException;
 import org.springframework.batch.item.ItemProcessor;
 
 import com.eai.BatchJobCDL.DTO.DocDTO;
-import com.eai.BatchJobCDL.DTO.DocFail;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
+import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
+
 
 public class ProcessorDoc  implements ItemProcessor<DocDTO, ImpayesCDLModel>  {
 
 	@Override
 	public ImpayesCDLModel process(DocDTO item) throws Exception {
+		
 		ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
-		DocFail docFail = new DocFail();
+		
+		ImpayesCdlRejetModel docFail = new ImpayesCdlRejetModel();
+		
 		if (item.getNateng().equals("DOC")) {
 			impayesCDLModel.setNateng(item.getNateng());
         	impayesCDLModel.setType(item.getType());
@@ -37,13 +41,8 @@ public class ProcessorDoc  implements ItemProcessor<DocDTO, ImpayesCDLModel>  {
         	docFail.setDateEcheance(item.getDateEcheance());
         	docFail.setDateMiseImpaye(item.getDateMiseImpaye());
         	docFail.setRefferenceValeur(item.getRefferenceValeur());
-        	try (FileWriter writer = new FileWriter("C:\\Users\\acer\\Desktop\\pfe\\fichier donnees\\FichierRejet\\CDL_DOC_FAILS.creances", true)) {
-                
-                writer.write(docFail.toString() + "\n");
-            
-        } catch (IOException e) {
-            System.err.println("Erreur lors de l'écriture dans le fichier echfails.txt : " + e.getMessage());
-        }
+        	docFail.setDateRejet(null);//date rejet
+        	docFail.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
 		}
 		return impayesCDLModel;
 	}
