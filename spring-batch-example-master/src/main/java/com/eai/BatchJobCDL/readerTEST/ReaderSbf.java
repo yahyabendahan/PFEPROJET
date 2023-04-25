@@ -1,4 +1,4 @@
-package com.eai.BatchJobCDL.reader;
+package com.eai.BatchJobCDL.readerTEST;
 
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;

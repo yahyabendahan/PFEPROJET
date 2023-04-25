@@ -14,7 +14,7 @@ import com.eai.BatchJobCDL.repository.ImpayesCDLRepository;
 @Component
 public class WriterImpayesCDL extends JdbcBatchItemWriter<ImpayesCDLModel>{
 
-	
+	//test
 	
 	    //@Autowired
 	    public WriterImpayesCDL(DataSource dataSource) {

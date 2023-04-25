@@ -12,6 +12,9 @@ import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
 @Component
 public class WriterImpayesCDLRejet extends JdbcBatchItemWriter<ImpayesCdlRejetModel>{
 
+	//test
+	
+	
 	    public WriterImpayesCDLRejet(DataSource dataSource) {
 	    	this.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
         
