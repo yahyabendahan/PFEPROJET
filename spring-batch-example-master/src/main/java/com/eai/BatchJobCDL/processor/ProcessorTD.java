@@ -33,8 +33,7 @@ public class ProcessorTD implements ItemProcessor<ImpayesCDLModel, DossierModel>
 
 		//String sql0 = "SELECT CLE_DOSSIER FROM DOSSIER";
 		//List<DossierModel> listDossier = jdbcTemplate.query(sql0, new BeanPropertyRowMapper<>(DossierModel.class));
-		
-		
+			
 		 if (impayescdl.getNateng()!="ESC") {
 			 d.setCLE_DOSSIER(impayescdl.getNateng()+impayescdl.getNoDossier()+impayescdl.getDateRemise());
 			 d.setCODE(i++);

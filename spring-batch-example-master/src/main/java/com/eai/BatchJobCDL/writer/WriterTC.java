@@ -6,14 +6,11 @@ import javax.sql.DataSource;
 
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.eai.BatchJobCDL.model.CompteModel;
-import com.eai.BatchJobCDL.model.DossierModel;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 
 
