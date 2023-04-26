@@ -2,22 +2,30 @@ package com.eai.BatchJobCDL.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "DOSSIER")
 public class DossierModel {
 	
 	@Id
+	@SequenceGenerator(name = "dossierSeqGen", sequenceName = "SEQ_DOSSIER", initialValue = 1, allocationSize = 999999999)
+	@GeneratedValue(generator = "dossierSeqGen")
 	@Column
 	private Double CODE;
 	@Column
 	private String NUMERO_DOSSIER;
 	@Column
 	private Double ENCOURS;
-	@Column
-	private Double CODE_COMPTE;
+	@ManyToOne
+    @JoinColumn(name ="CODE_COMPTE")
+	private CompteModel CODE_COMPTE;	
 	@Column
 	private String TYPE_DOSSIER;
 	@Column
@@ -30,6 +38,8 @@ public class DossierModel {
 	private String NUMERO_TIRAGE;
 	@Column
 	private String ANCIEN_NUMERO_DOSSIER;
+	
+	
 	public Double getCODE() {
 		return CODE;
 	}
@@ -48,10 +58,10 @@ public class DossierModel {
 	public void setENCOURS(Double eNCOURS) {
 		ENCOURS = eNCOURS;
 	}
-	public Double getCODE_COMPTE() {
+	public CompteModel getCODE_COMPTE() {
 		return CODE_COMPTE;
 	}
-	public void setCODE_COMPTE(Double cODE_COMPTE) {
+	public void setCODE_COMPTE(CompteModel cODE_COMPTE) {
 		CODE_COMPTE = cODE_COMPTE;
 	}
 	public String getTYPE_DOSSIER() {

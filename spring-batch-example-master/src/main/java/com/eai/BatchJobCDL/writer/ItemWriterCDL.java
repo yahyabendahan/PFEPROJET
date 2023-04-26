@@ -39,7 +39,7 @@ public class ItemWriterCDL implements ItemWriter {
 	             System.out.println("\nValider.ImpayesCDLModelToBD\n");
 	             
 				return itemWriter;
-	  }
+	  }/*
 	  
 	  public JdbcBatchItemWriter<ImpayesCdlRejetModel> ImpayesCdlRejetModelToBD(DataSource dataSource) {
 		  
@@ -59,7 +59,7 @@ public class ItemWriterCDL implements ItemWriter {
 		             System.out.println("\nValider.ImpayesCdlRejetModelToBD\n");
 		             
 					return itemWriter;
-		  }
+		  }*/
 	
 	
 	

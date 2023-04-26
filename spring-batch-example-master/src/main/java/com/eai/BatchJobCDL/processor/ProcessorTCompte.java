@@ -20,13 +20,13 @@ import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 @ComponentScan(basePackages = "com.example.springbatchexample.config")
 
 @Component
-public class ProcessorTC implements ItemProcessor<ImpayesCDLModel, CompteModel> {
+public class ProcessorTCompte implements ItemProcessor<ImpayesCDLModel, CompteModel> {
 
 
     /*@Autowired
 	private DataSource dataSource;
 	*/
-	double i = 0 ;
+	//double i = 0 ;
 
 
  
@@ -46,7 +46,7 @@ public class ProcessorTC implements ItemProcessor<ImpayesCDLModel, CompteModel> 
         	//condition in WriterTC
         
         
-            comptemodel.setCode(i++);
+            //comptemodel.setCode(i++);
         	comptemodel.setNumeroCompteEmprunteur(impayesCDLModel.getNumComptePayeur());
         	comptemodel.setEncoursEESConso(impayesCDLModel.getEncoursEESConso());
         	comptemodel.setEncoursEESComm(impayesCDLModel.getEncoursEESComm());

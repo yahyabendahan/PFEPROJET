@@ -1,145 +1,143 @@
 package com.eai.BatchJobCDL.model;
-/*package com.example.springbatchexample.model;
 
 import java.util.Date;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "CREANCE")
 public class CreanceModel {
 
-    @Id
-    @Column(name = "CODE")
-    private Double code;
+	@Id
+	@SequenceGenerator(name = "creanceSeqGen", sequenceName = "SEQ_CREANCE", initialValue = 1, allocationSize = 999999999)
+	@GeneratedValue(generator = "creanceSeqGen")
+	@Column(name = "CODE")
+	private Long id;
+	
+	@Column(name = "CODE_TYPE_DOSSIER")
+	private String codeTypeDossier;
 
-    @ManyToOne
-    @JoinColumn(name = "CODE_TYPE_DOSSIER")
-    private TypeDossierModel typeDossier;
+	@Column(name = "CODE_MOTIF")
+	private String codeMotif;
 
-    @Column(name = "CODE_MOTIF")
-    private String codeMotif;
+	@Column(name = "CODE_NAT_ENG")
+	private String codeNatEng;
 
-    @Column(name = "CODE_NAT_ENG")
-    private String codeNatEng;
+	@ManyToOne
+    @JoinColumn(name ="CODE_DOSSIER")
+	private DossierModel dossier;
 
-    @Column(name = "CODE_DOSSIER")
-    private Double codeDossier;
+	@Column(name = "MONTANT")
+	private Double montant;
 
-    @Column(name = "MONTANT")
-    private Double montant;
+	@Column(name = "DATE_ECHEANCE")
+	private Date dateEcheance;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "DATE_ECHEANCE")
-    private Date dateEcheance;
+	@Column(name = "DATE_CREANCE")
+	private Date dateCreance;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "DATE_CREANCE")
-    private Date dateCreance;
+	@Column(name = "DATE_MISE_IMPAYE")
+	private Date dateMiseImpaye;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "DATE_MISE_IMPAYE")
-    private Date dateMiseImpaye;
+	@Column(name = "MONTANT_AMORTISS")
+	private Double montantAmortiss;
 
-    @Column(name = "MONTANT_AMORTISS")
-    private Double montantAmortiss;
+	@Column(name = "MONTANT_INTERET_NORMAL")
+	private Double montantInteretNormal;
 
-    @Column(name = "MONTANT_INTERET_NORMAL")
-    private Double montantInteretNormal;
+	@Column(name = "TVA_INTERET_NORMAL")
+	private Double TVAInteretNormal;
 
-    @Column(name = "TVA_INTERET_NORMAL")
-    private Double tvaInteretNormal;
+	@Column(name = "MONTANT_INTERET_RETARD")
+	private Double montantInteretRetard;
 
-    @Column(name = "MONTANT_INTERET_RETARD")
-    private Double montantInteretRetard;
+	@Column(name = "TVA_INTERET_RETARD")
+	private Double TVAInteretRetard;
 
-    @Column(name = "TVA_INTERET_RETARD")
-    private Double tvaInteretRetard;
+	@Column(name = "PENALITE_RETARD")
+	private Double penaliteRetard;
 
-    @Column(name = "PENALITE_RETARD")
-    private Double penaliteRetard;
+	@Column(name = "TVA_PENALITE_RETARD")
+	private Double TVApenaliteRetard;
 
-    @Column(name = "TVA_PENALITE_RETARD")
-    private Double tvaPenaliteRetard;
+	@Column(name = "CODE_GUICHET_BANCAIRE")
+	private String codeGuichetBancaire;
 
-    @Column(name = "CODE_GUICHET_BANCAIRE")
-    private String codeGuichetBancaire;
+	@Column(name = "CODE_ETABLISST_BANCAIRE")
+	private String codeEtablissementBancaire;
 
-    @Column(name = "CODE_ETABLISST_BANCAIRE")
-    private String codeEtablissementBancaire;
+	@Column(name = "REFERENCE_VALEUR")
+	private String referenceValeur;
 
-    @Column(name = "REFERENCE_VALEUR")
-    private String referenceValeur;
+	@Column(name = "DATE_REMISE")
+	private Date dateRemise;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "DATE_REMISE")
-    private Date dateRemise;
+	@Column(name = "REFERENCE_LIAISON")
+	private String referenceLiaison;
 
-    @Column(name = "REFERENCE_LIAISON")
-    private String referenceLiaison;
+	@Column(name = "CODE_CATEGORIE")
+	private String codeCategorie;
 
-    @Column(name = "CODE_CATEGORIE")
-    private String codeCategorie;
+	@Column(name = "NUMERO_COMPTE_PAYEUR")
+	private String numeroComptePayeur;
 
-    @Column(name = "NUMERO_COMPTE_PAYEUR")
-    private String numeroComptePayeur;
+	@Column(name = "STATUT")
+	private String statut;
 
-    @Column(name = "STATUT")
-    private String statut;
+	@Column(name = "TYPE_CREANCE")
+	private String typeCreance;
 
-    @Column(name = "TYPE_CREANCE")
-    private String typeCreance;
+	@Column(name = "TYPE_PROPOSITION")
+	private String typeProposition;
 
-    @Column(name = "TYPE_PROPOSITION")
-    private String typeProposition;
+	@Column(name = "DATE_PROPOSITION")
+	private Date dateProposition;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "DATE_PROPOSITION")
-    private Date dateProposition;
+	@Column(name = "NATURE_PROPOSITION")
+	private String natureProposition;
 
-    @ManyToOne
-    @JoinColumn(name = "NATURE_PROPOSITION")
-    private String natureProposition;
+	@Column(name = "NUMERO")
+	private String numero;
 
-    @Column(name = "NUMERO")
-    private String numero;
+	@Column(name = "DATE_LOAD_OVO")
+	private Date dateLoadOVO;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "DATE_LOAD_OVO")
-    private Date dateLoadOvo;
+	@Column(name = "STATUT_G19")
+	private String statutG19;
 
-    @Column(name = "STATUT_G19")
-    private String statutG19;
+	@Column(name = "DATE_COMITE")
+	private Date dateComite;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "DATE_COMITE")
-    private Date dateComite;
-    
-    @Column(name = "NUMERO_LIGNE")
-    private String numeroLigne;
-    
-    @Column(name = "NUMERO_TIRAGE")
-    private String numeroTirage;
-    
-    @Column(name = "USER_CREATION")
-    private String userCreation;
-    
-    @Column(name = "ANCIEN_CODE_DOSSIER")
-    private Double ancienCodeDossier;
+	@Column(name = "NUMERO_LIGNE")
+	private String numeroLigne;
 
-	public Double getCode() {
-		return code;
+	@Column(name = "NUMERO_TIRAGE")
+	private String numeroTirage;
+
+	@Column(name = "USER_CREATION")
+	private String userCreation;
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setCode(Double code) {
-		this.code = code;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public TypeDossierModel getTypeDossier() {
-		return typeDossier;
+	public String getCodeTypeDossier() {
+		return codeTypeDossier;
 	}
 
-	public void setTypeDossier(TypeDossierModel typeDossier) {
-		this.typeDossier = typeDossier;
+	public void setCodeTypeDossier(String codeTypeDossier) {
+		this.codeTypeDossier = codeTypeDossier;
 	}
 
 	public String getCodeMotif() {
@@ -158,12 +156,12 @@ public class CreanceModel {
 		this.codeNatEng = codeNatEng;
 	}
 
-	public Double getCodeDossier() {
-		return codeDossier;
+	public DossierModel getDossier() {
+		return dossier;
 	}
 
-	public void setCodeDossier(Double codeDossier) {
-		this.codeDossier = codeDossier;
+	public void setDossier(DossierModel dossier) {
+		this.dossier = dossier;
 	}
 
 	public Double getMontant() {
@@ -214,12 +212,12 @@ public class CreanceModel {
 		this.montantInteretNormal = montantInteretNormal;
 	}
 
-	public Double getTvaInteretNormal() {
-		return tvaInteretNormal;
+	public Double getTVAInteretNormal() {
+		return TVAInteretNormal;
 	}
 
-	public void setTvaInteretNormal(Double tvaInteretNormal) {
-		this.tvaInteretNormal = tvaInteretNormal;
+	public void setTVAInteretNormal(Double tVAInteretNormal) {
+		TVAInteretNormal = tVAInteretNormal;
 	}
 
 	public Double getMontantInteretRetard() {
@@ -230,12 +228,12 @@ public class CreanceModel {
 		this.montantInteretRetard = montantInteretRetard;
 	}
 
-	public Double getTvaInteretRetard() {
-		return tvaInteretRetard;
+	public Double getTVAInteretRetard() {
+		return TVAInteretRetard;
 	}
 
-	public void setTvaInteretRetard(Double tvaInteretRetard) {
-		this.tvaInteretRetard = tvaInteretRetard;
+	public void setTVAInteretRetard(Double tVAInteretRetard) {
+		TVAInteretRetard = tVAInteretRetard;
 	}
 
 	public Double getPenaliteRetard() {
@@ -246,12 +244,12 @@ public class CreanceModel {
 		this.penaliteRetard = penaliteRetard;
 	}
 
-	public Double getTvaPenaliteRetard() {
-		return tvaPenaliteRetard;
+	public Double getTVApenaliteRetard() {
+		return TVApenaliteRetard;
 	}
 
-	public void setTvaPenaliteRetard(Double tvaPenaliteRetard) {
-		this.tvaPenaliteRetard = tvaPenaliteRetard;
+	public void setTVApenaliteRetard(Double tVApenaliteRetard) {
+		TVApenaliteRetard = tVApenaliteRetard;
 	}
 
 	public String getCodeGuichetBancaire() {
@@ -358,12 +356,12 @@ public class CreanceModel {
 		this.numero = numero;
 	}
 
-	public Date getDateLoadOvo() {
-		return dateLoadOvo;
+	public Date getDateLoadOVO() {
+		return dateLoadOVO;
 	}
 
-	public void setDateLoadOvo(Date dateLoadOvo) {
-		this.dateLoadOvo = dateLoadOvo;
+	public void setDateLoadOVO(Date dateLoadOVO) {
+		this.dateLoadOVO = dateLoadOVO;
 	}
 
 	public String getStatutG19() {
@@ -405,14 +403,6 @@ public class CreanceModel {
 	public void setUserCreation(String userCreation) {
 		this.userCreation = userCreation;
 	}
+	
 
-	public Double getAncienCodeDossier() {
-		return ancienCodeDossier;
-	}
-
-	public void setAncienCodeDossier(Double ancienCodeDossier) {
-		this.ancienCodeDossier = ancienCodeDossier;
-	}
-    
-    
-}*/
+}
