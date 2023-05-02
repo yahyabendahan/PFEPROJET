@@ -87,7 +87,91 @@ public MultiResourceItemReader<Person> multiItemReader() {
       .resources(resources).setStrict(true).build();
 }
  */
+/*
+ * @Value("input/inputData*.csv")
+private Resource[] inputResources;
+ 
+@Bean
+public Job readCSVFilesJob() {
+  return jobBuilderFactory
+      .get("readCSVFilesJob")
+      .incrementer(new RunIdIncrementer())
+      .start(step1())
+      .build();
+}
+ 
+@Bean
+public Step step1() {
+  return stepBuilderFactory.get("step1").<Employee, Employee>chunk(5)
+      .reader(multiResourceItemReader())
+      .writer(writer())
+      .build();
+}
+ 
+@Bean
+public MultiResourceItemReader<Employee> multiResourceItemReader() 
+{
+  MultiResourceItemReader<Employee> resourceItemReader = new MultiResourceItemReader<Employee>();
+  resourceItemReader.setResources(inputResources);
+  resourceItemReader.setDelegate(reader());
+  return resourceItemReader;
+}
+ 
+@Bean
+public FlatFileItemReader<Employee> reader() 
+{
+  //Create reader instance
+  FlatFileItemReader<Employee> reader = new FlatFileItemReader<Employee>();
+   
+  //Set number of lines to skips. Use it if file has header rows.
+  reader.setLinesToSkip(1);   
+   
+  //Configure how each line will be parsed and mapped to different values
+  reader.setLineMapper(new DefaultLineMapper() {
+    {
+      //3 columns in each row
+      setLineTokenizer(new DelimitedLineTokenizer() {
+        {
+          setNames(new String[] { "id", "firstName", "lastName" });
+        }
+      });
+      //Set values in Employee class
+      setFieldSetMapper(new BeanWrapperFieldSetMapper<Employee>() {
+        {
+          setTargetType(Employee.class);
+        }
+      });
+    }
+  });
+  return reader;
+}
+*/
 
+/*
+ * 
+  @Bean
+  public FlatFileItemReader<User> reader() {
+    FlatFileItemReader<User> reader = new FlatFileItemReader<User>();
+    reader.setLineMapper(new DefaultLineMapper<User>() {{
+      setLineTokenizer(new DelimitedLineTokenizer() {{
+        setNames(new String[]{"name", "gender"});
+      }});
+      setFieldSetMapper(new BeanWrapperFieldSetMapper<User>() {{
+        setTargetType(User.class);
+      }});
+​
+    }});
+​
+    return reader;
+  }
+​
+  @Bean
+  public MultiResourceItemReader<User> multiResourceItemReader() {
+    MultiResourceItemReader<User> resourceItemReader = new MultiResourceItemReader<User>();
+    resourceItemReader.setResources(inputResources);
+    resourceItemReader.setDelegate(reader());
+    return resourceItemReader;
+  }*/
 
 public class ReaderDto extends MultiResourceItemReader<DocDTO> {
 	//DOC
