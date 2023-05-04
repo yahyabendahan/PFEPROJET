@@ -27,6 +27,7 @@ public class ProcessorTCreance  implements ItemProcessor<CreanceModel , Cle_Doss
 			cle_doss_cr_cpt.setCode(dossiermodel.getCODE());
 			cle_doss_cr_cpt.setNumeroDossier(dossiermodel.getNUMERO_DOSSIER());
 			cle_doss_cr_cpt.setCpt(dossiermodel.getCODE_COMPTE().getCode()); 
+			//cle_doss_cr_cpt.wait(0);
 		}
         System.out.println("ProcessorTcreance: ");
 

@@ -171,7 +171,7 @@ public FlatFileItemReader<Employee> reader()
     resourceItemReader.setResources(inputResources);
     resourceItemReader.setDelegate(reader());
     return resourceItemReader;
-  }*/
+  }*//*
 
 public class ReaderDto extends MultiResourceItemReader<DocDTO> {
 	//DOC
@@ -205,4 +205,4 @@ public class ReaderDto extends MultiResourceItemReader<DocDTO> {
 
 	
 }
-	
+	*/
