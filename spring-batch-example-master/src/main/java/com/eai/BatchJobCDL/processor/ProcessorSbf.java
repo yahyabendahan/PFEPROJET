@@ -1,16 +1,11 @@
 package com.eai.BatchJobCDL.processor;
 
 
-import java.io.FileWriter;
-
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 
 import com.eai.BatchJobCDL.DTO.SbfDTO;
-import com.eai.BatchJobCDL.DTO.SbfFail;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
 
