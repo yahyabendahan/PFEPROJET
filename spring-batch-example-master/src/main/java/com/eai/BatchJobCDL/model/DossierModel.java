@@ -23,9 +23,11 @@ public class DossierModel {
 	private String NUMERO_DOSSIER;
 	@Column
 	private Double ENCOURS;
-	@ManyToOne
+	/*@ManyToOne
     @JoinColumn(name ="CODE_COMPTE")
-	private CompteModel CODE_COMPTE;	
+	private CompteModel CODE_COMPTE;	*/
+	@Column
+	private Double CODE_COMPTE;
 	@Column
 	private String TYPE_DOSSIER;
 	@Column
@@ -58,10 +60,10 @@ public class DossierModel {
 	public void setENCOURS(Double eNCOURS) {
 		ENCOURS = eNCOURS;
 	}
-	public CompteModel getCODE_COMPTE() {
+	public Double getCODE_COMPTE() {
 		return CODE_COMPTE;
 	}
-	public void setCODE_COMPTE(CompteModel cODE_COMPTE) {
+	public void setCODE_COMPTE(Double cODE_COMPTE) {
 		CODE_COMPTE = cODE_COMPTE;
 	}
 	public String getTYPE_DOSSIER() {

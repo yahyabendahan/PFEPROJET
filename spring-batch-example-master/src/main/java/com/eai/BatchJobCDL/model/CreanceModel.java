@@ -30,10 +30,13 @@ public class CreanceModel {
 	@Column(name = "CODE_NAT_ENG")
 	private String codeNatEng;
 
-	@ManyToOne
+	/*@ManyToOne
     @JoinColumn(name ="CODE_DOSSIER")
-	private DossierModel dossier;
+	private DossierModel dossier;*/
 
+	@Column(name ="CODE_DOSSIER")
+	private Double codeDossier;
+	
 	@Column(name = "MONTANT")
 	private Double montant;
 
@@ -156,12 +159,12 @@ public class CreanceModel {
 		this.codeNatEng = codeNatEng;
 	}
 
-	public DossierModel getDossier() {
-		return dossier;
+	public Double getcodeDossier() {
+		return codeDossier;
 	}
 
-	public void setDossier(DossierModel dossier) {
-		this.dossier = dossier;
+	public void setcodeDossier(Double codeDossier) {
+		this.codeDossier = codeDossier;
 	}
 
 	public Double getMontant() {

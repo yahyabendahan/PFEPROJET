@@ -45,7 +45,7 @@ public class WriterTD extends JdbcBatchItemWriter<DossierModel>{
 	    	
 	        this.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
 	    	if (!listDossier.contains(d.getCLE_DOSSIER())) {
-	        this.setSql("INSERT INTO Dossier (NUMERO_DOSSIER, ENCOURS, CODE ,CODE_COMPTE, TYPE_DOSSIER, CLE_DOSSIER, NUM_DOSSIER_COMPLET, NUMERO_LIGNE, NUMERO_TIRAGE, ANCIEN_NUMERO_DOSSIER ) " +
+	        this.setSql("INSERT INTO DOSSIER (NUMERO_DOSSIER, ENCOURS, CODE ,CODE_COMPTE, TYPE_DOSSIER, CLE_DOSSIER, NUM_DOSSIER_COMPLET, NUMERO_LIGNE, NUMERO_TIRAGE, ANCIEN_NUMERO_DOSSIER ) " +
 	        		"VALUES (:NUMERO_DOSSIER, :ENCOURS, :CODE, :CODE_COMPTE, :TYPE_DOSSIER, :CLE_DOSSIER, :NUM_DOSSIER_COMPLET, :NUMERO_LIGNE, :NUMERO_TIRAGE, :ANCIEN_NUMERO_DOSSIER)");
 	    	}    	
 	        this.setDataSource(dataSource);
