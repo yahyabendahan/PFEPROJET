@@ -35,17 +35,6 @@ public class ProcessorTCompte implements ItemProcessor<ImpayesCDLModel, CompteMo
         CompteModel comptemodel = new CompteModel();
         System.out.println("ProcessorTcompte: ");
 
-        
-      /*  String ncp = impayesCDLModel.getNumComptePayeur();
-    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "SELECT * FROM COMPTE WHERE NUMERO_COMPTE_EMPRUNTEUR = ?";
-        List<CompteModel> comptes = jdbcTemplate.query(sql, new Object[]{ncp}, new BeanPropertyRowMapper<>(CompteModel.class));
-    	*/
-        
-       /* if (!comptes.isEmpty()) */
-        	//condition in WriterTC
-        
-        
             //comptemodel.setCode(i++);
         	comptemodel.setNumeroCompteEmprunteur(impayesCDLModel.getNumComptePayeur());
         	comptemodel.setEncoursEESConso(impayesCDLModel.getEncoursEESConso());
