@@ -12,13 +12,13 @@ public class Cle_Doss_Cr_CptModel {
 
 		@Id
 		@Column(name = "CODE")
-		private Double code;
+		private Long  code;
 
 		@Column(name = "NUMERO_DOSSIER")
 		private String numeroDossier;
 
 		@Column(name = "CPT")
-		private Double cpt;
+		private Long  cpt;
 
 		@Column(name = "DATE_ECHEANCE")
 		private Date dateEcheance;
@@ -32,11 +32,11 @@ public class Cle_Doss_Cr_CptModel {
 		@Column(name = "CODE_NAT_ENG")
 		private String codeNatEng;
 
-		public Double getCode() {
+		public Long  getCode() {
 			return code;
 		}
 
-		public void setCode(Double code) {
+		public void setCode(Long  code) {
 			this.code = code;
 		}
 
@@ -48,11 +48,11 @@ public class Cle_Doss_Cr_CptModel {
 			this.numeroDossier = numeroDossier;
 		}
 
-		public Double getCpt() {
+		public Long  getCpt() {
 			return cpt;
 		}
 
-		public void setCpt(Double cpt) {
+		public void setCpt(Long  cpt) {
 			this.cpt = cpt;
 		}
 

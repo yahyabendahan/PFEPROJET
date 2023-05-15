@@ -34,8 +34,9 @@ public class CreanceModel {
     @JoinColumn(name ="CODE_DOSSIER")
 	private DossierModel dossier;*/
 
+	@ManyToOne
 	@Column(name ="CODE_DOSSIER")
-	private Double codeDossier;
+	private Long  codeDossier;
 	
 	@Column(name = "MONTANT")
 	private Double montant;
@@ -159,11 +160,11 @@ public class CreanceModel {
 		this.codeNatEng = codeNatEng;
 	}
 
-	public Double getcodeDossier() {
+	public Long  getcodeDossier() {
 		return codeDossier;
 	}
 
-	public void setcodeDossier(Double codeDossier) {
+	public void setcodeDossier(Long  codeDossier) {
 		this.codeDossier = codeDossier;
 	}
 

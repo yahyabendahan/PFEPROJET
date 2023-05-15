@@ -14,38 +14,50 @@ import javax.persistence.Table;
 @Table(name = "DOSSIER")
 public class DossierModel {
 	
+
 	@Id
 	@SequenceGenerator(name = "dossierSeqGen", sequenceName = "SEQ_DOSSIER", initialValue = 1, allocationSize = 999999999)
 	@GeneratedValue(generator = "dossierSeqGen")
-	@Column
-	private Double CODE;
-	@Column
+	@Column(name = "CODE")
+	private Long CODE;
+	
+	@Column(name="NUMERO_DOSSIER")
 	private String NUMERO_DOSSIER;
-	@Column
+	
+	@Column(name="ENCOURS")
 	private Double ENCOURS;
+	
 	/*@ManyToOne
     @JoinColumn(name ="CODE_COMPTE")
 	private CompteModel CODE_COMPTE;	*/
-	@Column
-	private Double CODE_COMPTE;
-	@Column
+	@ManyToOne
+	@Column(name="CODE_COMPTE")
+	private Long  CODE_COMPTE;
+	
+	@Column(name="TYPE_DOSSIER")
 	private String TYPE_DOSSIER;
-	@Column
+	
+	@Column(name="CLE_DOSSIER")
 	private String CLE_DOSSIER;
-	@Column
+	
+	@Column(name="NUM_DOSSIER_COMPLET")
 	private String NUM_DOSSIER_COMPLET;
-	@Column
+	
+	@Column(name="NUMERO_LIGNE")
 	private String NUMERO_LIGNE;
-	@Column
+	
+	@Column(name="NUMERO_TIRAGE")
 	private String NUMERO_TIRAGE;
-	@Column
+	
+	@Column(name="ANCIEN_NUMERO_DOSSIER")
 	private String ANCIEN_NUMERO_DOSSIER;
 	
 	
-	public Double getCODE() {
+	
+	public Long getCODE() {
 		return CODE;
 	}
-	public void setCODE(Double cODE) {
+	public void setCODE(Long cODE) {
 		CODE = cODE;
 	}
 	public String getNUMERO_DOSSIER() {
@@ -60,10 +72,10 @@ public class DossierModel {
 	public void setENCOURS(Double eNCOURS) {
 		ENCOURS = eNCOURS;
 	}
-	public Double getCODE_COMPTE() {
+	public Long getCODE_COMPTE() {
 		return CODE_COMPTE;
 	}
-	public void setCODE_COMPTE(Double cODE_COMPTE) {
+	public void setCODE_COMPTE(Long cODE_COMPTE) {
 		CODE_COMPTE = cODE_COMPTE;
 	}
 	public String getTYPE_DOSSIER() {

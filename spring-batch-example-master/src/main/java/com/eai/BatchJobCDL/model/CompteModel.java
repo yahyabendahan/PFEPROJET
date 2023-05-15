@@ -16,7 +16,7 @@ public class CompteModel {
 	@SequenceGenerator(name = "compteSeqGen", sequenceName = "SEQ_COMPTE", initialValue = 1, allocationSize = 999999999)
 	@GeneratedValue(generator = "compteSeqGen")
 	@Column(name = "CODE")
-	private Double code;
+	private Long code;
 
 	@Column(name = "NUMERO_COMPTE_EMPRUNTEUR")
 	private String numeroCompteEmprunteur;
@@ -66,11 +66,11 @@ public class CompteModel {
 	@Column(name = "RAISON_SOCIALE")
 	private String raisonSociale;
 
-	public Double getCode() {
+	public Long getCode() {
 		return code;
 	}
 
-	public void setCode(Double code) {
+	public void setCode(Long code) {
 		this.code = code;
 	}
 

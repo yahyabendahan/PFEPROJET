@@ -23,13 +23,14 @@ public class ProcessorTDossier implements ItemProcessor<ImpayesCDLModel, Dossier
         CompteModel c = new CompteModel();
  	
 		 if (impayescdl.getNateng()!="ESC") {
+	
 			 d.setCLE_DOSSIER(impayescdl.getNateng()+impayescdl.getNoDossier()+impayescdl.getDateRemise());
 			 //d.setCODE(i++);
 			 d.setNUMERO_DOSSIER(impayescdl.getNoDossier());
 			 d.setNUM_DOSSIER_COMPLET(impayescdl.getNumDossierComplet());
 			 d.setNUMERO_LIGNE(impayescdl.getNumeroLigne());
 			 d.setNUMERO_TIRAGE(impayescdl.getNumeroTirage());
-			 d.setCODE_COMPTE(c.getCode()); // select code from compte ;
+			 d.setCODE_COMPTE(c.getCode()); // return null ?
 			 d.setTYPE_DOSSIER(impayescdl.getType());
 			 //ANCIEN_NUMERO_DOSSIER=NULL and ENCOURS=NULL
 			 		 }
