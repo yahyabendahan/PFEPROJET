@@ -8,21 +8,24 @@ import org.springframework.stereotype.Component;
 import com.eai.BatchJobCDL.DTO.EscDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
+import com.eai.BatchJobCDL.repository.TypeDossierRepository;
 import com.eai.BatchJobCDL.utils.ValidVal;
 @Component
 public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	   
 		// private static final Logger log = LoggerFactory.getLogger(ProcessorEsc.class);
-		 
+
+	private final TypeDossierRepository typeDossierRepository= null;
+
 		@Override
 	    public ImpayesCDLModel process(EscDTO item) {
 			
 	    	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
 	    	ImpayesCdlRejetModel escFail = new ImpayesCdlRejetModel();
-			List<String> VALID_VALUES = ValidVal.getLibelleCourt();
+			//List<String> VALID_VALUES = ValidVal.getLibelleCourt();
 			
 	        if (item.getNateng().equals("ESC")) {
-	            if (VALID_VALUES.contains(item.getType())) {
+	            if (typeDossierRepository.findAllLibelleCourt().contains(item.getType())) {
 	            	impayesCDLModel.setNateng(item.getNateng());
 	            	impayesCDLModel.setType(item.getType());
 	            	impayesCDLModel.setCpt(item.getCpt());

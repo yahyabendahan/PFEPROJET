@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import com.eai.BatchJobCDL.DTO.EchDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
-
+import com.eai.BatchJobCDL.repository.TypeDossierRepository;
 import com.eai.BatchJobCDL.utils.ValidVal;
 
 @Component
@@ -22,16 +22,19 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 
 	//private static final Logger log = LoggerFactory.getLogger(ProcessorEch.class);
 	
+    private final TypeDossierRepository typeDossierRepository= null;
+
+    
 	@Override
     public ImpayesCDLModel process(EchDTO item) {
 		
     	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
-		List<String> VALID_VALUES = ValidVal.getLibelleCourt();
+		//List<String> VALID_VALUES = ValidVal.getLibelleCourt();
 		ImpayesCdlRejetModel echFail = new ImpayesCdlRejetModel();
 		
 		if (item.getNateng().equals("ECH")) {
 			
-            if (VALID_VALUES.contains(item.getType())) {
+            if (typeDossierRepository.findAllLibelleCourt().contains(item.getType())) {
             	
                 impayesCDLModel.setNateng(item.getNateng());
                 impayesCDLModel.setType(item.getType());
