@@ -11,7 +11,11 @@ import com.eai.BatchJobCDL.model.TypeDossierModel;
 @Repository
 public interface TypeDossierRepository extends JpaRepository<TypeDossierModel, String>{
 
+	TypeDossierModel typedossier = new TypeDossierModel();
 	@Query("SELECT t.LIBELLE_COURT FROM TypeDossierModel t")
 	ArrayList<String> findAllLibelleCourt();
 	
+	/*@Query("SELECT CODE FROM TYPE_DOSSIER");
+	ArrayList<String> findAllCODE();*/
+
 }

@@ -8,13 +8,13 @@ import org.springframework.batch.item.database.JdbcBatchItemWriter;
 
 import com.eai.BatchJobCDL.model.Cle_Doss_Cr_CptModel;
 
-public class WriterTCreance  extends JdbcBatchItemWriter<Cle_Doss_Cr_CptModel>{
+public class WriterCleDossCrCpt  extends JdbcBatchItemWriter<Cle_Doss_Cr_CptModel>{
 	
 	//@Autowired
 		//private DataSource dataSource;
 
 		   		
-		    public WriterTCreance(DataSource dataSource) {
+		    public WriterCleDossCrCpt(DataSource dataSource) {
 		    	
 		    /*	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		    	//jdbcTemplate.setDataSource(dataSource);

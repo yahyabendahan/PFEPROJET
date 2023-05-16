@@ -11,7 +11,7 @@ import com.eai.BatchJobCDL.model.*;
 
 @Component
 
-public class ProcessorTCreance  implements ItemProcessor<CreanceModel , Cle_Doss_Cr_CptModel> {
+public class ProcessorCleDossCrCpt  implements ItemProcessor<CreanceModel , Cle_Doss_Cr_CptModel> {
 
 
 	@Override
@@ -29,7 +29,7 @@ public class ProcessorTCreance  implements ItemProcessor<CreanceModel , Cle_Doss
 			cle_doss_cr_cpt.setCpt(dossiermodel.getCODE_COMPTE()); 
 			//cle_doss_cr_cpt.wait(0);
 		}
-        System.out.println("ProcessorTcreance: ");
+        System.out.println("ProcessorCle_Doss_Cr_Cpt: ");
 
 	    return cle_doss_cr_cpt;
 	}
