@@ -1,6 +1,8 @@
 package com.eai.BatchJobCDL.utils;
-import org.springframework.beans.factory.annotation.Autowired;
+
+
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@Configuration
 public class ValidVal {
 	
     private final JdbcTemplate jdbcTemplate;
@@ -15,7 +18,6 @@ public class ValidVal {
     
     private static List<String> VALID_VALUES = new ArrayList<>();
 
-    @Autowired
     public ValidVal(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -31,7 +33,7 @@ public class ValidVal {
         
     }
     @Bean
-    public static List<String> getValidValues() {
+    public static List<String> getLibelleCourt() {
         return VALID_VALUES;
         
     }

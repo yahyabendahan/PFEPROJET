@@ -19,7 +19,7 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 			
 	    	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
 	    	ImpayesCdlRejetModel escFail = new ImpayesCdlRejetModel();
-			List<String> VALID_VALUES = ValidVal.getValidValues();
+			List<String> VALID_VALUES = ValidVal.getLibelleCourt();
 			
 	        if (item.getNateng().equals("ESC")) {
 	            if (VALID_VALUES.contains(item.getType())) {

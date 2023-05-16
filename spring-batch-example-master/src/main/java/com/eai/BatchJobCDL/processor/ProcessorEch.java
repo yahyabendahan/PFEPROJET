@@ -26,7 +26,7 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
     public ImpayesCDLModel process(EchDTO item) {
 		
     	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
-		List<String> VALID_VALUES = ValidVal.getValidValues();
+		List<String> VALID_VALUES = ValidVal.getLibelleCourt();
 		ImpayesCdlRejetModel echFail = new ImpayesCdlRejetModel();
 		
 		if (item.getNateng().equals("ECH")) {

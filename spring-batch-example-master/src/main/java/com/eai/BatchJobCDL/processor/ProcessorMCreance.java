@@ -14,8 +14,13 @@ public class ProcessorMCreance implements ItemProcessor<ImpayesCDLModel, Creance
         CreanceModel creancemodel = new CreanceModel();
         TypeDossierModel typedossier = new TypeDossierModel();
 		
-        creancemodel.setCodeTypeDossier(typedossier.getCODE());
-        
+       // if((item.getNateng()==NATURE_ENGAGEMENT.LIBELLE_COURT)&&(item.getType()==TYPE_DOSSIER.LIBELLE_COURT))
+        {        
+            creancemodel.setCodeTypeDossier(typedossier.getCODE());
+            creancemodel.setCodeMotif(null);
+            creancemodel.setCodeNatEng(null);
+        	
+        }        
 		
         
         
