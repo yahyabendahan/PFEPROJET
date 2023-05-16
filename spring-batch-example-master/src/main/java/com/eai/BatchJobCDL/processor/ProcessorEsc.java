@@ -3,6 +3,7 @@ package com.eai.BatchJobCDL.processor;
 import java.util.List;
 
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.eai.BatchJobCDL.DTO.EscDTO;
@@ -15,8 +16,12 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	   
 		// private static final Logger log = LoggerFactory.getLogger(ProcessorEsc.class);
 
-	private final TypeDossierRepository typeDossierRepository= null;
+	private final TypeDossierRepository typeDossierRepository;
 
+    @Autowired
+    public ProcessorEsc(TypeDossierRepository typeDossierRepository) {
+        this.typeDossierRepository = typeDossierRepository;
+    }
 		@Override
 	    public ImpayesCDLModel process(EscDTO item) {
 			
