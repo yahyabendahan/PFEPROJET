@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.eai.BatchJobCDL.model.*;
 import com.eai.BatchJobCDL.repository.*;
 
-public class ProcessorMCreance implements ItemProcessor<ImpayesCDLModel, CreanceModel>{
+public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, CreanceModel>{
 
-    private final NatEngRepository NatEngRepository;
+    private final NatEngRepository natEngRepository;
 	private final TypeDossierRepository typeDossierRepository;
 
     @Autowired
-    public ProcessorMCreance(TypeDossierRepository typeDossierRepository,NatEngRepository NatEngRepository) {
+    public ProcessorTCreance(TypeDossierRepository typeDossierRepository,NatEngRepository NatEngRepository) {
         this.typeDossierRepository = typeDossierRepository;
-        this.NatEngRepository = NatEngRepository;
+        this.natEngRepository = NatEngRepository;
     }
     
 	@Override
@@ -24,7 +24,7 @@ public class ProcessorMCreance implements ItemProcessor<ImpayesCDLModel, Creance
         CreanceModel creancemodel = new CreanceModel();
         TypeDossierModel typedossier = new TypeDossierModel();
 		
-       if((NatEngRepository.findAllLibelleCourt().contains(item.getNateng()))&&(typeDossierRepository.findAllLibelleCourt().contains(item.getType())))       
+       if((natEngRepository.findAllLibelleCourt().contains(item.getNateng()))&&(typeDossierRepository.findAllLibelleCourt().contains(item.getType())))       
         {        
             creancemodel.setCodeTypeDossier(typedossier.getCODE());
             creancemodel.setCodeMotif(null);

@@ -16,7 +16,7 @@ import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 
 //@ComponentScan(basePackages = "com.example.springbatchexample.config")
 @Component
-public class WriterTC extends JdbcBatchItemWriter<CompteModel>{
+public class WriterTCompte extends JdbcBatchItemWriter<CompteModel>{
 	
 	//@Autowired
 	//private DataSource dataSource;
@@ -24,7 +24,7 @@ public class WriterTC extends JdbcBatchItemWriter<CompteModel>{
 	
 	    //@Autowired
 	    @SuppressWarnings("unlikely-arg-type")
-		public WriterTC(DataSource dataSource) {
+		public WriterTCompte(DataSource dataSource) {
 
 	    	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
 
