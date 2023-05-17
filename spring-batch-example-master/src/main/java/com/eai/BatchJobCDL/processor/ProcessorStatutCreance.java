@@ -24,7 +24,22 @@ public class ProcessorStatutCreance implements ItemProcessor<CreanceModel, Statu
 	   // }
 	        
 	        
-	        return null;
+	        return histCreance;
 	}
 
 }
+/*Nom Règle Remarque
+RG_1 Valeur code déclassement
+« CODE_DEC » :
+- Si « CREANCE
+.CODE_NAT_ENG » =
+NAT_ENG_ESC alors STATUS_RJ
+- Si « CODE_NAT_ENG » =
+NAT_ENG_SBF alors STATUS_RJ
+- Sinon STATUS_IM
+RG_2 Valeur date de création
+« DATE_CREATION » :
+- Si DATE_LOAD_OVO non nul
+alors CREANCE.
+DATE_LOAD_OVO
+*/
