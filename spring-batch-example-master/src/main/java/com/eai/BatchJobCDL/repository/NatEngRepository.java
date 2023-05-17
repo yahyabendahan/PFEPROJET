@@ -18,5 +18,5 @@ public interface NatEngRepository extends JpaRepository<NatEngModel, String>{
 	List<String> findAllLibelleCourt();
 
 	@Query("SELECT n.CODE FROM NatEngModel n")
-	List<String> findallCODE();
+	String findallCODE();
 }
