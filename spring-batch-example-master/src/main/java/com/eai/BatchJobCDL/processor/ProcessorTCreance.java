@@ -22,10 +22,10 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
 	@Override
 	public CreanceModel process(ImpayesCDLModel item) throws Exception {
 		DossierModel dossiermodel = new DossierModel();
-        CompteModel comptemodel = new CompteModel();
+       // CompteModel comptemodel = new CompteModel();
         CreanceModel creancemodel = new CreanceModel();
         TypeDossierModel typedossier = new TypeDossierModel();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Replace with your desired date format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Example: fichier esc (20230222)
 
 		
        if((natEngRepository.findAllLibelleCourt().contains(item.getNateng()))&&(typeDossierRepository.findAllLibelleCourt().contains(item.getType())))       
@@ -85,13 +85,25 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
             creancemodel.setUserCreation(null); //Valeur par défaut « BATCH_INTEG_CDL 
 
         }        
-		
-        
-        
-        
-        	
+ 	
         System.out.println("ProcessorTcreance: ");
 		return creancemodel;
 	}
 
 }
+
+/*  //Using java.time.LocalDate (for Java 8 and later):
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+// ...
+
+String dateString = item.getDateMiseImpaye();
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Replace with your desired date format
+LocalDate date = LocalDate.parse(dateString, formatter);
+creancemodel.setDateMiseImpaye(java.sql.Date.valueOf(date));
+
+// ...
+ * 
+*/

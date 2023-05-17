@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "NATURE_ENGAGEMENT")
-public class NatEngModel {
+@Table(name = "CODE_DECLASSEMENT")
+public class CodeDeclassementModel {
 
 	@Id
 	@Column(name = "CODE")
@@ -19,6 +19,9 @@ public class NatEngModel {
 	
 	@Column(name = "LIBELLE_LONG")
 	private String LibelleLong;
+	
+	@Column(name="NUMERO_ORDRE")
+	private Double numeroOrdre;
 
 	public String getCode() {
 		return code;
@@ -43,6 +46,14 @@ public class NatEngModel {
 	public void setLibelleLong(String libelleLong) {
 		LibelleLong = libelleLong;
 	}
-	
+
+	public Double getNumeroOrdre() {
+		return numeroOrdre;
+	}
+
+	public void setNumeroOrdre(Double numeroOrdre) {
+		this.numeroOrdre = numeroOrdre;
+	}
+
 	
 }

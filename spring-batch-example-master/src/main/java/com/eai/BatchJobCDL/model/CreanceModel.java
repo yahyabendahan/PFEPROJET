@@ -19,7 +19,7 @@ public class CreanceModel {
 	@SequenceGenerator(name = "creanceSeqGen", sequenceName = "SEQ_CREANCE", initialValue = 1, allocationSize = 999999999)
 	@GeneratedValue(generator = "creanceSeqGen")
 	@Column(name = "CODE")
-	private Long code;
+	private Double code;
 	
 	@Column(name = "CODE_TYPE_DOSSIER")
 	private String codeTypeDossier;
@@ -131,11 +131,11 @@ public class CreanceModel {
 	@Column(name = "ANCIEN_CODE_DOSSIER")
 	private String ancienCodeDossier;
 
-	public Long getId() {
+	public Double getcode() {
 		return code;
 	}
 
-	public void setId(Long id) {
+	public void setcode(Double id) {
 		this.code = id;
 	}
 

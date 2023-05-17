@@ -17,7 +17,7 @@ import com.eai.BatchJobCDL.model.DossierModel;
 
 //@ComponentScan(basePackages = "com.example.springbatchexample.config")
 @Component
-public class WriterTD extends JdbcBatchItemWriter<DossierModel>{
+public class WriterTDossier extends JdbcBatchItemWriter<DossierModel>{
 	
 	
 	
@@ -27,7 +27,7 @@ public class WriterTD extends JdbcBatchItemWriter<DossierModel>{
 	    
 	    @SuppressWarnings("unlikely-arg-type")
 	
-	    public WriterTD(DataSource dataSource) {
+	    public WriterTDossier(DataSource dataSource) {
 	    	
 	    	DossierModel d = new DossierModel();
 	    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
