@@ -22,7 +22,7 @@ public class WriterCleDossCrCpt  extends JdbcBatchItemWriter<Cle_Doss_Cr_CptMode
 		    	 String deleteSql = "DELETE FROM CLE_DOSS_CR_CPT";//TEMPORAIRE
 		         new JdbcTemplate(dataSource).update(deleteSql);
 		         */
-		         System.out.println("Writercreance: ");
+		         System.out.println("WriterCle_Doss_Cr_CptModel: ");
 		    	
 		    
 		    	

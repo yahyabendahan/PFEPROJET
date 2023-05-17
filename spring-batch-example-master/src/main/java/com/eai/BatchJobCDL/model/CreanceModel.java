@@ -19,7 +19,7 @@ public class CreanceModel {
 	@SequenceGenerator(name = "creanceSeqGen", sequenceName = "SEQ_CREANCE", initialValue = 1, allocationSize = 999999999)
 	@GeneratedValue(generator = "creanceSeqGen")
 	@Column(name = "CODE")
-	private Long id;
+	private Long code;
 	
 	@Column(name = "CODE_TYPE_DOSSIER")
 	private String codeTypeDossier;
@@ -127,13 +127,16 @@ public class CreanceModel {
 
 	@Column(name = "USER_CREATION")
 	private String userCreation;
+	
+	@Column(name = "ANCIEN_CODE_DOSSIER")
+	private String ancienCodeDossier;
 
 	public Long getId() {
-		return id;
+		return code;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.code = id;
 	}
 
 	public String getCodeTypeDossier() {
@@ -404,8 +407,15 @@ public class CreanceModel {
 		return userCreation;
 	}
 
-	public void setUserCreation(String userCreation) {
-		this.userCreation = userCreation;
+	public void setUserCreation(String ancienCodeDossier) {
+		this.ancienCodeDossier = ancienCodeDossier;
+	}
+	public String getancienCodeDossier() {
+		return userCreation;
+	}
+
+	public void setancienCodeDossier(String ancienCodeDossier) {
+		this.ancienCodeDossier = ancienCodeDossier;
 	}
 	
 
