@@ -21,7 +21,7 @@ import com.eai.BatchJobCDL.repository.TypeDossierRepository;
 public class TypeDossierRepositoryImpl implements TypeDossierRepository {
 
 	@PersistenceContext
-    private EntityManager entityManager;
+    private EntityManager entityManager;// probleme içi entityManager= null ??
 
     @Override
     public List<String> findAllLibelleCourt() {
