@@ -19,5 +19,5 @@ public interface CodeDecRepository extends JpaRepository<CodeDeclassementModel,S
 
 	@Query("SELECT n.CODE FROM CodeDeclassementModel n")
 	String findallCODE();
-	
+	//LIBELLE_LONG //NUMERO_ORDRE
 }

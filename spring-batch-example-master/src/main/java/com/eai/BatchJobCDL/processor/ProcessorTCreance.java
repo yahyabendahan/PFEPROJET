@@ -22,7 +22,6 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
 	@Override
 	public CreanceModel process(ImpayesCDLModel item) throws Exception {
 		DossierModel dossiermodel = new DossierModel();
-       // CompteModel comptemodel = new CompteModel();
         CreanceModel creancemodel = new CreanceModel();
         TypeDossierModel typedossier = new TypeDossierModel();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Example: fichier esc (20230222)
@@ -35,6 +34,7 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
             creancemodel.setCodeNatEng(natEngRepository.findallCODE());
             creancemodel.setcodeDossier(dossiermodel.getCODE());
             creancemodel.setMontant(item.getMontantCreance()/100);
+            
            /* creancemodel.setDateMiseImpaye(item.getDateMiseImpaye());
             creancemodel.setDateEcheance(item.getDateEcheance());
             creancemodel.setDateCreance(item.getDateCreance());    
@@ -59,6 +59,7 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
                 // Handle the parse exception if the date string is in an invalid format
                 e.printStackTrace();
             }
+            
             creancemodel.setMontantInteretNormal(item.getMontantInteretNormal()/100);
             creancemodel.setTVAInteretNormal(item.getTvaInteret()/100);
             creancemodel.setMontantInteretRetard(item.getMontantInteretRetard()/100);
@@ -71,7 +72,7 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
             creancemodel.setReferenceLiaison(item.getReferenceLiaison());
             creancemodel.setCodeCategorie(item.getCodeCategorie());
             creancemodel.setNumeroComptePayeur(item.getNumComptePayeur());
-            creancemodel.setStatut(null);//Selon CODE_NAT_ENG
+            creancemodel.setStatut(null);//Selon CODE_NAT_ENG?
             creancemodel.setTypeCreance(null);//La valeur « R »
             creancemodel.setTypeProposition(null);//null
             creancemodel.setDateProposition(null);

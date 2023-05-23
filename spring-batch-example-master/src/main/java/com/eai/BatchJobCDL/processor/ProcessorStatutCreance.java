@@ -13,30 +13,23 @@ public class ProcessorStatutCreance implements ItemProcessor<CreanceModel, Statu
 	    Statut_Creance_HistModel histCreance = new Statut_Creance_HistModel();
 	    TypeDossierModel typedossier = new TypeDossierModel();
 	        
-	    //if() {
 	    histCreance.setCodeNatDecl(item.getCodeNatEng());
 	    histCreance.setCodeCreance(item.getcode());
-	    histCreance.setCodeDec(null);//RG_1
-	    histCreance.setDateCreation(null);//RG_2
+	    
+	    //RG_1
+	    if(item.getCodeNatEng()=="NAT_ENG_ESC") {histCreance.setCodeDec("STATUS_RJ");}//Etat Rejete
+	    else if (item.getCodeNatEng()=="NAT_ENG_SBF") {histCreance.setCodeDec("STATUS_RJ");}	    else {histCreance.setCodeDec("STATUS_IM");}	//Etat Impaye Non classÃ©
+	    //RG_2 : inexplicable
+	    histCreance.setDateCreation(null);
+	    
 	    histCreance.setUserCreaction(null);//Valeur par défaut « BATCH_INTEG_CDL
-	    histCreance.setDateComite(item.getDateComite());
-	        
-	   // }
-	        
+	    histCreance.setDateComite(item.getDateComite());	        
 	        
 	        return histCreance;
 	}
 
 }
-/*Nom Règle Remarque
-RG_1 Valeur code déclassement
-« CODE_DEC » :
-- Si « CREANCE
-.CODE_NAT_ENG » =
-NAT_ENG_ESC alors STATUS_RJ
-- Si « CODE_NAT_ENG » =
-NAT_ENG_SBF alors STATUS_RJ
-- Sinon STATUS_IM
+/*
 RG_2 Valeur date de création
 « DATE_CREATION » :
 - Si DATE_LOAD_OVO non nul
