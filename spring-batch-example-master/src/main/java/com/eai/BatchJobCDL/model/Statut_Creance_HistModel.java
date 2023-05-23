@@ -22,6 +22,7 @@ public class Statut_Creance_HistModel {
 	private Double code;
 	//It is possible that the database is expecting a different data type for the "CODE" column. 
 	//checked 
+	
 	//You could also check if the sequence generator is set up correctly and if the sequence exists in the database.
 	//checked
 	

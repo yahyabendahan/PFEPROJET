@@ -1,6 +1,5 @@
 package com.eai.BatchJobCDL.processor;
 
-import java.util.List;
 
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import com.eai.BatchJobCDL.DTO.EscDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
 import com.eai.BatchJobCDL.repository.TypeDossierRepository;
-import com.eai.BatchJobCDL.utils.ValidVal;
 @Component
 public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	   
