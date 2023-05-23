@@ -16,7 +16,7 @@ public class Statut_Creance_HistModel {
 	
 
 	@Id
-	@SequenceGenerator(name = "statutcreanceSeqGen", sequenceName = "SEQ_HIST_CREANCE", initialValue = 0, allocationSize = 999999999)
+	@SequenceGenerator(name = "statutcreanceSeqGen", sequenceName = "SEQ_HIST_CREANCE", initialValue = 0, allocationSize = 17599000)
 	@GeneratedValue(generator = "statutcreanceSeqGen")
 	@Column(name = "CODE")
 	private Double code;

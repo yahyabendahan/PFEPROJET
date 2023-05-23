@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class CreanceModel {
 
 	@Id
-	@SequenceGenerator(name = "creanceSeqGen", sequenceName = "SEQ_CREANCE", initialValue = 1, allocationSize = 999999999)
+	@SequenceGenerator(name = "creanceSeqGen", sequenceName = "SEQ_CREANCE", initialValue = 1, allocationSize = 11727000)
 	@GeneratedValue(generator = "creanceSeqGen")
 	@Column(name = "CODE")
 	private Double code;
@@ -34,7 +34,7 @@ public class CreanceModel {
     @JoinColumn(name ="CODE_DOSSIER")
 	private DossierModel dossier;*/
 
-	@ManyToOne
+	
 	@Column(name ="CODE_DOSSIER")
 	private Long  codeDossier;
 	

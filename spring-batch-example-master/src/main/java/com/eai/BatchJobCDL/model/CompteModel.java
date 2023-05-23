@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "COMPTE")
 public class CompteModel {
 	@Id
-	@SequenceGenerator(name = "compteSeqGen", sequenceName = "SEQ_COMPTE", initialValue = 1, allocationSize = 999999999)
+	@SequenceGenerator(name = "compteSeqGen", sequenceName = "SEQ_COMPTE", initialValue = 1, allocationSize = 10000)
 	@GeneratedValue(generator = "compteSeqGen")
 	@Column(name = "CODE")
 	private Long code;

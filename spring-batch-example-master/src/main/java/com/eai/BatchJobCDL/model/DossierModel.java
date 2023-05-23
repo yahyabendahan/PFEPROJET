@@ -16,7 +16,7 @@ public class DossierModel {
 	
 
 	@Id
-	@SequenceGenerator(name = "dossierSeqGen", sequenceName = "SEQ_DOSSIER", initialValue = 1, allocationSize = 999999999)
+	@SequenceGenerator(name = "dossierSeqGen", sequenceName = "SEQ_DOSSIER", initialValue = 1, allocationSize = 10377915)
 	@GeneratedValue(generator = "dossierSeqGen")
 	@Column(name = "CODE")
 	private Long CODE;
@@ -30,7 +30,7 @@ public class DossierModel {
 	/*@ManyToOne
     @JoinColumn(name ="CODE_COMPTE")
 	private CompteModel CODE_COMPTE;	*/
-	@ManyToOne
+
 	@Column(name="CODE_COMPTE")
 	private Long  CODE_COMPTE;
 	

@@ -4,24 +4,30 @@ package com.eai.BatchJobCDL.processor;
 
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Component;
 
 import com.eai.BatchJobCDL.DTO.EchDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
-import com.eai.BatchJobCDL.repository.TypeDossierRepository;
+import com.eai.BatchJobCDL.repository.*;
+import com.eai.BatchJobCDL.implRepository.*;
 
+//com.eai.BatchJobCDL.repository.TypeDossierRepository;
+
+//@EnableJpaRepositories(basePackages = "com.eai.BatchJobCDL.repository"+"com.eai.BatchJobCDL.model")
 @Component
+//@ComponentScan("com.eai.BatchJobCDL.model")
+
 public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 
-	//private static final Logger log = LoggerFactory.getLogger(ProcessorEch.class);
-	
-	private final TypeDossierRepository typeDossierRepository;
+	private final TypeDossierRepositoryImpl TypeDossierRepositoryImpl = new TypeDossierRepositoryImpl();
 
-    @Autowired
+   /* @Autowired
     public ProcessorEch(TypeDossierRepository typeDossierRepository) {
         this.typeDossierRepository = typeDossierRepository;
-    }
+    }*/
     
 	@Override
     public ImpayesCDLModel process(EchDTO item) {
@@ -32,7 +38,7 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 		
 		if (item.getNateng().equals("ECH")) {
 			
-            if (typeDossierRepository.findAllLibelleCourt().contains(item.getType())) {
+            if (TypeDossierRepositoryImpl.findAllLibelleCourt().contains(item.getType())) {
             	
                 impayesCDLModel.setNateng(item.getNateng());
                 impayesCDLModel.setType(item.getType());
@@ -114,4 +120,6 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 	}
 		
     return impayesCDLModel;
-  }}
+  }
+	
+}
