@@ -2,6 +2,8 @@ package com.eai.BatchJobCDL.processor;
 
 
 
+import java.util.List;
+
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,33 +14,32 @@ import com.eai.BatchJobCDL.DTO.EchDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
 import com.eai.BatchJobCDL.repository.*;
-import com.eai.BatchJobCDL.implRepository.*;
 
-//com.eai.BatchJobCDL.repository.TypeDossierRepository;
+import com.eai.BatchJobCDL.repository.TypeDossierRepository;
 
 //@EnableJpaRepositories(basePackages = "com.eai.BatchJobCDL.repository"+"com.eai.BatchJobCDL.model")
 @Component
-//@ComponentScan("com.eai.BatchJobCDL.model")
+//@ComponentScan("com.eai.BatchJobCDL.model"+"com.eai.BatchJobCDL.repository")
 
 public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 
-	private final TypeDossierRepositoryImpl TypeDossierRepositoryImpl = new TypeDossierRepositoryImpl();
+	//private final TypeDossierRepositoryImpl TypeDossierRepository = new TypeDossierRepository();
 
-   /* @Autowired
-    public ProcessorEch(TypeDossierRepository typeDossierRepository) {
-        this.typeDossierRepository = typeDossierRepository;
-    }*/
+	@Autowired
+	TypeDossierRepository typeDOsRepo;
+	
     
-	@Override
+    
+	
     public ImpayesCDLModel process(EchDTO item) {
 		
     	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
-		//List<String> VALID_VALUES = ValidVal.getLibelleCourt();
+	//	List<String> VALID_VALUES = typeDOsRepo.findOneByLibelleCourt();
 		ImpayesCdlRejetModel echFail = new ImpayesCdlRejetModel();
 		
 		if (item.getNateng().equals("ECH")) {
 			
-            if (TypeDossierRepositoryImpl.findAllLibelleCourt().contains(item.getType())) {
+            if (typeDOsRepo.findOneByLibelleCourt(item.getType())!=null) { // if (typeDOsRepo.findAllLibelleCourt().contains(item.getType())) {
             	
                 impayesCDLModel.setNateng(item.getNateng());
                 impayesCDLModel.setType(item.getType());

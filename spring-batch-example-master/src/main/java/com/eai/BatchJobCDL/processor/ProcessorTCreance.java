@@ -10,15 +10,11 @@ import com.eai.BatchJobCDL.repository.*;
 
 public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, CreanceModel>{
 
-    private final NatEngRepository natEngRepository;
-	private final TypeDossierRepository typeDossierRepository;
-
-    @Autowired
-    public ProcessorTCreance(TypeDossierRepository typeDossierRepository,NatEngRepository NatEngRepository) {
-        this.typeDossierRepository = typeDossierRepository;
-        this.natEngRepository = NatEngRepository;
-    }
-    
+	@Autowired
+	TypeDossierRepository typeDOsRepo;
+	
+	@Autowired
+	NatEngRepository natgRepo;
 	@Override
 	public CreanceModel process(ImpayesCDLModel item) throws Exception {
 		DossierModel dossiermodel = new DossierModel();
@@ -27,19 +23,17 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Example: fichier esc (20230222)
 
 		
-       if((natEngRepository.findAllLibelleCourt().contains(item.getNateng()))&&(typeDossierRepository.findAllLibelleCourt().contains(item.getType())))       
+       if((natgRepo.findOneByLibelleCourt(item.getNateng())!=null)&&(typeDOsRepo.findOneByLibelleCourt(item.getType())!=null))       
         {        
             creancemodel.setCodeTypeDossier(typedossier.getCODE());
             creancemodel.setCodeMotif(null);
-            creancemodel.setCodeNatEng(natEngRepository.findallCODE());
+            
+            creancemodel.setCodeNatEng(natgRepo.findOneByLibelleCourt(item.getNateng()).getCode());
+            
             creancemodel.setcodeDossier(dossiermodel.getCODE());
             creancemodel.setMontant(item.getMontantCreance()/100);
             
-           /* creancemodel.setDateMiseImpaye(item.getDateMiseImpaye());
-            creancemodel.setDateEcheance(item.getDateEcheance());
-            creancemodel.setDateCreance(item.getDateCreance());    
-            creancemodel.setDateRemise(item.getDateRemise());
-		   */
+       
             String StringMiseImpaye = item.getDateMiseImpaye();
             String StringEcheance = item.getDateEcheance();
             String StringCreance = item.getDateCreance();
@@ -83,7 +77,7 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
             creancemodel.setDateComite(null);//item.getCommission()
             creancemodel.setNumeroLigne(item.getNumeroLigne());
             creancemodel.setNumeroTirage(item.getNumeroTirage());
-            creancemodel.setUserCreation(null); //Valeur par défaut « BATCH_INTEG_CDL 
+            creancemodel.setUserCreation("BATCH_INTEG_CDL"); //Valeur par défaut « BATCH_INTEG_CDL 
 
         }        
  	

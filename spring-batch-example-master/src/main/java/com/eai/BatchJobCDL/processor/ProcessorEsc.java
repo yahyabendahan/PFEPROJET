@@ -14,12 +14,12 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	   
 		// private static final Logger log = LoggerFactory.getLogger(ProcessorEsc.class);
 
-	private final TypeDossierRepository typeDossierRepository;
+	@Autowired
+	TypeDossierRepository typeDOsRepo;
+	
 
-    @Autowired
-    public ProcessorEsc(TypeDossierRepository typeDossierRepository) {
-        this.typeDossierRepository = typeDossierRepository;
-    }
+   // @Autowired
+   
 		@Override
 	    public ImpayesCDLModel process(EscDTO item) {
 			
@@ -28,7 +28,7 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 			//List<String> VALID_VALUES = ValidVal.getLibelleCourt();
 			
 	        if (item.getNateng().equals("ESC")) {
-	            if (typeDossierRepository.findAllLibelleCourt().contains(item.getType())) {
+	            if (typeDOsRepo.findOneByLibelleCourt(item.getType())!=null) {
 	            	impayesCDLModel.setNateng(item.getNateng());
 	            	impayesCDLModel.setType(item.getType());
 	            	impayesCDLModel.setCpt(item.getCpt());

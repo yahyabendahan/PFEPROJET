@@ -9,5 +9,6 @@ import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 
 @Repository
 public interface ImpayesCDLRepository extends JpaRepository<ImpayesCDLModel, String> {
+	
 
 }
