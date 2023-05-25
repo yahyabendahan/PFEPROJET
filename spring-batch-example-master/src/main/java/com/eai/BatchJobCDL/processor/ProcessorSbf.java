@@ -4,20 +4,24 @@ package com.eai.BatchJobCDL.processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.eai.BatchJobCDL.DTO.SbfDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
+import com.eai.BatchJobCDL.repository.ImpayesCDLRejetRepository;
 
 
 public class ProcessorSbf implements ItemProcessor<SbfDTO, ImpayesCDLModel> {
 
-			private static final Logger log = LoggerFactory.getLogger(ProcessorEch.class);
+		//	private static final Logger log = LoggerFactory.getLogger(ProcessorEch.class);
 			
-			@Override
+			@Autowired 
+			private ImpayesCDLRejetRepository impayesCDLRejetRepository;
+
 		    public ImpayesCDLModel process(SbfDTO item) {
 				
-				ImpayesCdlRejetModel sbfFail = new ImpayesCdlRejetModel();
+				ImpayesCdlRejetModel impayesCdlRejetModel = new ImpayesCdlRejetModel();
 		    	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
 		    	
 		        if (item.getNateng().equals("SBF")) {
@@ -36,23 +40,24 @@ public class ProcessorSbf implements ItemProcessor<SbfDTO, ImpayesCDLModel> {
 		            	impayesCDLModel.setCommission(item.getCommission());
 		        }
 		        else {
-		        	sbfFail.setNateng(item.getNateng());
-	            	sbfFail.setType(item.getType());
-	            	sbfFail.setCpt(item.getCpt());
-	            	sbfFail.setMontantCreance(item.getMontantCreance());
-	            	sbfFail.setDateCreance(item.getDateCreance());
-	            	sbfFail.setNoDossier(item.getNoDossier());
-	            	sbfFail.setRefferenceValeur(item.getRefferenceValeur());
-	            	sbfFail.setCodeEtablissementBancaire(item.getCodeEtablissementBancaire());
-	            	sbfFail.setCodeGuichetBancaire(item.getCodeGuichetBancaire());
-	            	sbfFail.setDateRemise(item.getDateRemise());
-	            	sbfFail.setRefferenceValeur(item.getRefferenceValeur());
-	            	sbfFail.setCodeRejet(item.getCodeRejet());
-	            	sbfFail.setCommission(item.getCommission());
-	            	sbfFail.setDateRejet(null);//date rejet
-	            	sbfFail.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
+		        	impayesCdlRejetModel.setNateng(item.getNateng());
+	            	impayesCdlRejetModel.setType(item.getType());
+	            	impayesCdlRejetModel.setCpt(item.getCpt());
+	            	impayesCdlRejetModel.setMontantCreance(item.getMontantCreance());
+	            	impayesCdlRejetModel.setDateCreance(item.getDateCreance());
+	            	impayesCdlRejetModel.setNoDossier(item.getNoDossier());
+	            	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
+	            	impayesCdlRejetModel.setCodeEtablissementBancaire(item.getCodeEtablissementBancaire());
+	            	impayesCdlRejetModel.setCodeGuichetBancaire(item.getCodeGuichetBancaire());
+	            	impayesCdlRejetModel.setDateRemise(item.getDateRemise());
+	            	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
+	            	impayesCdlRejetModel.setCodeRejet(item.getCodeRejet());
+	            	impayesCdlRejetModel.setCommission(item.getCommission());
+	            	impayesCdlRejetModel.setDateRejet(null);//date rejet
+	            	impayesCdlRejetModel.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
 				}
-					
+		        impayesCDLRejetRepository.save(impayesCdlRejetModel);
+
 		        return impayesCDLModel;		 
 	}
 

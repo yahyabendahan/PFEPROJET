@@ -5,20 +5,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.eai.BatchJobCDL.DTO.DocDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
+import com.eai.BatchJobCDL.repository.ImpayesCDLRejetRepository;
 
 
 public class ProcessorDoc  implements ItemProcessor<DocDTO, ImpayesCDLModel>  {
+	
+	@Autowired
+	private ImpayesCDLRejetRepository impayesCDLRejetRepository;
 
-	@Override
+
 	public ImpayesCDLModel process(DocDTO item) throws Exception {
 		
 		ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
 		
-		ImpayesCdlRejetModel docFail = new ImpayesCdlRejetModel();
+		ImpayesCdlRejetModel impayesCdlRejetModel = new ImpayesCdlRejetModel();
 		
 		if (item.getNateng().equals("DOC")) {
 			impayesCDLModel.setNateng(item.getNateng());
@@ -32,18 +37,21 @@ public class ProcessorDoc  implements ItemProcessor<DocDTO, ImpayesCDLModel>  {
         	impayesCDLModel.setRefferenceValeur(item.getRefferenceValeur());
 		}
 		else {
-			docFail.setNateng(item.getNateng());
-        	docFail.setType(item.getType());
-        	docFail.setCpt(item.getCpt());
-        	docFail.setMontantCreance(item.getMontantCreance());
-        	docFail.setDateCreance(item.getDateCreance());
-        	docFail.setNoDossier(item.getNoDossier());
-        	docFail.setDateEcheance(item.getDateEcheance());
-        	docFail.setDateMiseImpaye(item.getDateMiseImpaye());
-        	docFail.setRefferenceValeur(item.getRefferenceValeur());
-        	docFail.setDateRejet(null);//date rejet
-        	docFail.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
+			impayesCdlRejetModel.setNateng(item.getNateng());
+        	impayesCdlRejetModel.setType(item.getType());
+        	impayesCdlRejetModel.setCpt(item.getCpt());
+        	impayesCdlRejetModel.setMontantCreance(item.getMontantCreance());
+        	impayesCdlRejetModel.setDateCreance(item.getDateCreance());
+        	impayesCdlRejetModel.setNoDossier(item.getNoDossier());
+        	impayesCdlRejetModel.setDateEcheance(item.getDateEcheance());
+        	impayesCdlRejetModel.setDateMiseImpaye(item.getDateMiseImpaye());
+        	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
+        	impayesCdlRejetModel.setDateRejet(null);//date rejet
+        	impayesCdlRejetModel.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
 		}
+		
+		impayesCDLRejetRepository.save(impayesCdlRejetModel);
+
 		return impayesCDLModel;
 	}
 }

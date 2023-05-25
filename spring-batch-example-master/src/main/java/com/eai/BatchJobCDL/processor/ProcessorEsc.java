@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.eai.BatchJobCDL.DTO.EscDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
+import com.eai.BatchJobCDL.repository.ImpayesCDLRejetRepository;
 import com.eai.BatchJobCDL.repository.TypeDossierRepository;
 @Component
 public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
@@ -15,7 +16,10 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 		// private static final Logger log = LoggerFactory.getLogger(ProcessorEsc.class);
 
 	@Autowired
-	TypeDossierRepository typeDOsRepo;
+	private TypeDossierRepository typeDOsRepo;
+	@Autowired 
+	private ImpayesCDLRejetRepository impayesCDLRejetRepository;
+
 	
 
    // @Autowired
@@ -24,7 +28,7 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	    public ImpayesCDLModel process(EscDTO item) {
 			
 	    	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
-	    	ImpayesCdlRejetModel escFail = new ImpayesCdlRejetModel();
+	    	ImpayesCdlRejetModel impayesCdlRejetModel = new ImpayesCdlRejetModel();
 			//List<String> VALID_VALUES = ValidVal.getLibelleCourt();
 			
 	        if (item.getNateng().equals("ESC")) {
@@ -45,42 +49,45 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	            	impayesCDLModel.setCommission(item.getCommission());
 	            }
 	            else {
-	            	escFail.setNateng(item.getNateng());
-	            	escFail.setType(item.getType());
-	            	escFail.setCpt(item.getCpt());
-	            	escFail.setMontantCreance(item.getMontantCreance());
-	            	escFail.setDateCreance(item.getDateCreance());
-	            	escFail.setNoDossier(item.getNoDossier());
-	            	escFail.setRefferenceValeur(item.getRefferenceValeur());
-	            	escFail.setDateEcheance(item.getDateEcheance());
-	            	escFail.setCodeEtablissementBancaire(item.getCodeEtablissementBancaire());
-	            	escFail.setCodeGuichetBancaire(item.getCodeGuichetBancaire());
-	            	escFail.setDateRemise(item.getDateRemise());
-	            	escFail.setReferenceLiaison(item.getReferenceLiaison());
-	            	escFail.setCodeRejet(item.getCodeRejet());
-	            	escFail.setCommission(item.getCommission());
-	            	escFail.setDateRejet(null);//date rejet
-	                escFail.setMotifRejet(null); //motif rejet : la valeur du colonne "TYPE" n'exist pas  dans la table « TYPE_DOSSIER.LIBELLE_COURT »
+	            	impayesCdlRejetModel.setNateng(item.getNateng());
+	            	impayesCdlRejetModel.setType(item.getType());
+	            	impayesCdlRejetModel.setCpt(item.getCpt());
+	            	impayesCdlRejetModel.setMontantCreance(item.getMontantCreance());
+	            	impayesCdlRejetModel.setDateCreance(item.getDateCreance());
+	            	impayesCdlRejetModel.setNoDossier(item.getNoDossier());
+	            	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
+	            	impayesCdlRejetModel.setDateEcheance(item.getDateEcheance());
+	            	impayesCdlRejetModel.setCodeEtablissementBancaire(item.getCodeEtablissementBancaire());
+	            	impayesCdlRejetModel.setCodeGuichetBancaire(item.getCodeGuichetBancaire());
+	            	impayesCdlRejetModel.setDateRemise(item.getDateRemise());
+	            	impayesCdlRejetModel.setReferenceLiaison(item.getReferenceLiaison());
+	            	impayesCdlRejetModel.setCodeRejet(item.getCodeRejet());
+	            	impayesCdlRejetModel.setCommission(item.getCommission());
+	            	impayesCdlRejetModel.setDateRejet(null);//date rejet
+	                impayesCdlRejetModel.setMotifRejet(null); //motif rejet : la valeur du colonne "TYPE" n'exist pas  dans la table « TYPE_DOSSIER.LIBELLE_COURT »
 	    		}
 	        }
 	        else {
-	        	escFail.setNateng(item.getNateng());
-            	escFail.setType(item.getType());
-            	escFail.setCpt(item.getCpt());
-            	escFail.setMontantCreance(item.getMontantCreance());
-            	escFail.setDateCreance(item.getDateCreance());
-            	escFail.setNoDossier(item.getNoDossier());
-            	escFail.setRefferenceValeur(item.getRefferenceValeur());
-            	escFail.setDateEcheance(item.getDateEcheance());
-            	escFail.setCodeEtablissementBancaire(item.getCodeEtablissementBancaire());
-            	escFail.setCodeGuichetBancaire(item.getCodeGuichetBancaire());
-            	escFail.setDateRemise(item.getDateRemise());
-            	escFail.setReferenceLiaison(item.getReferenceLiaison());
-            	escFail.setCodeRejet(item.getCodeRejet());
-            	escFail.setCommission(item.getCommission());
-            	escFail.setDateRejet(null);//date rejet
-            	escFail.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
+	        	impayesCdlRejetModel.setNateng(item.getNateng());
+            	impayesCdlRejetModel.setType(item.getType());
+            	impayesCdlRejetModel.setCpt(item.getCpt());
+            	impayesCdlRejetModel.setMontantCreance(item.getMontantCreance());
+            	impayesCdlRejetModel.setDateCreance(item.getDateCreance());
+            	impayesCdlRejetModel.setNoDossier(item.getNoDossier());
+            	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
+            	impayesCdlRejetModel.setDateEcheance(item.getDateEcheance());
+            	impayesCdlRejetModel.setCodeEtablissementBancaire(item.getCodeEtablissementBancaire());
+            	impayesCdlRejetModel.setCodeGuichetBancaire(item.getCodeGuichetBancaire());
+            	impayesCdlRejetModel.setDateRemise(item.getDateRemise());
+            	impayesCdlRejetModel.setReferenceLiaison(item.getReferenceLiaison());
+            	impayesCdlRejetModel.setCodeRejet(item.getCodeRejet());
+            	impayesCdlRejetModel.setCommission(item.getCommission());
+            	impayesCdlRejetModel.setDateRejet(null);//date rejet
+            	impayesCdlRejetModel.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
 			}
+
+	        impayesCDLRejetRepository.save(impayesCdlRejetModel);
+
 	        return impayesCDLModel;
 	    }
 	}

@@ -2,17 +2,22 @@ package com.eai.BatchJobCDL.processor;
 
 
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.eai.BatchJobCDL.DTO.EfaDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
+import com.eai.BatchJobCDL.repository.ImpayesCDLRejetRepository;
 
 public class ProcessorEfa  implements ItemProcessor<EfaDTO, ImpayesCDLModel>  {
 
-	@Override
+	@Autowired 
+	private ImpayesCDLRejetRepository impayesCDLRejetRepository;
+
+
 	public ImpayesCDLModel process(EfaDTO item) throws Exception {
 		ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
-		ImpayesCdlRejetModel efaFail = new ImpayesCdlRejetModel();
+		ImpayesCdlRejetModel impayesCdlRejetModel = new ImpayesCdlRejetModel();
 		if (item.getNateng().equals("EFA")) {
 			impayesCDLModel.setNateng(item.getNateng());
         	impayesCDLModel.setType(item.getType());
@@ -25,18 +30,20 @@ public class ProcessorEfa  implements ItemProcessor<EfaDTO, ImpayesCDLModel>  {
         	impayesCDLModel.setRefferenceValeur(item.getRefferenceValeur());
 		}
 		else {
-			efaFail.setNateng(item.getNateng());
-        	efaFail.setType(item.getType());
-        	efaFail.setCpt(item.getCpt());
-        	efaFail.setMontantCreance(item.getMontantCreance());
-        	efaFail.setDateCreance(item.getDateCreance());
-        	efaFail.setNoDossier(item.getNoDossier());
-        	efaFail.setDateEcheance(item.getDateEcheance());
-        	efaFail.setDateMiseImpaye(item.getDateMiseImpaye());
-        	efaFail.setRefferenceValeur(item.getRefferenceValeur());
+			impayesCdlRejetModel.setNateng(item.getNateng());
+        	impayesCdlRejetModel.setType(item.getType());
+        	impayesCdlRejetModel.setCpt(item.getCpt());
+        	impayesCdlRejetModel.setMontantCreance(item.getMontantCreance());
+        	impayesCdlRejetModel.setDateCreance(item.getDateCreance());
+        	impayesCdlRejetModel.setNoDossier(item.getNoDossier());
+        	impayesCdlRejetModel.setDateEcheance(item.getDateEcheance());
+        	impayesCdlRejetModel.setDateMiseImpaye(item.getDateMiseImpaye());
+        	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
         	
 	        }  
 	        
+		impayesCDLRejetRepository.save(impayesCdlRejetModel);
+
 		return impayesCDLModel;
 	}
 }

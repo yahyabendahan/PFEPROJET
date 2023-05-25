@@ -2,19 +2,15 @@ package com.eai.BatchJobCDL.processor;
 
 
 
-import java.util.List;
 
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Component;
 
 import com.eai.BatchJobCDL.DTO.EchDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
-import com.eai.BatchJobCDL.repository.*;
-
+import com.eai.BatchJobCDL.repository.ImpayesCDLRejetRepository;
 import com.eai.BatchJobCDL.repository.TypeDossierRepository;
 
 //@EnableJpaRepositories(basePackages = "com.eai.BatchJobCDL.repository"+"com.eai.BatchJobCDL.model")
@@ -26,16 +22,19 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 	//private final TypeDossierRepositoryImpl TypeDossierRepository = new TypeDossierRepository();
 
 	@Autowired
-	TypeDossierRepository typeDOsRepo;
+	private TypeDossierRepository typeDOsRepo;
 	
     
+	@Autowired
+	private ImpayesCDLRejetRepository impayesCDLRejetRepository;
+
+
     
 	
     public ImpayesCDLModel process(EchDTO item) {
 		
     	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
-	//	List<String> VALID_VALUES = typeDOsRepo.findOneByLibelleCourt();
-		ImpayesCdlRejetModel echFail = new ImpayesCdlRejetModel();
+		ImpayesCdlRejetModel impayesCDLRejetModel = new ImpayesCdlRejetModel();
 		
 		if (item.getNateng().equals("ECH")) {
 			
@@ -65,29 +64,29 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
                
             }
             else {
-            	echFail.setNateng(item.getNateng());
-                echFail.setType(item.getType());
-                echFail.setCpt(item.getCpt());
-                echFail.setMontantCreance(item.getMontantCreance());
-                echFail.setDateCreance(item.getDateCreance());
-                echFail.setNoDossier(item.getNoDossier());
-                echFail.setDateEcheance(item.getDateEcheance());
-                echFail.setDateMiseImpaye(item.getDateMiseImpaye());
-                echFail.setDateReglement(item.getDateReglement());
-                echFail.setMontantAmortissement(item.getMontantAmortissement());
-                echFail.setMontantInteretNormal(item.getMontantInteretNormal());
-                echFail.setTvaInteret(item.getTvaInteret());
-                echFail.setMontantInteretNormal(item.getMontantInteretRetard());
-                echFail.setTvaInteretRetard(item.getTvaInteretRetard());
-                echFail.setMontantPenaliteRetard(item.getMontantInteretRetard());
-                echFail.setTvaPenaliteRetard(item.getTvaPenaliteRetard());
-                echFail.setNumComptePayeur(item.getNumComptePayeur());
-                echFail.setCodeCategorie(item.getCodeCategorie());
-                echFail.setNumDossierComplet(item.getNumDossierComplet());
-                echFail.setNumeroLigne(item.getNumeroLigne());
-                echFail.setNumeroTirage(item.getNumeroTirage());
-                echFail.setDateRejet(null);//date rejet
-                echFail.setMotifRejet(null); //motif rejet : la valeur du colonne "TYPE" n'exist pas  dans la table « TYPE_DOSSIER.LIBELLE_COURT »
+            	impayesCDLRejetModel.setNateng(item.getNateng());
+            	impayesCDLRejetModel.setType(item.getType());
+            	impayesCDLRejetModel.setCpt(item.getCpt());
+            	impayesCDLRejetModel.setMontantCreance(item.getMontantCreance());
+            	impayesCDLRejetModel.setDateCreance(item.getDateCreance());
+            	impayesCDLRejetModel.setNoDossier(item.getNoDossier());
+            	impayesCDLRejetModel.setDateEcheance(item.getDateEcheance());
+            	impayesCDLRejetModel.setDateMiseImpaye(item.getDateMiseImpaye());
+            	impayesCDLRejetModel.setDateReglement(item.getDateReglement());
+                impayesCDLRejetModel.setMontantAmortissement(item.getMontantAmortissement());
+                impayesCDLRejetModel.setMontantInteretNormal(item.getMontantInteretNormal());
+                impayesCDLRejetModel.setTvaInteret(item.getTvaInteret());
+                impayesCDLRejetModel.setMontantInteretNormal(item.getMontantInteretRetard());
+                impayesCDLRejetModel.setTvaInteretRetard(item.getTvaInteretRetard());
+                impayesCDLRejetModel.setMontantPenaliteRetard(item.getMontantInteretRetard());
+                impayesCDLRejetModel.setTvaPenaliteRetard(item.getTvaPenaliteRetard());
+                impayesCDLRejetModel.setNumComptePayeur(item.getNumComptePayeur());
+                impayesCDLRejetModel.setCodeCategorie(item.getCodeCategorie());
+                impayesCDLRejetModel.setNumDossierComplet(item.getNumDossierComplet());
+                impayesCDLRejetModel.setNumeroLigne(item.getNumeroLigne());
+                impayesCDLRejetModel.setNumeroTirage(item.getNumeroTirage());
+                impayesCDLRejetModel.setDateRejet(null);//date rejet
+                impayesCDLRejetModel.setMotifRejet(null); //motif rejet : la valeur du colonne "TYPE" n'exist pas  dans la table « TYPE_DOSSIER.LIBELLE_COURT »
 
                 }
 		}
@@ -95,31 +94,33 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 
         
 		else {
-			echFail.setNateng(item.getNateng());
-		    echFail.setType(item.getType());
-		    echFail.setCpt(item.getCpt());
-		    echFail.setMontantCreance(item.getMontantCreance());
-		    echFail.setDateCreance(item.getDateCreance());
-		    echFail.setNoDossier(item.getNoDossier());
-		    echFail.setDateEcheance(item.getDateEcheance());
-		    echFail.setDateMiseImpaye(item.getDateMiseImpaye());
-		    echFail.setDateReglement(item.getDateReglement());
-		    echFail.setMontantAmortissement(item.getMontantAmortissement());
-		    echFail.setMontantInteretNormal(item.getMontantInteretNormal());
-		    echFail.setTvaInteret(item.getTvaInteret());
-		    echFail.setMontantInteretNormal(item.getMontantInteretRetard());
-		    echFail.setTvaInteretRetard(item.getTvaInteretRetard());
-		    echFail.setMontantPenaliteRetard(item.getMontantInteretRetard());
-		    echFail.setTvaPenaliteRetard(item.getTvaPenaliteRetard());
-		    echFail.setNumComptePayeur(item.getNumComptePayeur());
-		    echFail.setCodeCategorie(item.getCodeCategorie());
-		    echFail.setNumDossierComplet(item.getNumDossierComplet());
-		    echFail.setNumeroLigne(item.getNumeroLigne());
-		    echFail.setNumeroTirage(item.getNumeroTirage());
-		    echFail.setDateRejet(null);//date rejet
-		    echFail.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
+			impayesCDLRejetModel.setNateng(item.getNateng());
+		    impayesCDLRejetModel.setType(item.getType());
+		    impayesCDLRejetModel.setCpt(item.getCpt());
+		    impayesCDLRejetModel.setMontantCreance(item.getMontantCreance());
+		    impayesCDLRejetModel.setDateCreance(item.getDateCreance());
+		    impayesCDLRejetModel.setNoDossier(item.getNoDossier());
+		    impayesCDLRejetModel.setDateEcheance(item.getDateEcheance());
+		    impayesCDLRejetModel.setDateMiseImpaye(item.getDateMiseImpaye());
+		    impayesCDLRejetModel.setDateReglement(item.getDateReglement());
+		    impayesCDLRejetModel.setMontantAmortissement(item.getMontantAmortissement());
+		    impayesCDLRejetModel.setMontantInteretNormal(item.getMontantInteretNormal());
+		    impayesCDLRejetModel.setTvaInteret(item.getTvaInteret());
+		    impayesCDLRejetModel.setMontantInteretNormal(item.getMontantInteretRetard());
+		    impayesCDLRejetModel.setTvaInteretRetard(item.getTvaInteretRetard());
+		    impayesCDLRejetModel.setMontantPenaliteRetard(item.getMontantInteretRetard());
+		    impayesCDLRejetModel.setTvaPenaliteRetard(item.getTvaPenaliteRetard());
+		    impayesCDLRejetModel.setNumComptePayeur(item.getNumComptePayeur());
+		    impayesCDLRejetModel.setCodeCategorie(item.getCodeCategorie());
+		    impayesCDLRejetModel.setNumDossierComplet(item.getNumDossierComplet());
+		    impayesCDLRejetModel.setNumeroLigne(item.getNumeroLigne());
+		    impayesCDLRejetModel.setNumeroTirage(item.getNumeroTirage());
+		    impayesCDLRejetModel.setDateRejet(null);//date rejet
+		    impayesCDLRejetModel.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
 	}
 		
+		impayesCDLRejetRepository.save(impayesCDLRejetModel);
+
     return impayesCDLModel;
   }
 	
