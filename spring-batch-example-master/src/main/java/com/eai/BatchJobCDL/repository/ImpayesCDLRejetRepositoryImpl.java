@@ -158,4 +158,10 @@ public class ImpayesCDLRejetRepositoryImpl implements ImpayesCDLRejetRepository 
 		return false;
 	}
 
+	@Override
+	public void insert(ImpayesCdlRejetModel imp) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

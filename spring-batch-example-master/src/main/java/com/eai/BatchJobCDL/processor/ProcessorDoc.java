@@ -47,10 +47,11 @@ public class ProcessorDoc  implements ItemProcessor<DocDTO, ImpayesCDLModel>  {
         	impayesCdlRejetModel.setDateMiseImpaye(item.getDateMiseImpaye());
         	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
         	impayesCdlRejetModel.setDateRejet(null);//date rejet
-        	impayesCdlRejetModel.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
+        	impayesCdlRejetModel.setMotifRejet("la valeur du colonne \"NATENG\" est different à « DOC »");  
 		}
 		
-		impayesCDLRejetRepository.save(impayesCdlRejetModel);
+		impayesCDLRejetRepository.insert(impayesCdlRejetModel);
+        System.out.println("ProcessorDoc: ");
 
 		return impayesCDLModel;
 	}

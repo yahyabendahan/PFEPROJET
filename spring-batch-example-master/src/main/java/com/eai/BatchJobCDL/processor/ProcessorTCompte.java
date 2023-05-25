@@ -17,17 +17,9 @@ import com.eai.BatchJobCDL.model.CompteModel;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 
 
-@ComponentScan(basePackages = "com.example.springbatchexample.config")
 
 @Component
 public class ProcessorTCompte implements ItemProcessor<ImpayesCDLModel, CompteModel> {
-
-
-    /*@Autowired
-	private DataSource dataSource;
-	*/
-	//double i = 0 ;
-
 
  
     @Override

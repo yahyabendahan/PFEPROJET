@@ -38,7 +38,7 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 		
 		if (item.getNateng().equals("ECH")) {
 			
-            if (typeDOsRepo.findOneByLibelleCourt(item.getType())!=null) { // if (typeDOsRepo.findAllLibelleCourt().contains(item.getType())) {
+            if (typeDOsRepo.findOneByLibelleCourt()==item.getType()) { // if (typeDOsRepo.findAllLibelleCourt().contains(item.getType())) {
             	
                 impayesCDLModel.setNateng(item.getNateng());
                 impayesCDLModel.setType(item.getType());
@@ -86,7 +86,7 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
                 impayesCDLRejetModel.setNumeroLigne(item.getNumeroLigne());
                 impayesCDLRejetModel.setNumeroTirage(item.getNumeroTirage());
                 impayesCDLRejetModel.setDateRejet(null);//date rejet
-                impayesCDLRejetModel.setMotifRejet(null); //motif rejet : la valeur du colonne "TYPE" n'exist pas  dans la table « TYPE_DOSSIER.LIBELLE_COURT »
+                impayesCDLRejetModel.setMotifRejet("la valeur du colonne \"TYPE\" n'exist pas  dans la table « TYPE_DOSSIER.LIBELLE_COURT »"); 
 
                 }
 		}
@@ -116,11 +116,11 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 		    impayesCDLRejetModel.setNumeroLigne(item.getNumeroLigne());
 		    impayesCDLRejetModel.setNumeroTirage(item.getNumeroTirage());
 		    impayesCDLRejetModel.setDateRejet(null);//date rejet
-		    impayesCDLRejetModel.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
+		    impayesCDLRejetModel.setMotifRejet("la valeur du colonne \"NATENG\" est different à « ECH »"); 
 	}
 		
-		impayesCDLRejetRepository.save(impayesCDLRejetModel);
-
+		impayesCDLRejetRepository.insert(impayesCDLRejetModel);
+		System.out.println("ProcessorEch: ");
     return impayesCDLModel;
   }
 	

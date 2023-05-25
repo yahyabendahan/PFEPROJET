@@ -39,11 +39,13 @@ public class ProcessorEfa  implements ItemProcessor<EfaDTO, ImpayesCDLModel>  {
         	impayesCdlRejetModel.setDateEcheance(item.getDateEcheance());
         	impayesCdlRejetModel.setDateMiseImpaye(item.getDateMiseImpaye());
         	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
-        	
+        	impayesCdlRejetModel.setDateRejet(null);//date rejet
+		    impayesCdlRejetModel.setMotifRejet("la valeur du colonne \"NATENG\" est different à « EFA »"); 
+
 	        }  
 	        
-		impayesCDLRejetRepository.save(impayesCdlRejetModel);
-
+		impayesCDLRejetRepository.insert(impayesCdlRejetModel);
+		System.out.println("ProcessorEfa: ");
 		return impayesCDLModel;
 	}
 }

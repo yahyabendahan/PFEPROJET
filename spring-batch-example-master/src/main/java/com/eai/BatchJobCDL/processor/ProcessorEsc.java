@@ -32,7 +32,9 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 			//List<String> VALID_VALUES = ValidVal.getLibelleCourt();
 			
 	        if (item.getNateng().equals("ESC")) {
-	            if (typeDOsRepo.findOneByLibelleCourt(item.getType())!=null) {
+	            if (typeDOsRepo.findOneByLibelleCourt()==item.getType()) {
+	    	        System.out.println("ProcessorEsc+++++++++++++++++++++");
+
 	            	impayesCDLModel.setNateng(item.getNateng());
 	            	impayesCDLModel.setType(item.getType());
 	            	impayesCDLModel.setCpt(item.getCpt());
@@ -48,7 +50,7 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	            	impayesCDLModel.setCodeRejet(item.getCodeRejet());
 	            	impayesCDLModel.setCommission(item.getCommission());
 	            }
-	            else {
+	            /* else {
 	            	impayesCdlRejetModel.setNateng(item.getNateng());
 	            	impayesCdlRejetModel.setType(item.getType());
 	            	impayesCdlRejetModel.setCpt(item.getCpt());
@@ -64,10 +66,10 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	            	impayesCdlRejetModel.setCodeRejet(item.getCodeRejet());
 	            	impayesCdlRejetModel.setCommission(item.getCommission());
 	            	impayesCdlRejetModel.setDateRejet(null);//date rejet
-	                impayesCdlRejetModel.setMotifRejet(null); //motif rejet : la valeur du colonne "TYPE" n'exist pas  dans la table « TYPE_DOSSIER.LIBELLE_COURT »
-	    		}
+	                impayesCdlRejetModel.setMotifRejet(" la valeur du colonne \"TYPE\" n'exist pas  dans la table « TYPE_DOSSIER.LIBELLE_COURT »");
+	    		}*/
 	        }
-	        else {
+	  /*      else {
 	        	impayesCdlRejetModel.setNateng(item.getNateng());
             	impayesCdlRejetModel.setType(item.getType());
             	impayesCdlRejetModel.setCpt(item.getCpt());
@@ -83,11 +85,11 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
             	impayesCdlRejetModel.setCodeRejet(item.getCodeRejet());
             	impayesCdlRejetModel.setCommission(item.getCommission());
             	impayesCdlRejetModel.setDateRejet(null);//date rejet
-            	impayesCdlRejetModel.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
+    		    impayesCdlRejetModel.setMotifRejet("la valeur du colonne \"NATENG\" est different à « ESC »"); 
 			}
-
-	        impayesCDLRejetRepository.save(impayesCdlRejetModel);
-
+*/
+	        impayesCDLRejetRepository.insert(impayesCdlRejetModel);
+	        System.out.println("ProcessorEsc: ");
 	        return impayesCDLModel;
 	    }
 	}

@@ -1,12 +1,16 @@
 package com.eai.BatchJobCDL.processor;
 
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.stereotype.Component;
 
 import com.eai.BatchJobCDL.model.*;
 
+
+@Component
+
 public class ProcessorStatutCreance implements ItemProcessor<CreanceModel, Statut_Creance_HistModel> {
 
-	@Override
+	
 	public Statut_Creance_HistModel process(CreanceModel item) throws Exception {
 		
 	    Statut_Creance_HistModel histCreance = new Statut_Creance_HistModel();

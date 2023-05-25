@@ -159,13 +159,13 @@ public class TypeDossierRepositoryImpl implements TypeDossierRepository {
 	}
 
 	@Override
-	public TypeDossierModel findOneByLibelleCourt(String LIBELLE_COURT) {
+	public String findOneByLibelleCourt() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public TypeDossierModel findOneByCODE(String CODE) {
+	public String findOneByCODE() {
 		// TODO Auto-generated method stub
 		return null;
 	}

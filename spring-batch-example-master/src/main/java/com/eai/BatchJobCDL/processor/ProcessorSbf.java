@@ -54,10 +54,10 @@ public class ProcessorSbf implements ItemProcessor<SbfDTO, ImpayesCDLModel> {
 	            	impayesCdlRejetModel.setCodeRejet(item.getCodeRejet());
 	            	impayesCdlRejetModel.setCommission(item.getCommission());
 	            	impayesCdlRejetModel.setDateRejet(null);//date rejet
-	            	impayesCdlRejetModel.setMotifRejet(null); // motif rejet : la valeur du colonne "NATENG" est different à « ECH »
+	            	impayesCdlRejetModel.setMotifRejet("la valeur du colonne \"NATENG\" est different à « SBF »"); 
 				}
-		        impayesCDLRejetRepository.save(impayesCdlRejetModel);
-
+		        impayesCDLRejetRepository.insert(impayesCdlRejetModel);
+		        System.out.println("ProcessorSbf: ");
 		        return impayesCDLModel;		 
 	}
 

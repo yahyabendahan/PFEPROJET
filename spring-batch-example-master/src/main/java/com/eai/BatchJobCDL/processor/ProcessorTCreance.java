@@ -2,12 +2,16 @@ package com.eai.BatchJobCDL.processor;
 
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.eai.BatchJobCDL.model.*;
 import com.eai.BatchJobCDL.repository.*;
 
+
+@Component
 public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, CreanceModel>{
 
 	@Autowired
@@ -24,7 +28,7 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Example: fichier esc (20230222)
 
 		
-       if((natgRepo.findOneByLibelleCourt(item.getNateng())!=null)&&(typeDOsRepo.findOneByLibelleCourt(item.getType())!=null))       
+       if((natgRepo.findOneByLibelleCourt(item.getNateng())!=null)&&(typeDOsRepo.findOneByLibelleCourt()==item.getType()))       
         {        
             creancemodel.setCodeTypeDossier(typedossier.getCODE());
             creancemodel.setCodeMotif(null);//CODE_REJET
@@ -74,17 +78,17 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
     	    else 
     	    	{creancemodel.setStatut("STATUS_IM");}	//Etat Impaye Non classÃ©
             
-            creancemodel.setTypeCreance("R");//La valeur « R »
+            creancemodel.setTypeCreance("R");
             creancemodel.setTypeProposition(null);//null
             creancemodel.setDateProposition(null);
             creancemodel.setNatureProposition(null);
-            creancemodel.setNumero(item.getNumTiers());// item.getNumDossierComplet() ?
+            creancemodel.setNumero(item.getNumTiers());
             creancemodel.setDateLoadOVO(null);
             creancemodel.setStatutG19(null);
             creancemodel.setDateComite(null);//item.getCommission()
             creancemodel.setNumeroLigne(item.getNumeroLigne());
             creancemodel.setNumeroTirage(item.getNumeroTirage());
-            creancemodel.setUserCreation("BATCH_INTEG_CDL"); //Valeur par défaut « BATCH_INTEG_CDL 
+            creancemodel.setUserCreation("BATCH_INTEG_CDL"); 
 
         }        
  	
@@ -93,19 +97,3 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
 	}
 
 }
-
-/*  //Using java.time.LocalDate (for Java 8 and later):
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-// ...
-
-String dateString = item.getDateMiseImpaye();
-DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Replace with your desired date format
-LocalDate date = LocalDate.parse(dateString, formatter);
-creancemodel.setDateMiseImpaye(java.sql.Date.valueOf(date));
-
-// ...
- * 
-*/
