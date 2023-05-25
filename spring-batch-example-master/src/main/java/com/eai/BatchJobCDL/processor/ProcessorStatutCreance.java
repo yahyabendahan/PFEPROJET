@@ -17,8 +17,8 @@ public class ProcessorStatutCreance implements ItemProcessor<CreanceModel, Statu
 	    histCreance.setCodeCreance(item.getcode());
 	    
 	    //RG_1
-	    if(item.getCodeNatEng()=="NAT_ENG_ESC") {histCreance.setCodeDec("STATUS_RJ");}//Etat Rejete
-	    else if (item.getCodeNatEng()=="NAT_ENG_SBF") {histCreance.setCodeDec("STATUS_RJ");}	    else {histCreance.setCodeDec("STATUS_IM");}	//Etat Impaye Non classÃ©
+	    if(item.getCodeNatEng()=="NAT_ENG_ESC" && item.getCodeNatEng()=="NAT_ENG_SBF") {histCreance.setCodeDec("STATUS_RJ");}//Etat Rejete
+	    //else if (item.getCodeNatEng()=="NAT_ENG_SBF") {histCreance.setCodeDec("STATUS_RJ");}	    else {histCreance.setCodeDec("STATUS_IM");}	//Etat Impaye Non classÃ©
 	    //RG_2 : inexplicable
 	    histCreance.setDateCreation(null);
 	    

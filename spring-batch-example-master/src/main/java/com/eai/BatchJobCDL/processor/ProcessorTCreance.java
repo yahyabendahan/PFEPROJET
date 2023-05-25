@@ -15,7 +15,8 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
 	
 	@Autowired
 	NatEngRepository natgRepo;
-	@Override
+
+	
 	public CreanceModel process(ImpayesCDLModel item) throws Exception {
 		DossierModel dossiermodel = new DossierModel();
         CreanceModel creancemodel = new CreanceModel();
@@ -26,9 +27,9 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
        if((natgRepo.findOneByLibelleCourt(item.getNateng())!=null)&&(typeDOsRepo.findOneByLibelleCourt(item.getType())!=null))       
         {        
             creancemodel.setCodeTypeDossier(typedossier.getCODE());
-            creancemodel.setCodeMotif(null);
-            
-            creancemodel.setCodeNatEng(natgRepo.findOneByLibelleCourt(item.getNateng()).getCode());
+            creancemodel.setCodeMotif(null);//CODE_REJET
+            String code = natgRepo.findOneByLibelleCourt(item.getNateng()).getCode();
+            creancemodel.setCodeNatEng(code);
             
             creancemodel.setcodeDossier(dossiermodel.getCODE());
             creancemodel.setMontant(item.getMontantCreance()/100);
@@ -66,8 +67,14 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
             creancemodel.setReferenceLiaison(item.getReferenceLiaison());
             creancemodel.setCodeCategorie(item.getCodeCategorie());
             creancemodel.setNumeroComptePayeur(item.getNumComptePayeur());
-            creancemodel.setStatut(null);//Selon CODE_NAT_ENG?
-            creancemodel.setTypeCreance(null);//La valeur « R »
+            
+           
+    	    if(code=="NAT_ENG_ESC" || code=="NAT_ENG_SBF")//("NAT_ENG_ESC".equals(code) || "NAT_ENG_SBF".equals(code))
+    	    	{creancemodel.setStatut("STATUS_RJ");}//Etat Rejete
+    	    else 
+    	    	{creancemodel.setStatut("STATUS_IM");}	//Etat Impaye Non classÃ©
+            
+            creancemodel.setTypeCreance("R");//La valeur « R »
             creancemodel.setTypeProposition(null);//null
             creancemodel.setDateProposition(null);
             creancemodel.setNatureProposition(null);
