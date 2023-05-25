@@ -15,11 +15,11 @@ import com.eai.BatchJobCDL.model.TypeDossierModel;
 public interface TypeDossierRepository extends JpaRepository<TypeDossierModel, String>{
 
 	@Bean
-	@Query("SELECT t.LIBELLE_COURT FROM TypeDossierModel t")
-	String findOneByLibelleCourt();
+	//@Query("SELECT t.LIBELLE_COURT FROM TypeDossierModel t")
+	String findOneByLibelleCourt(String libelleCourt);
 	
 	//@Query("SELECT t.CODE FROM TypeDossierModel t")
-	String findOneByCODE();
+	String findOneByCODE(String CODE);
 	
 
 }

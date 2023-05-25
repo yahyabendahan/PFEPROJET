@@ -31,8 +31,9 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	    	ImpayesCdlRejetModel impayesCdlRejetModel = new ImpayesCdlRejetModel();
 			//List<String> VALID_VALUES = ValidVal.getLibelleCourt();
 			
-	        if (item.getNateng().equals("ESC")) {
-	            if (typeDOsRepo.findOneByLibelleCourt()==item.getType()) {
+	        if (item.getNateng().equals("ESC")) {   //	            if (typeDOsRepo.findOneByLibelleCourt()==item.getType()) {
+            	if (typeDOsRepo.findOneByLibelleCourt(item.getType()) != null) {
+
 	    	        System.out.println("ProcessorEsc+++++++++++++++++++++");
 
 	            	impayesCDLModel.setNateng(item.getNateng());

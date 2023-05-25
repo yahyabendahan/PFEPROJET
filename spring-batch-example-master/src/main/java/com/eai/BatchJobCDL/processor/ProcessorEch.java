@@ -38,7 +38,7 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 		
 		if (item.getNateng().equals("ECH")) {
 			
-            if (typeDOsRepo.findOneByLibelleCourt()==item.getType()) { // if (typeDOsRepo.findAllLibelleCourt().contains(item.getType())) {
+            if (typeDOsRepo.findOneByLibelleCourt(item.getType())!=null) { // if (typeDOsRepo.findAllLibelleCourt().contains(item.getType())) {
             	
                 impayesCDLModel.setNateng(item.getNateng());
                 impayesCDLModel.setType(item.getType());
