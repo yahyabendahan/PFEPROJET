@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.eai.BatchJobCDL.model.TypeDossierModel;
 
 @Repository
-public class TypeDossierRepositoryImpl implements TypeDossierRepository {
+public abstract class TypeDossierRepositoryImpl implements TypeDossierRepository {
  
 	@Override
 	public List<TypeDossierModel> findAll() {
@@ -158,17 +158,17 @@ public class TypeDossierRepositoryImpl implements TypeDossierRepository {
 		return false;
 	}
 
-	@Override
-	public String findOneByLibelleCourt(String LIBELLECOURT) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String findOneByCODE(String LibelleCourt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-    
+//	@Override
+//	public TypeDossierModel findOneByLibelleCourt(String LIBELLE_COURT) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public TypeDossierModel findOneByCODE(String LIBELLE_COURT) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//    
     // Other method implementations...
 }

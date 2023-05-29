@@ -12,7 +12,7 @@ import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
 
 
 @Repository
-public class ImpayesCDLRejetRepositoryImpl implements ImpayesCDLRejetRepository {
+public abstract class ImpayesCDLRejetRepositoryImpl implements ImpayesCDLRejetRepository {
 
 	@Override
 	public List<ImpayesCdlRejetModel> findAll() {
@@ -158,10 +158,10 @@ public class ImpayesCDLRejetRepositoryImpl implements ImpayesCDLRejetRepository 
 		return false;
 	}
 
-	@Override
-	public void insert(ImpayesCdlRejetModel imp) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void insert(ImpayesCdlRejetModel imp) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 }

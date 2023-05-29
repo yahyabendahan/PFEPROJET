@@ -1,25 +1,48 @@
 package com.eai.BatchJobCDL.repository;
 
-import java.util.List;
 
-import org.springframework.context.annotation.Bean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eai.BatchJobCDL.model.TypeDossierModel;
 
 
-@Component
-//@JavaBean 
-public interface TypeDossierRepository extends JpaRepository<TypeDossierModel, String>{
+@Repository
+public interface TypeDossierRepository extends JpaRepository<TypeDossierModel, String> {
 
-	@Bean
-	//@Query("SELECT t.LIBELLE_COURT FROM TypeDossierModel t")
-	String findOneByLibelleCourt(String libelleCourt);
-	
-	//@Query("SELECT t.CODE FROM TypeDossierModel t")
-	String findOneByCODE(String CODE);
-	
+    public static final Logger log = LoggerFactory.getLogger(TypeDossierRepository.class);
+    @Primary
+    @Query("SELECT t FROM TypeDossierModel t WHERE t.LIBELLE_COURT = :libelleCourt")
+    TypeDossierModel findOneByLibelleCourt(@Param("libelleCourt") String libelleCourt);
 
+	
+    // Other methods...	
+	@Query("SELECT t.CODE FROM TypeDossierModel t")
+	TypeDossierModel findOneByCODE(String CODE);
+	
+	
+	
+	
+//	@Transactional
+	// Logging example for findOneByLibelleCourt
+//    @Query("SELECT t FROM TypeDossierModel t WHERE t.LIBELLE_COURT = :libelleCourt")
+//    default TypeDossierModel findOneByLibelleCourtWithLogging(@Param("libelleCourt") String libelleCourt) {
+//        TypeDossierModel result = findOneByLibelleCourt(libelleCourt);
+//        if (result != null) {
+//            log.info("Data is available in the database for LIBELLE_COURT: {}", libelleCourt);
+//        } else {
+//            log.info(" data is not available in the database for LIBELLE_COURT: {}", libelleCourt);
+//        }
+//        return result;
+//    }
+
+	
 }
+

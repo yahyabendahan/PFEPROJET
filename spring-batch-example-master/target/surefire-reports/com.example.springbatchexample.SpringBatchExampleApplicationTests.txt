@@ -1,9 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.springbatchexample.SpringBatchExampleApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 8.503 s <<< FAILURE! - in com.example.springbatchexample.SpringBatchExampleApplicationTests
-contextLoads  Time elapsed: 0.022 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'processorEch': Unsatisfied dependency expressed through field 'typeDOsRepo'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.eai.BatchJobCDL.repository.TypeDossierRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.eai.BatchJobCDL.repository.TypeDossierRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.7 s - in com.example.springbatchexample.SpringBatchExampleApplicationTests

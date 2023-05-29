@@ -13,7 +13,7 @@ import com.eai.BatchJobCDL.model.NatEngModel;
 
 @Repository
 
-public class NatEngRepositoryImpl implements NatEngRepository {
+public abstract class NatEngRepositoryImpl implements NatEngRepository {
 
 	@Override
 	public List<NatEngModel> findAll() {
@@ -159,16 +159,16 @@ public class NatEngRepositoryImpl implements NatEngRepository {
 		return false;
 	}
 
-	@Override
-	public NatEngModel findOneByLibelleCourt(String LIBELLE_COURT) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public NatEngModel findOneByCODE(String CODE) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public NatEngModel findOneByLibelleCourt(String LIBELLE_COURT) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public NatEngModel findOneByCODE(String CODE) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

@@ -45,5 +45,5 @@ public class TypeDossierModel {
 	public void setLIBELLE_LONG(String lIBELLE_LONG) {
 		LIBELLE_LONG = lIBELLE_LONG;
 	}
-	
+
 }

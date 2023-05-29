@@ -4,35 +4,41 @@ package com.eai.BatchJobCDL.processor;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import org.springframework.transaction.annotation.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.eai.BatchJobCDL.DTO.EscDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
 import com.eai.BatchJobCDL.repository.ImpayesCDLRejetRepository;
 import com.eai.BatchJobCDL.repository.TypeDossierRepository;
+
+@Transactional
 @Component
+
 public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	   
-		// private static final Logger log = LoggerFactory.getLogger(ProcessorEsc.class);
+		private static final Logger log = LoggerFactory.getLogger(ProcessorEsc.class);
 
 	@Autowired
 	private TypeDossierRepository typeDOsRepo;
 	@Autowired 
 	private ImpayesCDLRejetRepository impayesCDLRejetRepository;
 
-	
 
-   // @Autowired
-   
 		@Override
 	    public ImpayesCDLModel process(EscDTO item) {
 			
 	    	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
 	    	ImpayesCdlRejetModel impayesCdlRejetModel = new ImpayesCdlRejetModel();
-			//List<String> VALID_VALUES = ValidVal.getLibelleCourt();
-			
-	        if (item.getNateng().equals("ESC")) {   //	            if (typeDOsRepo.findOneByLibelleCourt()==item.getType()) {
-            	if (typeDOsRepo.findOneByLibelleCourt(item.getType()) != null) {
+		
+	        if (item.getNateng().equals("ESC")) {   // if (typeDOsRepo.findOneByLibelleCourt()==item.getType()) {
+	            log.info("Checking if type exists in TypeDossierModel: {}", item.getType());
+
+            	if (typeDOsRepo.findOneByLibelleCourt(item.getType()) != null) { // item.getType()=00001 and r.findOneByLibelleCourt=00001
+                   
+            		log.debug("Type exists in TypeDossierModel: {}", item.getType());
+    				log.info("Data retrieved from the database for type: {}", item.getType());
 
 	    	        System.out.println("ProcessorEsc+++++++++++++++++++++");
 
@@ -51,7 +57,11 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	            	impayesCDLModel.setCodeRejet(item.getCodeRejet());
 	            	impayesCDLModel.setCommission(item.getCommission());
 	            }
-	            /* else {
+	             else {
+	                 log.debug("Type does not exist in TypeDossierModel: {}", item.getType());
+	 				 log.info("No data found in the database for type: {}", item.getType());
+
+
 	            	impayesCdlRejetModel.setNateng(item.getNateng());
 	            	impayesCdlRejetModel.setType(item.getType());
 	            	impayesCdlRejetModel.setCpt(item.getCpt());
@@ -68,9 +78,11 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	            	impayesCdlRejetModel.setCommission(item.getCommission());
 	            	impayesCdlRejetModel.setDateRejet(null);//date rejet
 	                impayesCdlRejetModel.setMotifRejet(" la valeur du colonne \"TYPE\" n'exist pas  dans la table « TYPE_DOSSIER.LIBELLE_COURT »");
-	    		}*/
+	    		}
 	        }
-	  /*      else {
+	        else {
+	            log.info("type n'exists pas dans TypeDossierModel: {}", item.getType());
+
 	        	impayesCdlRejetModel.setNateng(item.getNateng());
             	impayesCdlRejetModel.setType(item.getType());
             	impayesCdlRejetModel.setCpt(item.getCpt());
@@ -88,7 +100,7 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
             	impayesCdlRejetModel.setDateRejet(null);//date rejet
     		    impayesCdlRejetModel.setMotifRejet("la valeur du colonne \"NATENG\" est different à « ESC »"); 
 			}
-*/
+
 	        impayesCDLRejetRepository.insert(impayesCdlRejetModel);
 	        System.out.println("ProcessorEsc: ");
 	        return impayesCDLModel;

@@ -1,21 +1,24 @@
 package com.eai.BatchJobCDL.repository;
 
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
-
-import java.beans.JavaBean;
+import org.springframework.stereotype.Repository;
 
 import com.eai.BatchJobCDL.model.NatEngModel;
+import com.eai.BatchJobCDL.model.TypeDossierModel;
 
 
-@Component
-@JavaBean
+@Repository 
 public interface NatEngRepository extends JpaRepository<NatEngModel, String>{
-	
-	//@Query("SELECT n.LIBELLE_COURT FROM NatEngModel n")
-	NatEngModel findOneByLibelleCourt(String LIBELLE_COURT);
+	@Primary
+	@Query("SELECT n FROM NatEngModel n where n.LIBELLE_COURT = :libelleCourt ")
+	NatEngModel findOneByLibelleCourt(@Param("libelleCourt") String libelleCourt);
 
-	//@Query("SELECT n.CODE FROM NatEngModel n")
+	@Query("SELECT n.CODE FROM NatEngModel n")
 	NatEngModel findOneByCODE(String CODE);
-}
+} 
+

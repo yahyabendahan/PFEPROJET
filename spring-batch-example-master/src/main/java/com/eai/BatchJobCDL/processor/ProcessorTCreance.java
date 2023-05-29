@@ -32,7 +32,7 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
         {        
             creancemodel.setCodeTypeDossier(typedossier.getCODE());
             creancemodel.setCodeMotif(null);//CODE_REJET
-            String code = natgRepo.findOneByLibelleCourt(item.getNateng()).getCode();
+            String code = natgRepo.findOneByLibelleCourt(item.getNateng()).getCODE();
             creancemodel.setCodeNatEng(code);
             
             creancemodel.setcodeDossier(dossiermodel.getCODE());

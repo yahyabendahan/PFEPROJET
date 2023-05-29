@@ -26,9 +26,6 @@ public class EchDTO {
     private String numDossierComplet;
     private String numeroLigne;
     private String numeroTirage;
-
-    
-   
 	public String getAge() {
 		return age;
 	}
@@ -173,6 +170,6 @@ public class EchDTO {
 	public void setNumeroTirage(String numeroTirage) {
 		this.numeroTirage = numeroTirage;
 	}
-	
+
 	
 }

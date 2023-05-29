@@ -22,12 +22,11 @@ import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 public class ProcessorTCompte implements ItemProcessor<ImpayesCDLModel, CompteModel> {
 
  
-    @Override
+    
     public CompteModel process(ImpayesCDLModel impayesCDLModel) throws Exception {
         CompteModel comptemodel = new CompteModel();
         System.out.println("ProcessorTcompte: ");
 
-            //comptemodel.setCode(i++);
         	comptemodel.setNumeroCompteEmprunteur(impayesCDLModel.getNumComptePayeur());
         	comptemodel.setEncoursEESConso(impayesCDLModel.getEncoursEESConso());
         	comptemodel.setEncoursEESComm(impayesCDLModel.getEncoursEESComm());

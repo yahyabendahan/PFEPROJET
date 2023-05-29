@@ -10,7 +10,7 @@ import com.eai.BatchJobCDL.model.*;
 
 public class ProcessorStatutCreance implements ItemProcessor<CreanceModel, Statut_Creance_HistModel> {
 
-	
+	@Override
 	public Statut_Creance_HistModel process(CreanceModel item) throws Exception {
 		
 	    Statut_Creance_HistModel histCreance = new Statut_Creance_HistModel();
