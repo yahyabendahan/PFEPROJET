@@ -1,6 +1,8 @@
 package com.eai.BatchJobCDL.model;
 
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,7 +23,7 @@ public class CodeDeclassementModel {
 	private String LIBELLE_LONG;
 	
 	@Column(name="NUMERO_ORDRE")
-	private Double NUMERO_ORDRE;
+	private BigDecimal NUMERO_ORDRE;
 
 	public String getCODE() {
 		return CODE;
@@ -47,11 +49,11 @@ public class CodeDeclassementModel {
 		LIBELLE_LONG = lIBELLE_LONG;
 	}
 
-	public Double getNUMERO_ORDRE() {
+	public BigDecimal getNUMERO_ORDRE() {
 		return NUMERO_ORDRE;
 	}
 
-	public void setNUMERO_ORDRE(Double nUMERO_ORDRE) {
+	public void setNUMERO_ORDRE(BigDecimal nUMERO_ORDRE) {
 		NUMERO_ORDRE = nUMERO_ORDRE;
 	}
 

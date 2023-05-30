@@ -40,7 +40,7 @@ public class ProcessorEfa  implements ItemProcessor<EfaDTO, ImpayesCDLModel>  {
         	impayesCdlRejetModel.setDateMiseImpaye(item.getDateMiseImpaye());
         	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
         	impayesCdlRejetModel.setDateRejet(null);//date rejet
-		    impayesCdlRejetModel.setMotifRejet("la valeur du colonne \"NATENG\" est different à « EFA »"); 
+		    impayesCdlRejetModel.setMotifRejet("la valeur du colonne NATENG est different a EFA "); 
 
 	        }  
 	        

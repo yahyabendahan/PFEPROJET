@@ -1,5 +1,6 @@
 package com.eai.BatchJobCDL.DTO;
 
+import java.math.BigDecimal;
 
 public class SbfDTO {
 	  private String age;
@@ -7,7 +8,7 @@ public class SbfDTO {
 	  private String type;
 	  private String cpt;
 	  private String raisonSocial;
-	  private Double montantCreance;
+	  private BigDecimal montantCreance;
 	  private String dateCreance;
 	  private String idClient;
 	  private String noDossier;
@@ -17,7 +18,7 @@ public class SbfDTO {
 	  private String dateRemise;
 	  private String referenceLiaison;
 	  private String codeRejet;
-	  private Double commission;
+	  private BigDecimal commission;
 	  private String field16;
 	  private String field17;
 	public String getAge() {
@@ -50,10 +51,10 @@ public class SbfDTO {
 	public void setRaisonSocial(String raisonSocial) {
 		this.raisonSocial = raisonSocial;
 	}
-	public Double getMontantCreance() {
+	public BigDecimal getMontantCreance() {
 		return montantCreance;
 	}
-	public void setMontantCreance(Double montantCreance) {
+	public void setMontantCreance(BigDecimal montantCreance) {
 		this.montantCreance = montantCreance;
 	}
 	public String getDateCreance() {
@@ -110,10 +111,10 @@ public class SbfDTO {
 	public void setCodeRejet(String codeRejet) {
 		this.codeRejet = codeRejet;
 	}
-	public Double getCommission() {
+	public BigDecimal getCommission() {
 		return commission;
 	}
-	public void setCommission(Double commission) {
+	public void setCommission(BigDecimal commission) {
 		this.commission = commission;
 	}
 	public String getField16() {

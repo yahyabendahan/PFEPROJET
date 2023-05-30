@@ -1,5 +1,6 @@
 package com.eai.BatchJobCDL.DTO;
 
+import java.math.BigDecimal;
 
 public class EchDTO {
     private String age;
@@ -7,20 +8,20 @@ public class EchDTO {
     private String type;
     private String cpt;
     private String raisonSocial;
-    private Double montantCreance;
+    private BigDecimal montantCreance;
     private String dateCreance;
     private String idClient;
     private String noDossier;
     private String dateEcheance;
     private String dateMiseImpaye;
     private String dateReglement;
-    private Double montantAmortissement;
-    private Double montantInteretNormal;
-    private Double tvaInteret;
-    private Double montantInteretRetard;
-    private Double tvaInteretRetard;
-    private Double montantPenaliteRetard;
-    private Double tvaPenaliteRetard;
+    private BigDecimal montantAmortissement;
+    private BigDecimal montantInteretNormal;
+    private BigDecimal tvaInteret;
+    private BigDecimal montantInteretRetard;
+    private BigDecimal tvaInteretRetard;
+    private BigDecimal montantPenaliteRetard;
+    private BigDecimal tvaPenaliteRetard;
     private String numComptePayeur;
     private String codeCategorie;
     private String numDossierComplet;
@@ -56,10 +57,10 @@ public class EchDTO {
 	public void setRaisonSocial(String raisonSocial) {
 		this.raisonSocial = raisonSocial;
 	}
-	public Double getMontantCreance() {
+	public BigDecimal getMontantCreance() {
 		return montantCreance;
 	}
-	public void setMontantCreance(Double montantCreance) {
+	public void setMontantCreance(BigDecimal montantCreance) {
 		this.montantCreance = montantCreance;
 	}
 	public String getDateCreance() {
@@ -98,46 +99,46 @@ public class EchDTO {
 	public void setDateReglement(String dateReglement) {
 		this.dateReglement = dateReglement;
 	}
-	public Double getMontantAmortissement() {
+	public BigDecimal getMontantAmortissement() {
 		return montantAmortissement;
 	}
-	public void setMontantAmortissement(Double montantAmortissement) {
+	public void setMontantAmortissement(BigDecimal montantAmortissement) {
 		this.montantAmortissement = montantAmortissement;
 	}
-	public Double getMontantInteretNormal() {
+	public BigDecimal getMontantInteretNormal() {
 		return montantInteretNormal;
 	}
-	public void setMontantInteretNormal(Double montantInteretNormal) {
+	public void setMontantInteretNormal(BigDecimal montantInteretNormal) {
 		this.montantInteretNormal = montantInteretNormal;
 	}
-	public Double getTvaInteret() {
+	public BigDecimal getTvaInteret() {
 		return tvaInteret;
 	}
-	public void setTvaInteret(Double tvaInteret) {
+	public void setTvaInteret(BigDecimal tvaInteret) {
 		this.tvaInteret = tvaInteret;
 	}
-	public Double getMontantInteretRetard() {
+	public BigDecimal getMontantInteretRetard() {
 		return montantInteretRetard;
 	}
-	public void setMontantInteretRetard(Double montantInteretRetard) {
+	public void setMontantInteretRetard(BigDecimal montantInteretRetard) {
 		this.montantInteretRetard = montantInteretRetard;
 	}
-	public Double getTvaInteretRetard() {
+	public BigDecimal getTvaInteretRetard() {
 		return tvaInteretRetard;
 	}
-	public void setTvaInteretRetard(Double tvaInteretRetard) {
+	public void setTvaInteretRetard(BigDecimal tvaInteretRetard) {
 		this.tvaInteretRetard = tvaInteretRetard;
 	}
-	public Double getMontantPenaliteRetard() {
+	public BigDecimal getMontantPenaliteRetard() {
 		return montantPenaliteRetard;
 	}
-	public void setMontantPenaliteRetard(Double montantPenaliteRetard) {
+	public void setMontantPenaliteRetard(BigDecimal montantPenaliteRetard) {
 		this.montantPenaliteRetard = montantPenaliteRetard;
 	}
-	public Double getTvaPenaliteRetard() {
+	public BigDecimal getTvaPenaliteRetard() {
 		return tvaPenaliteRetard;
 	}
-	public void setTvaPenaliteRetard(Double tvaPenaliteRetard) {
+	public void setTvaPenaliteRetard(BigDecimal tvaPenaliteRetard) {
 		this.tvaPenaliteRetard = tvaPenaliteRetard;
 	}
 	public String getNumComptePayeur() {

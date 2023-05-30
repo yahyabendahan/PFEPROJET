@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Column;
+
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -12,13 +14,13 @@ public class Cle_Doss_Cr_CptModel {
 
 		@Id
 		@Column(name = "CODE")
-		private Long  code;
+		private BigDecimal  code;
 
 		@Column(name = "NUMERO_DOSSIER")
 		private String numeroDossier;
 
 		@Column(name = "CPT")
-		private Long  cpt;
+		private BigDecimal  cpt;
 
 		@Column(name = "DATE_ECHEANCE")
 		private Date dateEcheance;
@@ -32,11 +34,11 @@ public class Cle_Doss_Cr_CptModel {
 		@Column(name = "CODE_NAT_ENG")
 		private String codeNatEng;
 
-		public Long  getCode() {
+		public BigDecimal  getCode() {
 			return code;
 		}
 
-		public void setCode(Long  code) {
+		public void setCode(BigDecimal  code) {
 			this.code = code;
 		}
 
@@ -48,11 +50,11 @@ public class Cle_Doss_Cr_CptModel {
 			this.numeroDossier = numeroDossier;
 		}
 
-		public Long  getCpt() {
+		public BigDecimal  getCpt() {
 			return cpt;
 		}
 
-		public void setCpt(Long  cpt) {
+		public void setCpt(BigDecimal  cpt) {
 			this.cpt = cpt;
 		}
 

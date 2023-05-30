@@ -1,20 +1,22 @@
 package com.eai.BatchJobCDL.DTO;
 
+import java.math.BigDecimal;
+
 public class EfaDTO {
 	private String age;
 	private String nateng;
 	private String type;
 	private String cpt;
 	private String raisonSocial;
-	private double montantCreance;
+	private BigDecimal montantCreance;
 	private String dateCreance;
 	private String idClient;
 	private String noDossier;
 	private String dateEcheance;
 	private String dateMiseImpaye;
 	private String refferenceValeur;
-	private double field13;
-	private double field14;
+	private BigDecimal field13;
+	private BigDecimal field14;
 	private String field15;
 	private String field16;
 	private String field17;
@@ -26,10 +28,10 @@ public class EfaDTO {
 	public void setRaisonSocial(String raisonSocial) {
 		this.raisonSocial = raisonSocial;
 	}
-	public double getMontantCreance() {
+	public BigDecimal getMontantCreance() {
 		return montantCreance;
 	}
-	public void setMontantCreance(double montantCreance) {
+	public void setMontantCreance(BigDecimal montantCreance) {
 		this.montantCreance = montantCreance;
 	}
 	public String getDateCreance() {
@@ -88,16 +90,16 @@ public class EfaDTO {
 		this.cpt = cpt;
 	}
 
-	public double getField13() {
+	public BigDecimal getField13() {
 		return field13;
 	}
-	public void setField13(double field13) {
+	public void setField13(BigDecimal field13) {
 		this.field13 = field13;
 	}
-	public double getField14() {
+	public BigDecimal getField14() {
 		return field14;
 	}
-	public void setField14(double field14) {
+	public void setField14(BigDecimal field14) {
 		this.field14 = field14;
 	}
 	public String getField15() {

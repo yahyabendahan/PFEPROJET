@@ -1,5 +1,6 @@
 package com.eai.BatchJobCDL.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,7 +20,7 @@ public class CreanceModel {
 	@SequenceGenerator(name = "creanceSeqGen", sequenceName = "SEQ_CREANCE", initialValue = 1, allocationSize = 11727000)
 	@GeneratedValue(generator = "creanceSeqGen")
 	@Column(name = "CODE")
-	private Double code;
+	private BigDecimal code;
 	
 	@Column(name = "CODE_TYPE_DOSSIER")
 	private String codeTypeDossier;
@@ -36,10 +37,10 @@ public class CreanceModel {
 
 	
 	@Column(name ="CODE_DOSSIER")
-	private Long  codeDossier;
+	private BigDecimal  codeDossier;
 	
 	@Column(name = "MONTANT")
-	private Double montant;
+	private BigDecimal montant;
 
 	@Column(name = "DATE_ECHEANCE")
 	private Date dateEcheance;
@@ -51,25 +52,25 @@ public class CreanceModel {
 	private Date dateMiseImpaye;
 
 	@Column(name = "MONTANT_AMORTISS")
-	private Double montantAmortiss;
+	private BigDecimal montantAmortiss;
 
 	@Column(name = "MONTANT_INTERET_NORMAL")
-	private Double montantInteretNormal;
+	private BigDecimal montantInteretNormal;
 
 	@Column(name = "TVA_INTERET_NORMAL")
-	private Double TVAInteretNormal;
+	private BigDecimal TVAInteretNormal;
 
 	@Column(name = "MONTANT_INTERET_RETARD")
-	private Double montantInteretRetard;
+	private BigDecimal montantInteretRetard;
 
 	@Column(name = "TVA_INTERET_RETARD")
-	private Double TVAInteretRetard;
+	private BigDecimal TVAInteretRetard;
 
 	@Column(name = "PENALITE_RETARD")
-	private Double penaliteRetard;
+	private BigDecimal penaliteRetard;
 
 	@Column(name = "TVA_PENALITE_RETARD")
-	private Double TVApenaliteRetard;
+	private BigDecimal TVApenaliteRetard;
 
 	@Column(name = "CODE_GUICHET_BANCAIRE")
 	private String codeGuichetBancaire;
@@ -131,11 +132,11 @@ public class CreanceModel {
 	@Column(name = "ANCIEN_CODE_DOSSIER")
 	private String ancienCodeDossier;
 
-	public Double getcode() {
+	public BigDecimal getcode() {
 		return code;
 	}
 
-	public void setcode(Double id) {
+	public void setcode(BigDecimal id) {
 		this.code = id;
 	}
 
@@ -163,19 +164,19 @@ public class CreanceModel {
 		this.codeNatEng = codeNatEng;
 	}
 
-	public Long  getcodeDossier() {
+	public BigDecimal  getcodeDossier() {
 		return codeDossier;
 	}
 
-	public void setcodeDossier(Long  codeDossier) {
+	public void setcodeDossier(BigDecimal  codeDossier) {
 		this.codeDossier = codeDossier;
 	}
 
-	public Double getMontant() {
+	public BigDecimal getMontant() {
 		return montant;
 	}
 
-	public void setMontant(Double montant) {
+	public void setMontant(BigDecimal montant) {
 		this.montant = montant;
 	}
 
@@ -203,59 +204,59 @@ public class CreanceModel {
 		this.dateMiseImpaye = dateMiseImpaye;
 	}
 
-	public Double getMontantAmortiss() {
+	public BigDecimal getMontantAmortiss() {
 		return montantAmortiss;
 	}
 
-	public void setMontantAmortiss(Double montantAmortiss) {
+	public void setMontantAmortiss(BigDecimal montantAmortiss) {
 		this.montantAmortiss = montantAmortiss;
 	}
 
-	public Double getMontantInteretNormal() {
+	public BigDecimal getMontantInteretNormal() {
 		return montantInteretNormal;
 	}
 
-	public void setMontantInteretNormal(Double montantInteretNormal) {
+	public void setMontantInteretNormal(BigDecimal montantInteretNormal) {
 		this.montantInteretNormal = montantInteretNormal;
 	}
 
-	public Double getTVAInteretNormal() {
+	public BigDecimal getTVAInteretNormal() {
 		return TVAInteretNormal;
 	}
 
-	public void setTVAInteretNormal(Double tVAInteretNormal) {
+	public void setTVAInteretNormal(BigDecimal tVAInteretNormal) {
 		TVAInteretNormal = tVAInteretNormal;
 	}
 
-	public Double getMontantInteretRetard() {
+	public BigDecimal getMontantInteretRetard() {
 		return montantInteretRetard;
 	}
 
-	public void setMontantInteretRetard(Double montantInteretRetard) {
+	public void setMontantInteretRetard(BigDecimal montantInteretRetard) {
 		this.montantInteretRetard = montantInteretRetard;
 	}
 
-	public Double getTVAInteretRetard() {
+	public BigDecimal getTVAInteretRetard() {
 		return TVAInteretRetard;
 	}
 
-	public void setTVAInteretRetard(Double tVAInteretRetard) {
+	public void setTVAInteretRetard(BigDecimal tVAInteretRetard) {
 		TVAInteretRetard = tVAInteretRetard;
 	}
 
-	public Double getPenaliteRetard() {
+	public BigDecimal getPenaliteRetard() {
 		return penaliteRetard;
 	}
 
-	public void setPenaliteRetard(Double penaliteRetard) {
+	public void setPenaliteRetard(BigDecimal penaliteRetard) {
 		this.penaliteRetard = penaliteRetard;
 	}
 
-	public Double getTVApenaliteRetard() {
+	public BigDecimal getTVApenaliteRetard() {
 		return TVApenaliteRetard;
 	}
 
-	public void setTVApenaliteRetard(Double tVApenaliteRetard) {
+	public void setTVApenaliteRetard(BigDecimal tVApenaliteRetard) {
 		TVApenaliteRetard = tVApenaliteRetard;
 	}
 

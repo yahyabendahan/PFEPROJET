@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.eai.BatchJobCDL.model.*;
 import com.eai.BatchJobCDL.repository.*;
+import java.math.BigDecimal;
 
 
 @Component
@@ -26,9 +27,12 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
         CreanceModel creancemodel = new CreanceModel();
         TypeDossierModel typedossier = new TypeDossierModel();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Example: fichier esc (20230222)
-
-		
-       if((natgRepo.findOneByLibelleCourt(item.getNateng())!=null)&&(typeDOsRepo.findOneByLibelleCourt(item.getType())!=null))       
+        BigDecimal divisor = new BigDecimal(100);
+        TypeDossierModel typeDossier = typeDOsRepo.findOneByLibelleCourt(item.getType());
+        NatEngModel natengcdl = natgRepo.findOneByLibelleCourt(item.getNateng());
+        
+        
+       if((natengcdl!=null)&&(typeDossier!=null))       
         {        
             creancemodel.setCodeTypeDossier(typedossier.getCODE());
             creancemodel.setCodeMotif(null);//CODE_REJET
@@ -36,7 +40,7 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
             creancemodel.setCodeNatEng(code);
             
             creancemodel.setcodeDossier(dossiermodel.getCODE());
-            creancemodel.setMontant(item.getMontantCreance()/100);
+            creancemodel.setMontant(item.getMontantCreance().divide(divisor));
             
        
             String StringMiseImpaye = item.getDateMiseImpaye();
@@ -59,12 +63,12 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
                 e.printStackTrace();
             }
             
-            creancemodel.setMontantInteretNormal(item.getMontantInteretNormal()/100);
-            creancemodel.setTVAInteretNormal(item.getTvaInteret()/100);
-            creancemodel.setMontantInteretRetard(item.getMontantInteretRetard()/100);
-            creancemodel.setTVAInteretRetard(item.getTvaInteretRetard()/100);
-            creancemodel.setPenaliteRetard(item.getMontantPenaliteRetard()/100);
-            creancemodel.setTVApenaliteRetard(item.getTvaPenaliteRetard()/100);
+            creancemodel.setMontantInteretNormal(item.getMontantInteretNormal().divide(divisor));
+            creancemodel.setTVAInteretNormal(item.getTvaInteret().divide(divisor));
+            creancemodel.setMontantInteretRetard(item.getMontantInteretRetard().divide(divisor));
+            creancemodel.setTVAInteretRetard(item.getTvaInteretRetard().divide(divisor));
+            creancemodel.setPenaliteRetard(item.getMontantPenaliteRetard().divide(divisor));
+            creancemodel.setTVApenaliteRetard(item.getTvaPenaliteRetard().divide(divisor));
             creancemodel.setCodeGuichetBancaire(item.getCodeGuichetBancaire());
             creancemodel.setCodeEtablissementBancaire(item.getCodeEtablissementBancaire());
             creancemodel.setReferenceValeur(item.getRefferenceValeur());

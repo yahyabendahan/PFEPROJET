@@ -47,7 +47,7 @@ public class ProcessorDoc  implements ItemProcessor<DocDTO, ImpayesCDLModel>  {
         	impayesCdlRejetModel.setDateMiseImpaye(item.getDateMiseImpaye());
         	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
         	impayesCdlRejetModel.setDateRejet(null);//date rejet
-        	impayesCdlRejetModel.setMotifRejet("la valeur du colonne \"NATENG\" est different à « DOC »");  
+        	impayesCdlRejetModel.setMotifRejet("la valeur du colonne NATENG est different a  DOC ");  
 		}
 		
 		impayesCDLRejetRepository.insert(impayesCdlRejetModel);

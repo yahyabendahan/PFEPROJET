@@ -1,5 +1,6 @@
 package com.eai.BatchJobCDL.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,31 +17,31 @@ public class CompteModel {
 	@SequenceGenerator(name = "compteSeqGen", sequenceName = "SEQ_COMPTE", initialValue = 1, allocationSize = 10000)
 	@GeneratedValue(generator = "compteSeqGen")
 	@Column(name = "CODE")
-	private Long code;
+	private BigDecimal code;
 
 	@Column(name = "NUMERO_COMPTE_EMPRUNTEUR")
 	private String numeroCompteEmprunteur;
 
 	@Column(name = "ENCOURS_EES_CONSO")
-	private Double encoursEESConso;
+	private BigDecimal encoursEESConso;
 
 	@Column(name = "ENCOURS_EES_COMM")
-	private Double encoursEESComm;
+	private BigDecimal encoursEESComm;
 
 	@Column(name = "ENCOURS_ESB")
-	private Double encoursESB;
+	private BigDecimal encoursESB;
 
 	@Column(name = "ENCOURS_ESI")
-	private Double encoursESI;
+	private BigDecimal encoursESI;
 
 	@Column(name = "SOLDE")
-	private Double solde;
+	private BigDecimal solde;
 
 	@Column(name = "ENCOURS_DECLASSE")
-	private Double encoursDeclasse;
+	private BigDecimal encoursDeclasse;
 
 	@Column(name = "ENCOURS_RISQUE")
-	private Double encoursRisque;
+	private BigDecimal encoursRisque;
 
 	@Column(name = "TYPE_CLIENT")
 	private String typeClient;
@@ -66,11 +67,11 @@ public class CompteModel {
 	@Column(name = "RAISON_SOCIALE")
 	private String raisonSociale;
 
-	public Long getCode() {
+	public BigDecimal getCode() {
 		return code;
 	}
 
-	public void setCode(Long code) {
+	public void setCode(BigDecimal code) {
 		this.code = code;
 	}
 
@@ -82,59 +83,59 @@ public class CompteModel {
 		this.numeroCompteEmprunteur = numeroCompteEmprunteur;
 	}
 
-	public Double getEncoursEESConso() {
+	public BigDecimal getEncoursEESConso() {
 		return encoursEESConso;
 	}
 
-	public void setEncoursEESConso(Double encoursEESConso) {
+	public void setEncoursEESConso(BigDecimal encoursEESConso) {
 		this.encoursEESConso = encoursEESConso;
 	}
 
-	public Double getEncoursEESComm() {
+	public BigDecimal getEncoursEESComm() {
 		return encoursEESComm;
 	}
 
-	public void setEncoursEESComm(Double encoursEESComm) {
+	public void setEncoursEESComm(BigDecimal encoursEESComm) {
 		this.encoursEESComm = encoursEESComm;
 	}
 
-	public Double getEncoursESB() {
+	public BigDecimal getEncoursESB() {
 		return encoursESB;
 	}
 
-	public void setEncoursESB(Double encoursESB) {
+	public void setEncoursESB(BigDecimal encoursESB) {
 		this.encoursESB = encoursESB;
 	}
 
-	public Double getEncoursESI() {
+	public BigDecimal getEncoursESI() {
 		return encoursESI;
 	}
 
-	public void setEncoursESI(Double encoursESI) {
+	public void setEncoursESI(BigDecimal encoursESI) {
 		this.encoursESI = encoursESI;
 	}
 
-	public Double getSolde() {
+	public BigDecimal getSolde() {
 		return solde;
 	}
 
-	public void setSolde(Double solde) {
+	public void setSolde(BigDecimal solde) {
 		this.solde = solde;
 	}
 
-	public Double getEncoursDeclasse() {
+	public BigDecimal getEncoursDeclasse() {
 		return encoursDeclasse;
 	}
 
-	public void setEncoursDeclasse(Double encoursDeclasse) {
+	public void setEncoursDeclasse(BigDecimal encoursDeclasse) {
 		this.encoursDeclasse = encoursDeclasse;
 	}
 
-	public Double getEncoursRisque() {
+	public BigDecimal getEncoursRisque() {
 		return encoursRisque;
 	}
 
-	public void setEncoursRisque(Double encoursRisque) {
+	public void setEncoursRisque(BigDecimal encoursRisque) {
 		this.encoursRisque = encoursRisque;
 	}
 

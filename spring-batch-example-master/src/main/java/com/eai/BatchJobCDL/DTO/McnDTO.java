@@ -1,12 +1,14 @@
 package com.eai.BatchJobCDL.DTO;
 
+import java.math.BigDecimal;
+
 public class McnDTO {
 	private String age;
 	private String nateng;
 	private String type;
 	private String cpt;
 	private String raisonSocial;
-	private double montantCreance;
+	private BigDecimal montantCreance;
 	private String dateCreance;
 	private String idClient;
 	private String noDossier;
@@ -26,10 +28,10 @@ public class McnDTO {
 	public void setRaisonSocial(String raisonSocial) {
 		this.raisonSocial = raisonSocial;
 	}
-	public double getMontantCreance() {
+	public BigDecimal getMontantCreance() {
 		return montantCreance;
 	}
-	public void setMontantCreance(double montantCreance) {
+	public void setMontantCreance(BigDecimal montantCreance) {
 		this.montantCreance = montantCreance;
 	}
 	public String getDateCreance() {

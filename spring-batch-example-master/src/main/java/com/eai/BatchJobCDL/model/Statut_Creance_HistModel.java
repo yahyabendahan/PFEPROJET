@@ -1,5 +1,6 @@
 package com.eai.BatchJobCDL.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,7 +20,7 @@ public class Statut_Creance_HistModel {
 	@SequenceGenerator(name = "statutcreanceSeqGen", sequenceName = "SEQ_HIST_CREANCE", initialValue = 0, allocationSize = 17599000)
 	@GeneratedValue(generator = "statutcreanceSeqGen")
 	@Column(name = "CODE")
-	private Double code;
+	private BigDecimal code;
 	//It is possible that the database is expecting a different data type for the "CODE" column. 
 	//checked 
 	
@@ -30,7 +31,7 @@ public class Statut_Creance_HistModel {
 	private String codeNatDecl ;
 
 	@Column(name = "CODE_CREANCE")
-	private Double codeCreance ;
+	private BigDecimal codeCreance ;
 
 	@Column(name = "CODE_DEC")
 	private String codeDec ;
@@ -44,11 +45,11 @@ public class Statut_Creance_HistModel {
 	@Column(name = "DATE_COMITE")
 	private Date dateComite ;
 
-	public Double getCode() {
+	public BigDecimal getCode() {
 		return code;
 	}
 
-	public void setCode(Double code) {
+	public void setCode(BigDecimal code) {
 		this.code = code;
 	}
 
@@ -60,11 +61,11 @@ public class Statut_Creance_HistModel {
 		this.codeNatDecl = codeNatDecl;
 	}
 
-	public Double getCodeCreance() {
+	public BigDecimal getCodeCreance() {
 		return codeCreance;
 	}
 
-	public void setCodeCreance(Double codeCreance) {
+	public void setCodeCreance(BigDecimal codeCreance) {
 		this.codeCreance = codeCreance;
 	}
 

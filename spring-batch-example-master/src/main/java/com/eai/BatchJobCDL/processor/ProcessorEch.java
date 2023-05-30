@@ -1,8 +1,5 @@
 package com.eai.BatchJobCDL.processor;
 
-
-
-
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.eai.BatchJobCDL.DTO.EchDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
+import com.eai.BatchJobCDL.model.TypeDossierModel;
 import com.eai.BatchJobCDL.repository.ImpayesCDLRejetRepository;
 import com.eai.BatchJobCDL.repository.TypeDossierRepository;
 
@@ -35,10 +33,11 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 		
     	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
 		ImpayesCdlRejetModel impayesCDLRejetModel = new ImpayesCdlRejetModel();
-		
+		TypeDossierModel typeDossier = typeDOsRepo.findOneByLibelleCourt(item.getType());
+
 		if (item.getNateng().equals("ECH")) {
 			
-            if (typeDOsRepo.findOneByLibelleCourt(item.getType())!=null) { // if (typeDOsRepo.findAllLibelleCourt().contains(item.getType())) {
+            if (typeDossier!=null) { // if (typeDOsRepo.findAllLibelleCourt().contains(item.getType())) {
             	
                 impayesCDLModel.setNateng(item.getNateng());
                 impayesCDLModel.setType(item.getType());
@@ -86,11 +85,10 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
                 impayesCDLRejetModel.setNumeroLigne(item.getNumeroLigne());
                 impayesCDLRejetModel.setNumeroTirage(item.getNumeroTirage());
                 impayesCDLRejetModel.setDateRejet(null);//date rejet
-                impayesCDLRejetModel.setMotifRejet("la valeur du colonne \"TYPE\" n'exist pas  dans la table « TYPE_DOSSIER.LIBELLE_COURT »"); 
+                impayesCDLRejetModel.setMotifRejet("la valeur du colonne TYPE n exist pas  dans la table TYPE_DOSSIER.LIBELLE_COURT"); 
 
                 }
 		}
-
 
         
 		else {
@@ -116,7 +114,7 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 		    impayesCDLRejetModel.setNumeroLigne(item.getNumeroLigne());
 		    impayesCDLRejetModel.setNumeroTirage(item.getNumeroTirage());
 		    impayesCDLRejetModel.setDateRejet(null);//date rejet
-		    impayesCDLRejetModel.setMotifRejet("la valeur du colonne \"NATENG\" est different à « ECH »"); 
+		    impayesCDLRejetModel.setMotifRejet("la valeur du colonne NATENG est different a ECH "); 
 	}
 		
 		impayesCDLRejetRepository.insert(impayesCDLRejetModel);

@@ -41,7 +41,7 @@ public class ProcessorMcn  implements ItemProcessor<McnDTO, ImpayesCDLModel>  {
         	impayesCdlRejetModel.setDateMiseImpaye(item.getDateMiseImpaye());
         	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
         	impayesCdlRejetModel.setDateRejet(null);//date rejet
-        	impayesCdlRejetModel.setMotifRejet("la valeur du colonne \"NATENG\" est different à « MCN »");
+        	impayesCdlRejetModel.setMotifRejet("la valeur du colonne NATENG est different a MCN ");
 		}
         impayesCDLRejetRepository.insert(impayesCdlRejetModel);
         System.out.println("ProcessorMcn: ");

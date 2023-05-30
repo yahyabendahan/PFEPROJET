@@ -1,5 +1,7 @@
 package com.eai.BatchJobCDL.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,7 +23,7 @@ public class ImpayesCDLModel {
 	private String cpt;
 
 	@Column(name = "MONTANT_CREANCE")
-	private Double montantCreance;
+	private BigDecimal montantCreance;
 
 	@Column(name = "DATE_CREANCE")
 	private String dateCreance;
@@ -39,25 +41,25 @@ public class ImpayesCDLModel {
 	private String dateReglement;
 
 	@Column(name = "MONTANT_AMORTISSEMENT")
-	private Double montantAmortissement;
+	private BigDecimal montantAmortissement;
 
 	@Column(name = "MONTANT_INTERET_NORMAL")
-	private Double montantInteretNormal;
+	private BigDecimal montantInteretNormal;
 
 	@Column(name = "TVA_INTERET")
-	private Double tvaInteret;
+	private BigDecimal tvaInteret;
 
 	@Column(name = "MONTANT_INTERET_RETARD")
-	private Double montantInteretRetard;
+	private BigDecimal montantInteretRetard;
 
 	@Column(name = "TVA_INTERET_RETARD")
-	private Double tvaInteretRetard;
+	private BigDecimal tvaInteretRetard;
 
 	@Column(name = "MONATANT_PENALITE_RETARD")
-	private Double montantPenaliteRetard;
+	private BigDecimal montantPenaliteRetard;
 
 	@Column(name = "TVA_PENALITE_RETARD")
-	private Double tvaPenaliteRetard;
+	private BigDecimal tvaPenaliteRetard;
 
 	@Column(name = "NUM_COMPTE_PAYEUR")
 	private String numComptePayeur;
@@ -69,7 +71,7 @@ public class ImpayesCDLModel {
 	private String referenceLiaison;
 
 	@Column(name = "COMISSION")
-	private Double commission;
+	private BigDecimal commission;
 
 	@Column(name = "CODE_REJET")
 	private String codeRejet;
@@ -84,25 +86,25 @@ public class ImpayesCDLModel {
 	private String dateRemise;
 
 	@Column(name = "ENCOURS_EES_CONSO")
-	private Double encoursEESConso;
+	private BigDecimal encoursEESConso;
 
 	@Column(name = "ENCOURS_EES_COMM")
-	private Double encoursEESComm;
+	private BigDecimal encoursEESComm;
 
 	@Column(name = "ENCOURS_ESB")
-	private Double encoursESB;
+	private BigDecimal encoursESB;
 
 	@Column(name = "ENCOURS_ESI")
-	private Double encoursESI;
+	private BigDecimal encoursESI;
 	
 	@Column(name = "SOLDE")
-	private Double solde;
+	private BigDecimal solde;
 	
 	@Column(name = "ENCOURS_DECLASSE")
-	private Double encoursDeclasse;
+	private BigDecimal encoursDeclasse;
 	
 	@Column(name ="ENCOURS_RISQUE")
-	private Double encoursRisque;
+	private BigDecimal encoursRisque;
 	
 	@Column(name = "TYPE_CLIENT")
 	private String typeClient;
@@ -146,11 +148,11 @@ public class ImpayesCDLModel {
 		this.cpt = cpt;
 	}
 
-	public Double getMontantCreance() {
+	public BigDecimal getMontantCreance() {
 		return montantCreance;
 	}
 
-	public void setMontantCreance(Double montantCreance) {
+	public void setMontantCreance(BigDecimal montantCreance) {
 		this.montantCreance = montantCreance;
 	}
 
@@ -194,59 +196,59 @@ public class ImpayesCDLModel {
 		this.dateReglement = dateReglement;
 	}
 
-	public Double getMontantAmortissement() {
+	public BigDecimal getMontantAmortissement() {
 		return montantAmortissement;
 	}
 
-	public void setMontantAmortissement(Double montantAmortissement) {
+	public void setMontantAmortissement(BigDecimal montantAmortissement) {
 		this.montantAmortissement = montantAmortissement;
 	}
 
-	public Double getMontantInteretNormal() {
+	public BigDecimal getMontantInteretNormal() {
 		return montantInteretNormal;
 	}
 
-	public void setMontantInteretNormal(Double montantInteretNormal) {
+	public void setMontantInteretNormal(BigDecimal montantInteretNormal) {
 		this.montantInteretNormal = montantInteretNormal;
 	}
 
-	public Double getTvaInteret() {
+	public BigDecimal getTvaInteret() {
 		return tvaInteret;
 	}
 
-	public void setTvaInteret(Double tvaInteret) {
+	public void setTvaInteret(BigDecimal tvaInteret) {
 		this.tvaInteret = tvaInteret;
 	}
 
-	public Double getMontantInteretRetard() {
+	public BigDecimal getMontantInteretRetard() {
 		return montantInteretRetard;
 	}
 
-	public void setMontantInteretRetard(Double montantInteretRetard) {
+	public void setMontantInteretRetard(BigDecimal montantInteretRetard) {
 		this.montantInteretRetard = montantInteretRetard;
 	}
 
-	public Double getTvaInteretRetard() {
+	public BigDecimal getTvaInteretRetard() {
 		return tvaInteretRetard;
 	}
 
-	public void setTvaInteretRetard(Double tvaInteretRetard) {
+	public void setTvaInteretRetard(BigDecimal tvaInteretRetard) {
 		this.tvaInteretRetard = tvaInteretRetard;
 	}
 
-	public Double getMontantPenaliteRetard() {
+	public BigDecimal getMontantPenaliteRetard() {
 		return montantPenaliteRetard;
 	}
 
-	public void setMontantPenaliteRetard(Double montantPenaliteRetard) {
+	public void setMontantPenaliteRetard(BigDecimal montantPenaliteRetard) {
 		this.montantPenaliteRetard = montantPenaliteRetard;
 	}
 
-	public Double getTvaPenaliteRetard() {
+	public BigDecimal getTvaPenaliteRetard() {
 		return tvaPenaliteRetard;
 	}
 
-	public void setTvaPenaliteRetard(Double tvaPenaliteRetard) {
+	public void setTvaPenaliteRetard(BigDecimal tvaPenaliteRetard) {
 		this.tvaPenaliteRetard = tvaPenaliteRetard;
 	}
 
@@ -274,11 +276,11 @@ public class ImpayesCDLModel {
 		this.referenceLiaison = referenceLiaison;
 	}
 
-	public Double getCommission() {
+	public BigDecimal getCommission() {
 		return commission;
 	}
 
-	public void setCommission(Double commission) {
+	public void setCommission(BigDecimal commission) {
 		this.commission = commission;
 	}
 
@@ -314,59 +316,59 @@ public class ImpayesCDLModel {
 		this.dateRemise = dateRemise;
 	}
 
-	public Double getEncoursEESConso() {
+	public BigDecimal getEncoursEESConso() {
 		return encoursEESConso;
 	}
 
-	public void setEncoursEESConso(Double encoursEESConso) {
+	public void setEncoursEESConso(BigDecimal encoursEESConso) {
 		this.encoursEESConso = encoursEESConso;
 	}
 
-	public Double getEncoursEESComm() {
+	public BigDecimal getEncoursEESComm() {
 		return encoursEESComm;
 	}
 
-	public void setEncoursEESComm(Double encoursEESComm) {
+	public void setEncoursEESComm(BigDecimal encoursEESComm) {
 		this.encoursEESComm = encoursEESComm;
 	}
 
-	public Double getEncoursESB() {
+	public BigDecimal getEncoursESB() {
 		return encoursESB;
 	}
 
-	public void setEncoursESB(Double encoursESB) {
+	public void setEncoursESB(BigDecimal encoursESB) {
 		this.encoursESB = encoursESB;
 	}
 
-	public Double getEncoursESI() {
+	public BigDecimal getEncoursESI() {
 		return encoursESI;
 	}
 
-	public void setEncoursESI(Double encoursESI) {
+	public void setEncoursESI(BigDecimal encoursESI) {
 		this.encoursESI = encoursESI;
 	}
 
-	public Double getSolde() {
+	public BigDecimal getSolde() {
 		return solde;
 	}
 
-	public void setSolde(Double solde) {
+	public void setSolde(BigDecimal solde) {
 		this.solde = solde;
 	}
 
-	public Double getEncoursDeclasse() {
+	public BigDecimal getEncoursDeclasse() {
 		return encoursDeclasse;
 	}
 
-	public void setEncoursDeclasse(Double encoursDeclasse) {
+	public void setEncoursDeclasse(BigDecimal encoursDeclasse) {
 		this.encoursDeclasse = encoursDeclasse;
 	}
 
-	public Double getEncoursRisque() {
+	public BigDecimal getEncoursRisque() {
 		return encoursRisque;
 	}
 
-	public void setEncoursRisque(Double encoursRisque) {
+	public void setEncoursRisque(BigDecimal encoursRisque) {
 		this.encoursRisque = encoursRisque;
 	}
 

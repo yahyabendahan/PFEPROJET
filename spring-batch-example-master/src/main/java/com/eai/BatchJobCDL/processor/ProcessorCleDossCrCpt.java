@@ -1,5 +1,5 @@
-package com.eai.BatchJobCDL.processor;
 
+package com.eai.BatchJobCDL.processor;
 
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class ProcessorCleDossCrCpt  implements ItemProcessor<CreanceModel , Cle_
 		DossierModel dossiermodel = new DossierModel();
         Cle_Doss_Cr_CptModel cle_doss_cr_cpt = new Cle_Doss_Cr_CptModel();
         
-		if (item.getcodeDossier() == dossiermodel.getCODE() ) { // CreanceModel est vide 
+		if ( item.getcodeDossier() == dossiermodel.getCODE() ){// CreanceModel est vide 
 			
 			cle_doss_cr_cpt.setDateEcheance(item.getDateEcheance());
 			cle_doss_cr_cpt.setCodeNatEng(item.getCodeNatEng()); 
@@ -32,3 +32,4 @@ public class ProcessorCleDossCrCpt  implements ItemProcessor<CreanceModel , Cle_
 	    return cle_doss_cr_cpt;
 	}
 }
+

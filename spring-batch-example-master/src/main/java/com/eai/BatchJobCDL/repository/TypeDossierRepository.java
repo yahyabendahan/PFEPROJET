@@ -18,30 +18,31 @@ import com.eai.BatchJobCDL.model.TypeDossierModel;
 public interface TypeDossierRepository extends JpaRepository<TypeDossierModel, String> {
 
     public static final Logger log = LoggerFactory.getLogger(TypeDossierRepository.class);
+    @Transactional
     @Primary
     @Query("SELECT t FROM TypeDossierModel t WHERE t.LIBELLE_COURT = :libelleCourt")
     TypeDossierModel findOneByLibelleCourt(@Param("libelleCourt") String libelleCourt);
 
 	
     // Other methods...	
-	@Query("SELECT t.CODE FROM TypeDossierModel t")
+	@Query("SELECT t FROM TypeDossierModel t")
 	TypeDossierModel findOneByCODE(String CODE);
 	
 	
 	
 	
-//	@Transactional
+	@Transactional
 	// Logging example for findOneByLibelleCourt
-//    @Query("SELECT t FROM TypeDossierModel t WHERE t.LIBELLE_COURT = :libelleCourt")
-//    default TypeDossierModel findOneByLibelleCourtWithLogging(@Param("libelleCourt") String libelleCourt) {
-//        TypeDossierModel result = findOneByLibelleCourt(libelleCourt);
-//        if (result != null) {
-//            log.info("Data is available in the database for LIBELLE_COURT: {}", libelleCourt);
-//        } else {
-//            log.info(" data is not available in the database for LIBELLE_COURT: {}", libelleCourt);
-//        }
-//        return result;
-//    }
+    //@Query("SELECT t FROM TypeDossierModel t WHERE t.LIBELLE_COURT = :libelleCourt")
+    default TypeDossierModel findOneByLibelleCourtWithLogging(@Param("libelleCourt") String libelleCourt) {
+        TypeDossierModel result = findOneByLibelleCourt(libelleCourt);
+        if (result != null) {
+            log.info("Data is available in the database for LIBELLE_COURT: {}", libelleCourt);
+        } else {
+            log.info(" data is not available in the database for LIBELLE_COURT: {}", libelleCourt);
+        }
+        return result;
+    }
 
 	
 }

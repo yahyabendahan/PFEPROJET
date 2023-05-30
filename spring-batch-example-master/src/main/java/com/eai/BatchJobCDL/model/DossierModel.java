@@ -1,5 +1,7 @@
 package com.eai.BatchJobCDL.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,20 +21,20 @@ public class DossierModel {
 	@SequenceGenerator(name = "dossierSeqGen", sequenceName = "SEQ_DOSSIER", initialValue = 1, allocationSize = 10377915)
 	@GeneratedValue(generator = "dossierSeqGen")
 	@Column(name = "CODE")
-	private Long CODE;
+	private BigDecimal CODE;
 	
 	@Column(name="NUMERO_DOSSIER")
 	private String NUMERO_DOSSIER;
 	
 	@Column(name="ENCOURS")
-	private Double ENCOURS;
+	private BigDecimal ENCOURS;
 	
 	/*@ManyToOne
     @JoinColumn(name ="CODE_COMPTE")
 	private CompteModel CODE_COMPTE;	*/
 
 	@Column(name="CODE_COMPTE")
-	private Long  CODE_COMPTE;
+	private BigDecimal  CODE_COMPTE;
 	
 	@Column(name="TYPE_DOSSIER")
 	private String TYPE_DOSSIER;
@@ -54,10 +56,10 @@ public class DossierModel {
 	
 	
 	
-	public Long getCODE() {
+	public BigDecimal getCODE() {
 		return CODE;
 	}
-	public void setCODE(Long cODE) {
+	public void setCODE(BigDecimal cODE) {
 		CODE = cODE;
 	}
 	public String getNUMERO_DOSSIER() {
@@ -66,16 +68,16 @@ public class DossierModel {
 	public void setNUMERO_DOSSIER(String nUMERO_DOSSIER) {
 		NUMERO_DOSSIER = nUMERO_DOSSIER;
 	}
-	public Double getENCOURS() {
+	public BigDecimal getENCOURS() {
 		return ENCOURS;
 	}
-	public void setENCOURS(Double eNCOURS) {
+	public void setENCOURS(BigDecimal eNCOURS) {
 		ENCOURS = eNCOURS;
 	}
-	public Long getCODE_COMPTE() {
+	public BigDecimal getCODE_COMPTE() {
 		return CODE_COMPTE;
 	}
-	public void setCODE_COMPTE(Long cODE_COMPTE) {
+	public void setCODE_COMPTE(BigDecimal cODE_COMPTE) {
 		CODE_COMPTE = cODE_COMPTE;
 	}
 	public String getTYPE_DOSSIER() {

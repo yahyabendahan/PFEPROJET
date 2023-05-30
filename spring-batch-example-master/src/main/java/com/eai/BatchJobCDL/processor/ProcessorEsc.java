@@ -2,6 +2,9 @@ package com.eai.BatchJobCDL.processor;
 
 
 import org.springframework.batch.item.ItemProcessor;
+
+import com.eai.BatchJobCDL.model.TypeDossierModel;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,11 +34,13 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 			
 	    	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
 	    	ImpayesCdlRejetModel impayesCdlRejetModel = new ImpayesCdlRejetModel();
+	    	TypeDossierModel typeDossier = typeDOsRepo.findOneByLibelleCourt(item.getType());
+
 		
 	        if (item.getNateng().equals("ESC")) {   // if (typeDOsRepo.findOneByLibelleCourt()==item.getType()) {
 	            log.info("Checking if type exists in TypeDossierModel: {}", item.getType());
 
-            	if (typeDOsRepo.findOneByLibelleCourt(item.getType()) != null) { // item.getType()=00001 and r.findOneByLibelleCourt=00001
+            	if (typeDossier != null) { // item.getType()=00001 and r.findOneByLibelleCourt=00001
                    
             		log.debug("Type exists in TypeDossierModel: {}", item.getType());
     				log.info("Data retrieved from the database for type: {}", item.getType());
@@ -76,8 +81,8 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	            	impayesCdlRejetModel.setReferenceLiaison(item.getReferenceLiaison());
 	            	impayesCdlRejetModel.setCodeRejet(item.getCodeRejet());
 	            	impayesCdlRejetModel.setCommission(item.getCommission());
-	            	impayesCdlRejetModel.setDateRejet(null);//date rejet
-	                impayesCdlRejetModel.setMotifRejet(" la valeur du colonne \"TYPE\" n'exist pas  dans la table « TYPE_DOSSIER.LIBELLE_COURT »");
+	            	impayesCdlRejetModel.setDateRejet(null);
+	                impayesCdlRejetModel.setMotifRejet("la valeur du colonne TYPE n exist pas  dans la table TYPE_DOSSIERLIBELLE_COURT ");
 	    		}
 	        }
 	        else {
@@ -98,7 +103,7 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
             	impayesCdlRejetModel.setCodeRejet(item.getCodeRejet());
             	impayesCdlRejetModel.setCommission(item.getCommission());
             	impayesCdlRejetModel.setDateRejet(null);//date rejet
-    		    impayesCdlRejetModel.setMotifRejet("la valeur du colonne \"NATENG\" est different à « ESC »"); 
+    		    impayesCdlRejetModel.setMotifRejet("la valeur du colonne NATENG est different à ESC "); 
 			}
 
 	        impayesCDLRejetRepository.insert(impayesCdlRejetModel);
