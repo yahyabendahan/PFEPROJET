@@ -7,19 +7,24 @@ import javax.sql.DataSource;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import com.eai.BatchJobCDL.model.Statut_Creance_HistModel;
 
+
+@Component
 public class WriterStatutCreance extends JdbcBatchItemWriter<Statut_Creance_HistModel> {
-	
+    
+	@Autowired
 	   public WriterStatutCreance(DataSource dataSource) {
 	    	
-		    /*	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		    	//jdbcTemplate.setDataSource(dataSource);
+		    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+//		    	jdbcTemplate.setDataSource(dataSource);
 		    	
-		    	 String deleteSql = "DELETE FROM CLE_DOSS_CR_CPT";//TEMPORAIRE
+		    	 String deleteSql = "DELETE FROM STATUT_CREANCE_HIST";//TEMPORAIRE
 		         new JdbcTemplate(dataSource).update(deleteSql);
-		         */
+		         
 		         System.out.println("WriterStatut_Creance_HistModel: ");
 		    	
 		    

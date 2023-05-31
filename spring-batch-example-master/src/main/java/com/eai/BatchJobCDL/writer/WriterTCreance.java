@@ -1,6 +1,10 @@
 package com.eai.BatchJobCDL.writer;
 
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
@@ -8,12 +12,20 @@ import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourc
 
 import com.eai.BatchJobCDL.model.CreanceModel;
 
-
+@Component
 public class WriterTCreance  extends JdbcBatchItemWriter<CreanceModel>{
-
-			 public WriterTCreance(DataSource dataSource) {
+	
+	@Autowired
+	public WriterTCreance(DataSource dataSource) {
 			    	
 		System.out.println("WriterCreanceModel: ");
+		
+    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+//    	jdbcTemplate.setDataSource(dataSource);
+
+    	String deleteSql = "DELETE FROM CREANCE";//TEMPORAIRE
+        new JdbcTemplate(dataSource).update(deleteSql);
+
 			  
 		this.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
 		this.setSql("INSERT INTO CREANCE (CODE_TYPE_DOSSIER,\r\n"
@@ -90,6 +102,9 @@ public class WriterTCreance  extends JdbcBatchItemWriter<CreanceModel>{
 			        		+ ":numeroTirage,\r\n"
 			        		+ ":userCreation,\r\n"
 			        		+ ":ancienCodeDossier)");
+		
+		System.out.println("DELETE FROM CREANCE: ");
+
 		this.setDataSource(dataSource);
 			    
 			 }

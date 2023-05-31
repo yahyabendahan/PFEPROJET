@@ -16,9 +16,9 @@ import com.eai.BatchJobCDL.model.TypeDossierModel;
 public interface NatEngRepository extends JpaRepository<NatEngModel, String>{
 	@Primary
 	@Query("SELECT n FROM NatEngModel n where n.LIBELLE_COURT = :libelleCourt ")
-	NatEngModel findOneByLibelleCourt(@Param("libelleCourt") String libelleCourt);
+	NatEngModel findAllByLibelleCourt(@Param("libelleCourt") String libelleCourt);
 
 	@Query("SELECT n.CODE FROM NatEngModel n")
-	NatEngModel findOneByCODE(String CODE);
+	NatEngModel findAllByCODE(String CODE);
 } 
 

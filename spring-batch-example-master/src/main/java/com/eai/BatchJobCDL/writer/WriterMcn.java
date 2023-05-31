@@ -18,6 +18,7 @@ public class WriterMcn extends JdbcBatchItemWriter<ImpayesCDLModel>{
 	        this.setSql("INSERT INTO IMPAYES_CDL (NATENG, TYPE, CPT, MONTANT_CREANCE, DATE_CREANCE, NO_DOSSIER, DATE_ECHEANCE, DATE_MISE_IMPAYE, REFFERENCE_VALEUR) " +
 	                "VALUES (:nateng, :type, :cpt, :montantCreance, :dateCreance, :noDossier, :dateEcheance, :dateMiseImpaye, :refferenceValeur)");
 	        this.setDataSource(dataSource);
+	         System.out.println("WriterMcn: ");
 
 	    }
 }

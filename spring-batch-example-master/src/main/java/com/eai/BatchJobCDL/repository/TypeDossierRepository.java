@@ -21,12 +21,12 @@ public interface TypeDossierRepository extends JpaRepository<TypeDossierModel, S
     @Transactional
     @Primary
     @Query("SELECT t FROM TypeDossierModel t WHERE t.LIBELLE_COURT = :libelleCourt")
-    TypeDossierModel findOneByLibelleCourt(@Param("libelleCourt") String libelleCourt);
+    TypeDossierModel findAllByLibelleCourt(@Param("libelleCourt") String libelleCourt);
 
 	
     // Other methods...	
 	@Query("SELECT t FROM TypeDossierModel t")
-	TypeDossierModel findOneByCODE(String CODE);
+	TypeDossierModel findAllByCODE(String CODE);
 	
 	
 	
@@ -34,8 +34,8 @@ public interface TypeDossierRepository extends JpaRepository<TypeDossierModel, S
 	@Transactional
 	// Logging example for findOneByLibelleCourt
     //@Query("SELECT t FROM TypeDossierModel t WHERE t.LIBELLE_COURT = :libelleCourt")
-    default TypeDossierModel findOneByLibelleCourtWithLogging(@Param("libelleCourt") String libelleCourt) {
-        TypeDossierModel result = findOneByLibelleCourt(libelleCourt);
+    default TypeDossierModel findAllByLibelleCourtWithLogging(@Param("libelleCourt") String libelleCourt) {
+        TypeDossierModel result = findAllByLibelleCourt(libelleCourt);
         if (result != null) {
             log.info("Data is available in the database for LIBELLE_COURT: {}", libelleCourt);
         } else {

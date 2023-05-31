@@ -20,55 +20,86 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
 	
 	@Autowired
 	NatEngRepository natgRepo;
+	
+	@Autowired
+	DossierRepository dossierRepo;
 
 	
 	public CreanceModel process(ImpayesCDLModel item) throws Exception {
-		DossierModel dossiermodel = new DossierModel();
+		//DossierModel dossiermodel = new DossierModel();
         CreanceModel creancemodel = new CreanceModel();
-        TypeDossierModel typedossier = new TypeDossierModel();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Example: fichier esc (20230222)
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd"); // Example: fichier esc (20230222) // Unparseable date: "20220921"
         BigDecimal divisor = new BigDecimal(100);
-        TypeDossierModel typeDossier = typeDOsRepo.findOneByLibelleCourt(item.getType());
-        NatEngModel natengcdl = natgRepo.findOneByLibelleCourt(item.getNateng());
-        
+        TypeDossierModel typeDossier = typeDOsRepo.findAllByLibelleCourt(item.getType());
+        NatEngModel natengcdl = natgRepo.findAllByLibelleCourt(item.getNateng());
+        DossierModel dossiermodel = dossierRepo.findAllByCODE(); // Adjust the criteria to retrieve the appropriate DossierModel
+
         
        if((natengcdl!=null)&&(typeDossier!=null))       
         {        
-            creancemodel.setCodeTypeDossier(typedossier.getCODE());
-            creancemodel.setCodeMotif(null);//CODE_REJET
-            String code = natgRepo.findOneByLibelleCourt(item.getNateng()).getCODE();
-            creancemodel.setCodeNatEng(code);
+            creancemodel.setCodeTypeDossier(typeDossier.getCODE());
+            creancemodel.setCodeMotif(null);//CODE_REJE
+            creancemodel.setCodeNatEng(natengcdl.getCODE());
             
+            //BigDecimal codedoss = dossiermodel.getCODE();
             creancemodel.setcodeDossier(dossiermodel.getCODE());
-            creancemodel.setMontant(item.getMontantCreance().divide(divisor));
             
-       
+            
+            
+//            BigDecimal codedoss = dossierRepo.findAllByCODE(dossiermodel.getCODE()).getCODE();
+//            creancemodel.setcodeDossier(codedoss);
+            
+            //    creancemodel.setcodeDossier(dossierRepo.findAllByCODE(dossiermodel.getCODE()).getCODE());
+            
+          /*  DossierModel DossierCode = dossierRepo.findOneByCODE(dossiermodel.getCODE()); // autre façon d'ecrire
+            creancemodel.setcodeDossier(DossierCode.getCODE());*/ 
+            
             String StringMiseImpaye = item.getDateMiseImpaye();
             String StringEcheance = item.getDateEcheance();
             String StringCreance = item.getDateCreance();
             String StringRemise = item.getDateRemise();
+
+            Date dateMiseImpaye = null;
+            Date DateEcheance = null;
+            Date DateCreance = null;
+            Date DateRemise = null;
+
             try {
-                Date dateMiseImpaye = dateFormat.parse(StringMiseImpaye);
-                Date DateEcheance = dateFormat.parse(StringEcheance); 
-                Date DateCreance = dateFormat.parse(StringCreance);
-                Date DateRemise = dateFormat.parse(StringRemise);
-                
-                creancemodel.setDateMiseImpaye(dateMiseImpaye);
-                creancemodel.setDateEcheance(DateEcheance);
-                creancemodel.setDateCreance(DateCreance);
-                creancemodel.setDateRemise(DateRemise);
+
+            		if (StringMiseImpaye != null) {
+            				dateMiseImpaye = dateFormat.parse(StringMiseImpaye);
+            			}
+
+            		if (StringEcheance != null) {
+            				DateEcheance = dateFormat.parse(StringEcheance);
+            			}
+
+            		if (StringCreance != null) {
+            			DateCreance = dateFormat.parse(StringCreance);
+            			}
+
+            		if (StringRemise != null) {
+            			DateRemise = dateFormat.parse(StringRemise);
+            			}
+
+            		creancemodel.setDateMiseImpaye(dateMiseImpaye);
+            		creancemodel.setDateEcheance(DateEcheance);
+            		creancemodel.setDateCreance(DateCreance);
+            		creancemodel.setDateRemise(DateRemise);
+
                 
             } catch (ParseException e) {
                 // Handle the parse exception if the date string is in an invalid format
                 e.printStackTrace();
             }
-            
-            creancemodel.setMontantInteretNormal(item.getMontantInteretNormal().divide(divisor));
-            creancemodel.setTVAInteretNormal(item.getTvaInteret().divide(divisor));
-            creancemodel.setMontantInteretRetard(item.getMontantInteretRetard().divide(divisor));
-            creancemodel.setTVAInteretRetard(item.getTvaInteretRetard().divide(divisor));
-            creancemodel.setPenaliteRetard(item.getMontantPenaliteRetard().divide(divisor));
-            creancemodel.setTVApenaliteRetard(item.getTvaPenaliteRetard().divide(divisor));
+
+            creancemodel.setMontantInteretNormal(item.getMontantInteretNormal() != null ? item.getMontantInteretNormal().divide(divisor) : null);
+            creancemodel.setTVAInteretNormal(item.getTvaInteret() != null ? item.getTvaInteret().divide(divisor) : null);
+            creancemodel.setMontantInteretRetard(item.getMontantInteretRetard() != null ? item.getMontantInteretRetard().divide(divisor) : null);
+            creancemodel.setTVAInteretRetard(item.getTvaInteretRetard() != null ? item.getTvaInteretRetard().divide(divisor) : null);
+            creancemodel.setPenaliteRetard(item.getMontantPenaliteRetard() != null ? item.getMontantPenaliteRetard().divide(divisor) : null);
+            creancemodel.setTVApenaliteRetard(item.getTvaPenaliteRetard() != null ? item.getTvaPenaliteRetard().divide(divisor) : null);
+            creancemodel.setMontant(item.getMontantCreance() != null ? item.getMontantCreance().divide(divisor) : null);
             creancemodel.setCodeGuichetBancaire(item.getCodeGuichetBancaire());
             creancemodel.setCodeEtablissementBancaire(item.getCodeEtablissementBancaire());
             creancemodel.setReferenceValeur(item.getRefferenceValeur());
@@ -77,7 +108,7 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
             creancemodel.setNumeroComptePayeur(item.getNumComptePayeur());
             
            
-    	    if(code=="NAT_ENG_ESC" || code=="NAT_ENG_SBF")//("NAT_ENG_ESC".equals(code) || "NAT_ENG_SBF".equals(code))
+    	    if(natengcdl.getCODE().equals("NAT_ENG_ESC") || natengcdl.getCODE().equals("NAT_ENG_SBF"))
     	    	{creancemodel.setStatut("STATUS_RJ");}//Etat Rejete
     	    else 
     	    	{creancemodel.setStatut("STATUS_IM");}	//Etat Impaye Non classÃ©
@@ -102,18 +133,3 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
 
 }
 
-/*  //Using java.time.LocalDate (for Java 8 and later):
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-// ...
-
-String dateString = item.getDateMiseImpaye();
-DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Replace with your desired date format
-LocalDate date = LocalDate.parse(dateString, formatter);
-creancemodel.setDateMiseImpaye(java.sql.Date.valueOf(date));
-
-// ...
- * 
-*/

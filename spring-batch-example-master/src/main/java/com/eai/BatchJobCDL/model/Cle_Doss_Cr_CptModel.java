@@ -34,11 +34,11 @@ public class Cle_Doss_Cr_CptModel {
 		@Column(name = "CODE_NAT_ENG")
 		private String codeNatEng;
 
-		public BigDecimal  getCode() {
+		public BigDecimal getCode() {
 			return code;
 		}
 
-		public void setCode(BigDecimal  code) {
+		public void setCode(BigDecimal code) {
 			this.code = code;
 		}
 
@@ -50,11 +50,11 @@ public class Cle_Doss_Cr_CptModel {
 			this.numeroDossier = numeroDossier;
 		}
 
-		public BigDecimal  getCpt() {
+		public BigDecimal getCpt() {
 			return cpt;
 		}
 
-		public void setCpt(BigDecimal  cpt) {
+		public void setCpt(BigDecimal cpt) {
 			this.cpt = cpt;
 		}
 
@@ -66,6 +66,22 @@ public class Cle_Doss_Cr_CptModel {
 			this.dateEcheance = dateEcheance;
 		}
 
+		public String getCodeTypeDossier() {
+			return codeTypeDossier;
+		}
+
+		public void setCodeTypeDossier(String codeTypeDossier) {
+			this.codeTypeDossier = codeTypeDossier;
+		}
+
+		public String getCleDossier() {
+			return cleDossier;
+		}
+
+		public void setCleDossier(String cleDossier) {
+			this.cleDossier = cleDossier;
+		}
+
 		public String getCodeNatEng() {
 			return codeNatEng;
 		}
@@ -73,6 +89,5 @@ public class Cle_Doss_Cr_CptModel {
 		public void setCodeNatEng(String codeNatEng) {
 			this.codeNatEng = codeNatEng;
 		}
-		
 
 }

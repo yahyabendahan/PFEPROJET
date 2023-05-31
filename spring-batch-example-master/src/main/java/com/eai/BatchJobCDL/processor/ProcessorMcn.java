@@ -2,12 +2,16 @@ package com.eai.BatchJobCDL.processor;
 
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.eai.BatchJobCDL.DTO.McnDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
 import com.eai.BatchJobCDL.repository.ImpayesCDLRejetRepository;
 
+
+
+@Component
 public class ProcessorMcn  implements ItemProcessor<McnDTO, ImpayesCDLModel>  {
 
 	@Autowired 
@@ -42,8 +46,10 @@ public class ProcessorMcn  implements ItemProcessor<McnDTO, ImpayesCDLModel>  {
         	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
         	impayesCdlRejetModel.setDateRejet(null);//date rejet
         	impayesCdlRejetModel.setMotifRejet("la valeur du colonne NATENG est different a MCN ");
+        	impayesCDLRejetRepository.save(impayesCdlRejetModel);
+			//impayesCDLRejetRepository.insert(impayesCDLRejetModel);
 		}
-        impayesCDLRejetRepository.insert(impayesCdlRejetModel);
+       // impayesCDLRejetRepository.insert(impayesCdlRejetModel);
         System.out.println("ProcessorMcn: ");
 		return impayesCDLModel;
 	}

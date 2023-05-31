@@ -1,6 +1,7 @@
 package com.eai.BatchJobCDL.writer;
 
-import java.util.List;
+import java.util.List;import org.springframework.beans.factory.annotation.Autowired;
+
 
 import javax.sql.DataSource;
 
@@ -22,7 +23,7 @@ public class WriterTCompte extends JdbcBatchItemWriter<CompteModel>{
 	//private DataSource dataSource;
 	
 	
-	    //@Autowired
+	    @Autowired
 	    @SuppressWarnings("unlikely-arg-type")
 		public WriterTCompte(DataSource dataSource) {
 
@@ -31,8 +32,10 @@ public class WriterTCompte extends JdbcBatchItemWriter<CompteModel>{
 	    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 	    	
 	    	 String deleteSql = "DELETE FROM COMPTE";//TEMPORAIRE
+	    	 
 	         new JdbcTemplate(dataSource).update(deleteSql);
-	         System.out.println("WriterCOMPTE: ");
+	         
+	         System.out.println("WriterCompte: ");
 	    	
 	    	String sql = "SELECT NUMERO_COMPTE_EMPRUNTEUR FROM COMPTE";
 	    	List<CompteModel> listCompte = jdbcTemplate.query(
@@ -46,7 +49,8 @@ public class WriterTCompte extends JdbcBatchItemWriter<CompteModel>{
 	        this.setSql("INSERT INTO COMPTE ( NUMERO_COMPTE_EMPRUNTEUR, ENCOURS_EES_CONSO, ENCOURS_EES_COMM, ENCOURS_ESB, ENCOURS_ESI, SOLDE, ENCOURS_DECLASSE, ENCOURS_RISQUE, TYPE_CLIENT, NUM_TIERS, CODE ) " +
 	        		"VALUES ( :numeroCompteEmprunteur, :encoursEESConso, :encoursEESComm, :encoursESB, :encoursESI, :solde, :encoursDeclasse, :encoursRisque, :typeClient, :numTiers, :code)");
 	        }
-	        
+	         System.out.println("WriterCompte2: ");
+
 	        this.setDataSource(dataSource);
 	    }
 	}

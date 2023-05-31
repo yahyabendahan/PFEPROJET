@@ -16,7 +16,6 @@ import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
 import com.eai.BatchJobCDL.repository.ImpayesCDLRejetRepository;
 import com.eai.BatchJobCDL.repository.TypeDossierRepository;
 
-@Transactional
 @Component
 
 public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
@@ -34,7 +33,7 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 			
 	    	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
 	    	ImpayesCdlRejetModel impayesCdlRejetModel = new ImpayesCdlRejetModel();
-	    	TypeDossierModel typeDossier = typeDOsRepo.findOneByLibelleCourt(item.getType());
+	    	TypeDossierModel typeDossier = typeDOsRepo.findAllByLibelleCourt(item.getType());
 
 		
 	        if (item.getNateng().equals("ESC")) {   // if (typeDOsRepo.findOneByLibelleCourt()==item.getType()) {
@@ -42,10 +41,9 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 
             	if (typeDossier != null) { // item.getType()=00001 and r.findOneByLibelleCourt=00001
                    
-            		log.debug("Type exists in TypeDossierModel: {}", item.getType());
+//            		log.debug("Type exists in TypeDossierModel: {}", item.getType());
     				log.info("Data retrieved from the database for type: {}", item.getType());
 
-	    	        System.out.println("ProcessorEsc+++++++++++++++++++++");
 
 	            	impayesCDLModel.setNateng(item.getNateng());
 	            	impayesCDLModel.setType(item.getType());
@@ -63,7 +61,7 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	            	impayesCDLModel.setCommission(item.getCommission());
 	            }
 	             else {
-	                 log.debug("Type does not exist in TypeDossierModel: {}", item.getType());
+//	                 log.debug("Type does not exist in TypeDossierModel: {}", item.getType());
 	 				 log.info("No data found in the database for type: {}", item.getType());
 
 
@@ -83,7 +81,9 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	            	impayesCdlRejetModel.setCommission(item.getCommission());
 	            	impayesCdlRejetModel.setDateRejet(null);
 	                impayesCdlRejetModel.setMotifRejet("la valeur du colonne TYPE n exist pas  dans la table TYPE_DOSSIERLIBELLE_COURT ");
-	    		}
+	                impayesCDLRejetRepository.save(impayesCdlRejetModel);
+	    			//impayesCDLRejetRepository.insert(impayesCDLRejetModel);	    		
+	             }
 	        }
 	        else {
 	            log.info("type n'exists pas dans TypeDossierModel: {}", item.getType());
@@ -104,9 +104,11 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
             	impayesCdlRejetModel.setCommission(item.getCommission());
             	impayesCdlRejetModel.setDateRejet(null);//date rejet
     		    impayesCdlRejetModel.setMotifRejet("la valeur du colonne NATENG est different à ESC "); 
-			}
+    		    impayesCDLRejetRepository.save(impayesCdlRejetModel);
+    			//impayesCDLRejetRepository.insert(impayesCDLRejetModel);
+	        }
 
-	        impayesCDLRejetRepository.insert(impayesCdlRejetModel);
+	       // impayesCDLRejetRepository.insert(impayesCdlRejetModel);
 	        System.out.println("ProcessorEsc: ");
 	        return impayesCDLModel;
 	    }

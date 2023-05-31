@@ -11,10 +11,7 @@ import com.eai.BatchJobCDL.model.TypeDossierModel;
 import com.eai.BatchJobCDL.repository.ImpayesCDLRejetRepository;
 import com.eai.BatchJobCDL.repository.TypeDossierRepository;
 
-//@EnableJpaRepositories(basePackages = "com.eai.BatchJobCDL.repository"+"com.eai.BatchJobCDL.model")
 @Component
-//@ComponentScan("com.eai.BatchJobCDL.model"+"com.eai.BatchJobCDL.repository")
-
 public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 
 	//private final TypeDossierRepositoryImpl TypeDossierRepository = new TypeDossierRepository();
@@ -31,14 +28,18 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 	
     public ImpayesCDLModel process(EchDTO item) {
 		
+    	
     	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
 		ImpayesCdlRejetModel impayesCDLRejetModel = new ImpayesCdlRejetModel();
-		TypeDossierModel typeDossier = typeDOsRepo.findOneByLibelleCourt(item.getType());
+    	TypeDossierModel typeDossier = typeDOsRepo.findAllByLibelleCourt(item.getType());
+    	impayesCDLRejetRepository.delete(impayesCDLRejetModel);//TRUNCATE TABLE IMPAYES_CDL_REJET;//tester
+
 
 		if (item.getNateng().equals("ECH")) {
 			
             if (typeDossier!=null) { // if (typeDOsRepo.findAllLibelleCourt().contains(item.getType())) {
-            	
+        		System.out.println("ProcessorEch: typeDOsRepo.findAllLibelleCourt().contains(item.getType())");
+
                 impayesCDLModel.setNateng(item.getNateng());
                 impayesCDLModel.setType(item.getType());
                 impayesCDLModel.setCpt(item.getCpt());
@@ -86,6 +87,8 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
                 impayesCDLRejetModel.setNumeroTirage(item.getNumeroTirage());
                 impayesCDLRejetModel.setDateRejet(null);//date rejet
                 impayesCDLRejetModel.setMotifRejet("la valeur du colonne TYPE n exist pas  dans la table TYPE_DOSSIER.LIBELLE_COURT"); 
+        		impayesCDLRejetRepository.save(impayesCDLRejetModel);
+        		//impayesCDLRejetRepository.insert(impayesCDLRejetModel);
 
                 }
 		}
@@ -115,9 +118,12 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 		    impayesCDLRejetModel.setNumeroTirage(item.getNumeroTirage());
 		    impayesCDLRejetModel.setDateRejet(null);//date rejet
 		    impayesCDLRejetModel.setMotifRejet("la valeur du colonne NATENG est different a ECH "); 
+			impayesCDLRejetRepository.save(impayesCDLRejetModel);
+			//impayesCDLRejetRepository.insert(impayesCDLRejetModel);
+
+
 	}
-		
-		impayesCDLRejetRepository.insert(impayesCDLRejetModel);
+		//impayesCDLRejetRepository.insert(impayesCDLRejetModel);
 		System.out.println("ProcessorEch: ");
     return impayesCDLModel;
   }

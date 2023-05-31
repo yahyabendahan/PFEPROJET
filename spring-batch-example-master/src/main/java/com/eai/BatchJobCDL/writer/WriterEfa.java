@@ -17,7 +17,8 @@ public class WriterEfa extends JdbcBatchItemWriter<ImpayesCDLModel>{
 	    
 	    public WriterEfa(DataSource dataSource) {
 	        this.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
-	        
+	         System.out.println("WriterEfa: ");
+
 
 	        this.setSql("INSERT INTO IMPAYES_CDL (NATENG, TYPE, CPT, MONTANT_CREANCE, DATE_CREANCE, NO_DOSSIER, DATE_ECHEANCE, DATE_MISE_IMPAYE, REFFERENCE_VALEUR) " +
 	                "VALUES (:nateng, :type, :cpt, :montantCreance, :dateCreance, :noDossier, :dateEcheance, :dateMiseImpaye, :refferenceValeur)");

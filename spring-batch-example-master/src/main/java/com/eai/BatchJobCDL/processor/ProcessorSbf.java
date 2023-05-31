@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.eai.BatchJobCDL.DTO.SbfDTO;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
@@ -12,6 +13,7 @@ import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
 import com.eai.BatchJobCDL.repository.ImpayesCDLRejetRepository;
 
 
+@Component
 public class ProcessorSbf implements ItemProcessor<SbfDTO, ImpayesCDLModel> {
 
 		//	private static final Logger log = LoggerFactory.getLogger(ProcessorEch.class);
@@ -55,8 +57,11 @@ public class ProcessorSbf implements ItemProcessor<SbfDTO, ImpayesCDLModel> {
 	            	impayesCdlRejetModel.setCommission(item.getCommission());
 	            	impayesCdlRejetModel.setDateRejet(null);//date rejet
 	            	impayesCdlRejetModel.setMotifRejet("la valeur du colonne NATENG est different a SBF "); 
+	            	impayesCDLRejetRepository.save(impayesCdlRejetModel);
+	    			//impayesCDLRejetRepository.insert(impayesCDLRejetModel);
 				}
-		        impayesCDLRejetRepository.insert(impayesCdlRejetModel);
+		       
+		        //impayesCDLRejetRepository.insert(impayesCdlRejetModel);
 		        System.out.println("ProcessorSbf: ");
 		        return impayesCDLModel;		 
 	}

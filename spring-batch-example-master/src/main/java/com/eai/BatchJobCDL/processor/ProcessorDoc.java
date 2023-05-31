@@ -48,9 +48,11 @@ public class ProcessorDoc  implements ItemProcessor<DocDTO, ImpayesCDLModel>  {
         	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
         	impayesCdlRejetModel.setDateRejet(null);//date rejet
         	impayesCdlRejetModel.setMotifRejet("la valeur du colonne NATENG est different a  DOC ");  
+        	impayesCDLRejetRepository.save(impayesCdlRejetModel);
+			//impayesCDLRejetRepository.insert(impayesCDLRejetModel);
 		}
 		
-		impayesCDLRejetRepository.insert(impayesCdlRejetModel);
+		//impayesCDLRejetRepository.insert(impayesCdlRejetModel);
         System.out.println("ProcessorDoc: ");
 
 		return impayesCDLModel;

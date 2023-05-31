@@ -26,7 +26,7 @@ public class WriterTDossier extends JdbcBatchItemWriter<DossierModel>{
 
 	    
 	    @SuppressWarnings("unlikely-arg-type")
-	
+	    @Autowired
 	    public WriterTDossier(DataSource dataSource) {
 	    	
 	    	DossierModel d = new DossierModel();

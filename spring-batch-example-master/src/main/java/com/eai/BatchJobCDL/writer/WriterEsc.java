@@ -18,6 +18,8 @@ public class WriterEsc extends JdbcBatchItemWriter<ImpayesCDLModel>{
 	        this.setSql("INSERT INTO IMPAYES_CDL (NATENG, TYPE, CPT, MONTANT_CREANCE, DATE_CREANCE, NO_DOSSIER, REFFERENCE_VALEUR, DATE_ECHEANCE, CODE_ETABLISST_BANCAIRE, CODE_GUICHET_BANCAIRE, DATE_REMISE, REFERNCE_LIAISON, CODE_REJET, COMISSION) " +
 	                "VALUES (:nateng, :type, :cpt, :montantCreance, :dateCreance, :noDossier, :refferenceValeur, :dateEcheance, :codeEtablissementBancaire, :codeGuichetBancaire, :dateRemise, :referenceLiaison, :codeRejet, :commission)");
 	        this.setDataSource(dataSource);
+	         System.out.println("WriterEsc: ");
+
 	    }
 	    
 	}
