@@ -26,20 +26,25 @@ public class ProcessorCleDossCrCpt  implements ItemProcessor<CreanceModel , Cle_
 
 	public Cle_Doss_Cr_CptModel process(CreanceModel item)/*ajouter dossiermodule içi !?*/ throws Exception {
 		
-		DossierModel dossiermodel = new DossierModel();
+		//DossierModel dossiermodel = new DossierModel();
 		Cle_Doss_Cr_CptModel cle_doss_cr_cpt = new Cle_Doss_Cr_CptModel();
-        
-		if ( item.getcodeDossier() == dossiermodel.getCODE() ){// CreanceModel est vide 
-			
-			//cle_doss_cr_cpt.setCode(dossiermodel.getCODE());//	dossiermodel.getCODE() /  item.getcode()
-			cle_doss_cr_cpt.setCode( item.getcode());
+        DossierModel shareddossiermodel = SharedDataDossier.sharedDossierModel;
 
-			//dossierRepo.findAllByCODE(dossiermodel.getCODE()).getCODE()
-			cle_doss_cr_cpt.setNumeroDossier(dossiermodel.getNUMERO_DOSSIER());
-			cle_doss_cr_cpt.setCpt(dossiermodel.getCODE_COMPTE()); 	
+		//DossierModel dossier = dossierRepo.findByCODE(dossiermodel.getCODE());
+
+		if ( item.getcodeDossier() == shareddossiermodel.getCODE() ){// CreanceModel est vide 
+			
+				//cle_doss_cr_cpt.setCode(dossiermodel.getCODE());//	dossiermodel.getCODE() /  item.getcode()
+			
+			//cle_doss_cr_cpt.setCode(dossierRepo.findByCODE().getCODE());
+			
+			
+			cle_doss_cr_cpt.setCode(shareddossiermodel.getCODE());
+			cle_doss_cr_cpt.setNumeroDossier(shareddossiermodel.getNUMERO_DOSSIER());
+			cle_doss_cr_cpt.setCpt(shareddossiermodel.getCODE_COMPTE()); 	
 			cle_doss_cr_cpt.setDateEcheance(item.getDateEcheance());//item.getDateEcheance()
 			cle_doss_cr_cpt.setCodeTypeDossier(item.getCodeTypeDossier());
-			cle_doss_cr_cpt.setCleDossier(dossiermodel.getCLE_DOSSIER());
+			cle_doss_cr_cpt.setCleDossier(shareddossiermodel.getCLE_DOSSIER());
 			cle_doss_cr_cpt.setCodeNatEng(item.getCodeNatEng());
 
 		

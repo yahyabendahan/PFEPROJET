@@ -14,12 +14,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.eai.BatchJobCDL.model.CompteModel;
+import com.eai.BatchJobCDL.model.DossierModel;
 import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 
 
 
 @Component
 public class ProcessorTCompte implements ItemProcessor<ImpayesCDLModel, CompteModel> {
+
+	
 
  
     
@@ -37,6 +40,9 @@ public class ProcessorTCompte implements ItemProcessor<ImpayesCDLModel, CompteMo
         	comptemodel.setEncoursRisque(impayesCDLModel.getEncoursRisque());
         	comptemodel.setTypeClient(impayesCDLModel.getTypeClient());
         	comptemodel.setNumTiers(impayesCDLModel.getNumTiers());
+
+        	
+	        SharedDataCompte.sharedCompteModel = comptemodel;
 
         return comptemodel;
     }

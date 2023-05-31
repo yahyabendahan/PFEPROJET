@@ -13,9 +13,11 @@ import com.eai.BatchJobCDL.model.DossierModel;
 @Repository
 public interface DossierRepository extends JpaRepository<DossierModel,BigDecimal> {
 	
-	@Query("SELECT n.CODE FROM DossierModel n")
-	DossierModel findAllByCODE();
+//	@Query("SELECT n.CODE FROM DossierModel n")
+//	DossierModel findByCODE();
 	
+	@Query("SELECT n FROM DossierModel n WHERE n.CODE = :code")
+	DossierModel findByCODE(@Param("code") BigDecimal code);
 	
 //	@Query("SELECT n FROM DossierModel n WHERE n.CODE = :someValue")
 //	DossierModel findBySomeCriteria(@Param("someValue") BigDecimal someValue);

@@ -9,10 +9,6 @@ import com.eai.BatchJobCDL.model.*;
 
 @Component
 public class ProcessorTDossier implements ItemProcessor<ImpayesCDLModel, DossierModel> {
-	
-	//@Autowired
-	//private DataSource dataSource;
-	//double i=1;
 
 
 	@Override
@@ -20,7 +16,9 @@ public class ProcessorTDossier implements ItemProcessor<ImpayesCDLModel, Dossier
 		
 		DossierModel d = new DossierModel();
 
-        CompteModel c = new CompteModel();
+		
+	    CompteModel compteshared = SharedDataCompte.sharedCompteModel;
+
  	
 		 if (impayescdl.getNateng()!="ESC") {
 	
@@ -30,7 +28,7 @@ public class ProcessorTDossier implements ItemProcessor<ImpayesCDLModel, Dossier
 			 d.setNUM_DOSSIER_COMPLET(impayescdl.getNumDossierComplet());
 			 d.setNUMERO_LIGNE(impayescdl.getNumeroLigne());
 			 d.setNUMERO_TIRAGE(impayescdl.getNumeroTirage());
-			 d.setCODE_COMPTE(c.getCode()); // return null ?
+			 d.setCODE_COMPTE(compteshared.getCode()); // return null ?
 			 d.setTYPE_DOSSIER(impayescdl.getType());
 			 //ANCIEN_NUMERO_DOSSIER=NULL and ENCOURS=NULL
 			 		 }
@@ -52,13 +50,14 @@ public class ProcessorTDossier implements ItemProcessor<ImpayesCDLModel, Dossier
 			 d.setNUM_DOSSIER_COMPLET(impayescdl.getNumDossierComplet());
 			 d.setNUMERO_LIGNE(impayescdl.getNumeroLigne());
 			 d.setNUMERO_TIRAGE(impayescdl.getNumeroTirage());
-			 d.setCODE_COMPTE(c.getCode());   // select code from compte ;
 			 d.setTYPE_DOSSIER(impayescdl.getType());//td.getLIBELLE_COURT()
 			 //ANCIEN_NUMERO_DOSSIER=NULL and ENCOURS=NULL
 		        
 		 }
 	        System.out.println("ProcessorTdossier: ");
-		
+	        
+	        SharedDataDossier.sharedDossierModel = d;
+
 		return d;
 	}
 }

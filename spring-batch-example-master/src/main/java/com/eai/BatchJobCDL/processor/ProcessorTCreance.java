@@ -28,11 +28,17 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
 	public CreanceModel process(ImpayesCDLModel item) throws Exception {
 		//DossierModel dossiermodel = new DossierModel();
         CreanceModel creancemodel = new CreanceModel();
+        
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd"); // Example: fichier esc (20230222) // Unparseable date: "20220921"
         BigDecimal divisor = new BigDecimal(100);
+        
         TypeDossierModel typeDossier = typeDOsRepo.findAllByLibelleCourt(item.getType());
         NatEngModel natengcdl = natgRepo.findAllByLibelleCourt(item.getNateng());
-        DossierModel dossiermodel = dossierRepo.findAllByCODE(); // Adjust the criteria to retrieve the appropriate DossierModel
+        
+        DossierModel dossiermodel = SharedDataDossier.sharedDossierModel;
+
+        
+      //  DossierModel dossiermodelrepo = dossierRepo.findAllByCODE(); // Adjust the criteria to retrieve the appropriate DossierModel
 
         
        if((natengcdl!=null)&&(typeDossier!=null))       
@@ -41,8 +47,11 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
             creancemodel.setCodeMotif(null);//CODE_REJE
             creancemodel.setCodeNatEng(natengcdl.getCODE());
             
-            //BigDecimal codedoss = dossiermodel.getCODE();
             creancemodel.setcodeDossier(dossiermodel.getCODE());
+            
+            
+            //BigDecimal codedoss = dossiermodel.getCODE();
+           // creancemodel.setcodeDossier(dossiermodelrepo.getCODE());
             
             
             
