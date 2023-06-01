@@ -37,12 +37,12 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 
 		
 	        if (item.getNateng().equals("ESC")) {   // if (typeDOsRepo.findOneByLibelleCourt()==item.getType()) {
-	            log.info("Checking if type exists in TypeDossierModel: {}", item.getType());
+	            //log.info("Checking if type exists in TypeDossierModel: {}", item.getType());
 
             	if (typeDossier != null) { // item.getType()=00001 and r.findOneByLibelleCourt=00001
                    
 //            		log.debug("Type exists in TypeDossierModel: {}", item.getType());
-    				log.info("Data retrieved from the database for type: {}", item.getType());
+    				//log.info("Data retrieved from the database for type: {}", item.getType());
 
 
 	            	impayesCDLModel.setNateng(item.getNateng());
@@ -62,7 +62,7 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	            }
 	             else {
 //	                 log.debug("Type does not exist in TypeDossierModel: {}", item.getType());
-	 				 log.info("No data found in the database for type: {}", item.getType());
+	 				 //log.info("No data found in the database for type: {}", item.getType());
 
 
 	            	impayesCdlRejetModel.setNateng(item.getNateng());
@@ -86,7 +86,7 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	             }
 	        }
 	        else {
-	            log.info("type n'exists pas dans TypeDossierModel: {}", item.getType());
+	            //log.info("type n'exists pas dans TypeDossierModel: {}", item.getType());
 
 	        	impayesCdlRejetModel.setNateng(item.getNateng());
             	impayesCdlRejetModel.setType(item.getType());

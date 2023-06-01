@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
 import com.eai.BatchJobCDL.model.*;
 import com.eai.BatchJobCDL.repository.*;
 import java.math.BigDecimal;
@@ -26,39 +29,57 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
 
 	
 	public CreanceModel process(ImpayesCDLModel item) throws Exception {
-		//DossierModel dossiermodel = new DossierModel();
-        CreanceModel creancemodel = new CreanceModel();
-        
+
+		CreanceModel creancemodel = new CreanceModel();      
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd"); // Example: fichier esc (20230222) // Unparseable date: "20220921"
-        BigDecimal divisor = new BigDecimal(100);
-        
+        BigDecimal divisor = new BigDecimal(100);      
         TypeDossierModel typeDossier = typeDOsRepo.findAllByLibelleCourt(item.getType());
         NatEngModel natengcdl = natgRepo.findAllByLibelleCourt(item.getNateng());
         
-        DossierModel dossiermodel = SharedDataDossier.sharedDossierModel;
+        BigDecimal dossierCodes = dossierRepo.findAllCODEs();
+       // System.out.println("dossierCodes: " + dossierCodes);
+	
+//        Optional<BigDecimal> dossierCodeOptional = dossierRepo.findFirstByCODE();
+//        BigDecimal dossierCode = dossierCodeOptional.orElse(null); // or handle the absence of a result accordingly
+//        System.out.println("    creancemodel.setcodeDossier( dossierCode ) =   "+ dossierCode);
 
-        
-      //  DossierModel dossiermodelrepo = dossierRepo.findAllByCODE(); // Adjust the criteria to retrieve the appropriate DossierModel
-
-        
-       if((natengcdl!=null)&&(typeDossier!=null))       
+    	//DossierModel dossiermodel = new DossierModel();
+        //DossierModel dossiermodel = SharedDataDossier.sharedDossierModel;      
+        //dossierrepo = dossierRepo.findOneByCODE(); // Adjust the criteria to retrieve the appropriate DossierModel
+        int i = 0;
+       if((natengcdl!=null)&&(typeDossier!=null)&&(dossierCodes!=null))       
         {        
             creancemodel.setCodeTypeDossier(typeDossier.getCODE());
             creancemodel.setCodeMotif(null);//CODE_REJE
             creancemodel.setCodeNatEng(natengcdl.getCODE());
             
-            creancemodel.setcodeDossier(dossiermodel.getCODE());
-            
-            
-            //BigDecimal codedoss = dossiermodel.getCODE();
-           // creancemodel.setcodeDossier(dossiermodelrepo.getCODE());
             
             
             
-//            BigDecimal codedoss = dossierRepo.findAllByCODE(dossiermodel.getCODE()).getCODE();
-//            creancemodel.setcodeDossier(codedoss);
+          creancemodel.setcodeDossier(dossierCodes);
+
+            /*for (int i =0 ; i < dossierCodes.size(); i++)*/
             
-            //    creancemodel.setcodeDossier(dossierRepo.findAllByCODE(dossiermodel.getCODE()).getCODE());
+//            while (i < dossierCodes.size()) {
+//                        creancemodel.setcodeDossier(dossierCodes.get(i));
+//            		    System.out.println("dossierCodes[" + i + "]: " + dossierCodes.get(i));
+//            		    i++;
+//            		    continue;
+//            		}
+            
+            
+           //creancemodel.setcodeDossier(dossiermodel.getCODE());
+            
+           // BigDecimal dossierrepo = dossierRepo.findOneByCODE();
+           //creancemodel.setcodeDossier(dossierrepo);
+            
+//	        System.out.println("    creancemodel.setcodeDossier( dossierCode ) =   "+ dossierCode);
+//
+//            creancemodel.setcodeDossier( dossierCode );
+//            
+//            
+            
+           // creancemodel.setcodeDossier(dossierRepo.findAllByCODE(dossiermodel.getCODE()).getCODE());
             
           /*  DossierModel DossierCode = dossierRepo.findOneByCODE(dossiermodel.getCODE()); // autre façon d'ecrire
             creancemodel.setcodeDossier(DossierCode.getCODE());*/ 

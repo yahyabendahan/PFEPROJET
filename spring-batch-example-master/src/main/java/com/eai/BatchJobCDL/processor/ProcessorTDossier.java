@@ -28,8 +28,9 @@ public class ProcessorTDossier implements ItemProcessor<ImpayesCDLModel, Dossier
 			 d.setNUM_DOSSIER_COMPLET(impayescdl.getNumDossierComplet());
 			 d.setNUMERO_LIGNE(impayescdl.getNumeroLigne());
 			 d.setNUMERO_TIRAGE(impayescdl.getNumeroTirage());
+			 
 			 d.setCODE_COMPTE(compteshared.getCode()); // return null ?
-			 d.setTYPE_DOSSIER(impayescdl.getType());
+			 
 			 //ANCIEN_NUMERO_DOSSIER=NULL and ENCOURS=NULL
 			 		 }
 		 else {
@@ -45,7 +46,6 @@ public class ProcessorTDossier implements ItemProcessor<ImpayesCDLModel, Dossier
 			  
 		        
 		     d.setCLE_DOSSIER(sql);
-		   	// d.setCODE(i++);
 			 d.setNUMERO_DOSSIER(impayescdl.getNoDossier());
 			 d.setNUM_DOSSIER_COMPLET(impayescdl.getNumDossierComplet());
 			 d.setNUMERO_LIGNE(impayescdl.getNumeroLigne());

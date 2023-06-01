@@ -30,19 +30,19 @@ public interface TypeDossierRepository extends JpaRepository<TypeDossierModel, S
 	
 	
 	
-	
-	@Transactional
-	// Logging example for findOneByLibelleCourt
-    //@Query("SELECT t FROM TypeDossierModel t WHERE t.LIBELLE_COURT = :libelleCourt")
-    default TypeDossierModel findAllByLibelleCourtWithLogging(@Param("libelleCourt") String libelleCourt) {
-        TypeDossierModel result = findAllByLibelleCourt(libelleCourt);
-        if (result != null) {
-            log.info("Data is available in the database for LIBELLE_COURT: {}", libelleCourt);
-        } else {
-            log.info(" data is not available in the database for LIBELLE_COURT: {}", libelleCourt);
-        }
-        return result;
-    }
+//	
+//	@Transactional
+//	// Logging example for findOneByLibelleCourt
+//    //@Query("SELECT t FROM TypeDossierModel t WHERE t.LIBELLE_COURT = :libelleCourt")
+//    default TypeDossierModel findAllByLibelleCourtWithLogging(@Param("libelleCourt") String libelleCourt) {
+//        TypeDossierModel result = findAllByLibelleCourt(libelleCourt);
+//        if (result != null) {
+//            log.info("Data is available in the database for LIBELLE_COURT: {}", libelleCourt);
+//        } else {
+//            log.info(" data is not available in the database for LIBELLE_COURT: {}", libelleCourt);
+//        }
+//        return result;
+//    }
 
 	
 }
