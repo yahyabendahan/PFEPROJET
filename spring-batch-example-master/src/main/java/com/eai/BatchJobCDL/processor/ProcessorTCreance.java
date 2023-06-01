@@ -36,7 +36,7 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
         TypeDossierModel typeDossier = typeDOsRepo.findAllByLibelleCourt(item.getType());
         NatEngModel natengcdl = natgRepo.findAllByLibelleCourt(item.getNateng());
         
-        BigDecimal dossierCodes = dossierRepo.findAllCODEs();
+        DossierModel dossierCodes = dossierRepo.findOneByCODE(item.getNoDossier());
        // System.out.println("dossierCodes: " + dossierCodes);
 	
 //        Optional<BigDecimal> dossierCodeOptional = dossierRepo.findFirstByCODE();
@@ -56,7 +56,7 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
             
             
             
-          creancemodel.setcodeDossier(dossierCodes);
+          creancemodel.setcodeDossier(dossierCodes.getCODE());
 
             /*for (int i =0 ; i < dossierCodes.size(); i++)*/
             

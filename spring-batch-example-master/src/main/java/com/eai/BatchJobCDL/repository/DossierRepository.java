@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.Column;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,9 +23,17 @@ public interface DossierRepository extends JpaRepository<DossierModel,BigDecimal
 //	@Query("SELECT n.CODE FROM DossierModel n")
 //	List<BigDecimal> findAllCODEs();
 	
-	@Query("SELECT n.CODE FROM DossierModel n")
-	BigDecimal findAllCODEs();
-
+	@Query("SELECT n.CODE FROM DossierModel n  WHERE n.NUMERO_DOSSIER = :noDossier")
+	DossierModel findOneByCODE(@Param("noDossier")String noDossier );
+	
+	
+/*	@Column(name = "NO_DOSSIER")
+	private String noDossier;*/
+	
+	/*@Column(name="NUMERO_DOSSIER")
+	private String NUMERO_DOSSIER;*/
+	
+	
     //BigDecimal findOneByCODE();
 
 	
