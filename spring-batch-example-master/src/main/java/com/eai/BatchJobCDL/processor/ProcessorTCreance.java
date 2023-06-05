@@ -28,6 +28,8 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
 	DossierRepository dossierRepo;
 
 	
+	int i = 0;
+	
 	public CreanceModel process(ImpayesCDLModel item) throws Exception {
 
 		CreanceModel creancemodel = new CreanceModel();      
@@ -36,7 +38,9 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
         TypeDossierModel typeDossier = typeDOsRepo.findAllByLibelleCourt(item.getType());
         NatEngModel natengcdl = natgRepo.findAllByLibelleCourt(item.getNateng());
         
-        DossierModel dossierCodes = dossierRepo.findOneByCODE(item.getNoDossier());
+        //BigDecimal dossierCodes = dossierRepo.findOneByCODE(item.getNoDossier());
+        List<BigDecimal> dossierCodes = dossierRepo.findAllCODEs();
+        
        // System.out.println("dossierCodes: " + dossierCodes);
 	
 //        Optional<BigDecimal> dossierCodeOptional = dossierRepo.findFirstByCODE();
@@ -46,7 +50,7 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
     	//DossierModel dossiermodel = new DossierModel();
         //DossierModel dossiermodel = SharedDataDossier.sharedDossierModel;      
         //dossierrepo = dossierRepo.findOneByCODE(); // Adjust the criteria to retrieve the appropriate DossierModel
-        int i = 0;
+        //int i = 0;
        if((natengcdl!=null)&&(typeDossier!=null)&&(dossierCodes!=null))       
         {        
             creancemodel.setCodeTypeDossier(typeDossier.getCODE());
@@ -55,17 +59,14 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
             
             
             
-            
-          creancemodel.setcodeDossier(dossierCodes.getCODE());
+            //          creancemodel.setcodeDossier(dossierCodes.getCODE());
+         // creancemodel.setcodeDossier(dossierCodes);
 
             /*for (int i =0 ; i < dossierCodes.size(); i++)*/
             
-//            while (i < dossierCodes.size()) {
-//                        creancemodel.setcodeDossier(dossierCodes.get(i));
-//            		    System.out.println("dossierCodes[" + i + "]: " + dossierCodes.get(i));
-//            		    i++;
-//            		    continue;
-//            		}
+                        creancemodel.setcodeDossier(dossierCodes.get(i));
+            		    System.out.println("dossierCodes[" + i + "]: " + dossierCodes.get(i));
+            		    i++;
             
             
            //creancemodel.setcodeDossier(dossiermodel.getCODE());
