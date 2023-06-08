@@ -22,34 +22,19 @@ public interface DossierRepository extends JpaRepository<DossierModel,BigDecimal
 	
 	@Query("SELECT n.CODE FROM DossierModel n")
 	List<BigDecimal> findAllCODEs();
-	
-	@Query("SELECT n.CODE FROM DossierModel n  WHERE n.NUMERO_DOSSIER = :noDossier")
-	BigDecimal findOneByCODE(@Param("noDossier")String noDossier );
-	
-	
-	@Query("SELECT n.CLE_DOSSIER FROM DossierModel n  WHERE n.NUMERO_DOSSIER = :noDossier")
-	DossierModel findOneByCLE_DOSSIER(@Param("noDossier")String noDossier );
 
-	
-	
-	
-/*	@Column(name = "NO_DOSSIER")
-	private String noDossier;*/
-	
-	/*@Column(name="NUMERO_DOSSIER")
-	private String NUMERO_DOSSIER;*/
-	
-	
-    //BigDecimal findOneByCODE();
-
-	
 	@Query("SELECT n FROM DossierModel n WHERE n.CODE = :code")
 	DossierModel findByCODE(@Param("code") BigDecimal code);
 	
+//	@Query("SELECT n.CODE FROM DossierModel n  WHERE n.NUMERO_DOSSIER = :noDossier")
+//	BigDecimal findOneByCODE(@Param("noDossier")String noDossier );
+//	
 //	@Query("SELECT n FROM DossierModel n WHERE n.CODE = :someValue")
 //	DossierModel findBySomeCriteria(@Param("someValue") BigDecimal someValue);
-
-	
+//	
+//	@Query("SELECT n.CLE_DOSSIER FROM DossierModel n  WHERE n.NUMERO_DOSSIER = :noDossier")
+//	DossierModel findOneByCLE_DOSSIER(@Param("noDossier")String noDossier );
+//
 //	@Query("SELECT n FROM DossierModel n")
 //	DossierModel findBySomeCriteria();
 

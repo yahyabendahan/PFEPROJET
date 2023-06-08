@@ -1,6 +1,8 @@
 package com.eai.BatchJobCDL.processor;
 
 
+import java.util.Calendar;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
@@ -55,7 +57,7 @@ public class ProcessorSbf implements ItemProcessor<SbfDTO, ImpayesCDLModel> {
 	            	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
 	            	impayesCdlRejetModel.setCodeRejet(item.getCodeRejet());
 	            	impayesCdlRejetModel.setCommission(item.getCommission());
-	            	impayesCdlRejetModel.setDateRejet(null);//date rejet
+	            	impayesCdlRejetModel.setDateRejet(Calendar.getInstance().getTime());//date rejet
 	            	impayesCdlRejetModel.setMotifRejet("la valeur du colonne NATENG est different a SBF "); 
 	            	impayesCDLRejetRepository.save(impayesCdlRejetModel);
 	    			//impayesCDLRejetRepository.insert(impayesCDLRejetModel);

@@ -37,22 +37,23 @@ public class ProcessorCleDossCrCpt  implements ItemProcessor<CreanceModel , Cle_
 
 		DossierModel CodeDossierRepo = dossierRepo.findByCODE(item.getcodeDossier());
 
-		if (dossierCodes.contains(item.getcodeDossier())&&(dossierCodes.size()>i)){ //(item.getcodeDossier() == CodeDossierRepo.getCODE())
+		if (dossierCodes.contains(item.getcodeDossier())){ //(item.getcodeDossier() == CodeDossierRepo.getCODE())
 			
 			//cle_doss_cr_cpt.setCode(CodeDossierRepo.getCODE());
 			if (dossierCodes.get(i) == null) {
 		        System.out.println("if (dossierCodes.get(i) == null): "+dossierCodes.get(i));
 
-			    return cle_doss_cr_cpt;
+			    return null;
 			}
-			else {
+			else{
 			
 			cle_doss_cr_cpt.setCode(item.getcodeDossier());
 			
-			cle_doss_cr_cpt.setCode(dossierCodes.get(i));
-		    System.out.println("cle_doss_cr_cpt:dossierCodes[" + i + "]: " + dossierCodes.get(i));
-			i++;
-			
+//			if (dossierCodes.size()>i) {
+//			cle_doss_cr_cpt.setCode(dossierCodes.get(i));
+//		    System.out.println("cle_doss_cr_cpt:dossierCodes[" + i + "]: " + dossierCodes.get(i));
+//			i++;
+//			}
 			cle_doss_cr_cpt.setNumeroDossier(CodeDossierRepo.getNUMERO_DOSSIER());
 			cle_doss_cr_cpt.setCpt(CodeDossierRepo.getCODE_COMPTE()); 	
 			cle_doss_cr_cpt.setCleDossier(CodeDossierRepo.getCLE_DOSSIER());
@@ -63,9 +64,12 @@ public class ProcessorCleDossCrCpt  implements ItemProcessor<CreanceModel , Cle_
 
 			}
 		}
+		else {
+			return null ;
+		}
         System.out.println("ProcessorCle_Doss_Cr_Cpt: ");
 
-	    return cle_doss_cr_cpt;
+	    return cle_doss_cr_cpt != null ? cle_doss_cr_cpt : new Cle_Doss_Cr_CptModel();
 	}
 }
 

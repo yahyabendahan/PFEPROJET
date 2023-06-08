@@ -3,7 +3,8 @@ package com.eai.BatchJobCDL.processor;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.Date;
+import java.util.Calendar;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -46,7 +47,9 @@ public class ProcessorDoc  implements ItemProcessor<DocDTO, ImpayesCDLModel>  {
         	impayesCdlRejetModel.setDateEcheance(item.getDateEcheance());
         	impayesCdlRejetModel.setDateMiseImpaye(item.getDateMiseImpaye());
         	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
-        	impayesCdlRejetModel.setDateRejet(null);//date rejet
+        	impayesCdlRejetModel.setDateRejet(Calendar.getInstance().getTime());
+
+        	//impayesCdlRejetModel.setDateRejet(null);//date rejet
         	impayesCdlRejetModel.setMotifRejet("la valeur du colonne NATENG est different a  DOC ");  
         	impayesCDLRejetRepository.save(impayesCdlRejetModel);
 			//impayesCDLRejetRepository.insert(impayesCDLRejetModel);

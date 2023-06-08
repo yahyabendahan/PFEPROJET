@@ -57,34 +57,16 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
             creancemodel.setCodeMotif(null);//CODE_REJE
             creancemodel.setCodeNatEng(natengcdl.getCODE());
             
-            
-            
-            //          creancemodel.setcodeDossier(dossierCodes.getCODE());
-         // creancemodel.setcodeDossier(dossierCodes);
-
-            /*for (int i =0 ; i < dossierCodes.size(); i++)*/
-            
+   
+            if(dossierCodes.size()>i) {
                         creancemodel.setcodeDossier(dossierCodes.get(i));
             		    System.out.println("dossierCodes[" + i + "]: " + dossierCodes.get(i));
             		    i++;
-            
+            }
             
            //creancemodel.setcodeDossier(dossiermodel.getCODE());
             
-           // BigDecimal dossierrepo = dossierRepo.findOneByCODE();
-           //creancemodel.setcodeDossier(dossierrepo);
-            
-//	        System.out.println("    creancemodel.setcodeDossier( dossierCode ) =   "+ dossierCode);
-//
-//            creancemodel.setcodeDossier( dossierCode );
-//            
-//            
-            
-           // creancemodel.setcodeDossier(dossierRepo.findAllByCODE(dossiermodel.getCODE()).getCODE());
-            
-          /*  DossierModel DossierCode = dossierRepo.findOneByCODE(dossiermodel.getCODE()); // autre façon d'ecrire
-            creancemodel.setcodeDossier(DossierCode.getCODE());*/ 
-            
+         
             String StringMiseImpaye = item.getDateMiseImpaye();
             String StringEcheance = item.getDateEcheance();
             String StringCreance = item.getDateCreance();
@@ -156,10 +138,14 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
             creancemodel.setNumeroTirage(item.getNumeroTirage());
             creancemodel.setUserCreation("BATCH_INTEG_CDL"); //Valeur par défaut « BATCH_INTEG_CDL 
 
-        }        
+        }    
+       else {
+    	   return null ;
+       }
  	
         System.out.println("ProcessorTcreance: ");
-		return creancemodel;
+        
+		return creancemodel != null ? creancemodel : new CreanceModel() ;
 	}
 
 }

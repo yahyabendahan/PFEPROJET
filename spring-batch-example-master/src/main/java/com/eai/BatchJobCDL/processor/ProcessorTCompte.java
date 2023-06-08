@@ -2,7 +2,9 @@ package com.eai.BatchJobCDL.processor;
 
 
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.sql.DataSource;
 
@@ -23,27 +25,37 @@ import com.eai.BatchJobCDL.model.ImpayesCDLModel;
 public class ProcessorTCompte implements ItemProcessor<ImpayesCDLModel, CompteModel> {
 
 	
+	private Set<String> numdossierset = new HashSet<> ();
 
- 
-    
+
     public CompteModel process(ImpayesCDLModel impayesCDLModel) throws Exception {
         CompteModel comptemodel = new CompteModel();
+        
+        if(!numdossierset.contains(impayesCDLModel.getCpt())) {
+     		numdossierset.add(impayesCDLModel.getCpt());
+        
+     		if(impayesCDLModel.getCpt()!=null) {
+     			
+	        	comptemodel.setNumeroCompteEmprunteur(impayesCDLModel.getCpt());//Cpt
+	        	comptemodel.setEncoursEESConso(impayesCDLModel.getEncoursEESConso());
+	        	comptemodel.setEncoursEESComm(impayesCDLModel.getEncoursEESComm());
+	        	comptemodel.setEncoursESB(impayesCDLModel.getEncoursESB());
+	        	comptemodel.setEncoursESI(impayesCDLModel.getEncoursESI());
+	        	comptemodel.setSolde(impayesCDLModel.getSolde());
+	        	comptemodel.setEncoursDeclasse(impayesCDLModel.getEncoursDeclasse());
+	        	comptemodel.setEncoursRisque(impayesCDLModel.getEncoursRisque());
+	        	comptemodel.setTypeClient(impayesCDLModel.getTypeClient());
+	        	comptemodel.setNumTiers(impayesCDLModel.getNumTiers());
+     		} else {
+     			return null ;
+     		}
+        } else {
+	        	return null;
+	    }    
         System.out.println("ProcessorTcompte: ");
 
-        	comptemodel.setNumeroCompteEmprunteur(impayesCDLModel.getNumComptePayeur());
-        	comptemodel.setEncoursEESConso(impayesCDLModel.getEncoursEESConso());
-        	comptemodel.setEncoursEESComm(impayesCDLModel.getEncoursEESComm());
-        	comptemodel.setEncoursESB(impayesCDLModel.getEncoursESB());
-        	comptemodel.setEncoursESI(impayesCDLModel.getEncoursESI());
-        	comptemodel.setSolde(impayesCDLModel.getSolde());
-        	comptemodel.setEncoursDeclasse(impayesCDLModel.getEncoursDeclasse());
-        	comptemodel.setEncoursRisque(impayesCDLModel.getEncoursRisque());
-        	comptemodel.setTypeClient(impayesCDLModel.getTypeClient());
-        	comptemodel.setNumTiers(impayesCDLModel.getNumTiers());
-
         	
-	        SharedDataCompte.sharedCompteModel = comptemodel;
-
-        return comptemodel;
+        return comptemodel != null ? comptemodel : new CompteModel() ;
+        //return d  !=null ? d : new DossierModel() ;
     }
 }

@@ -1,5 +1,7 @@
 package com.eai.BatchJobCDL.processor;
 
+import java.util.Calendar;
+
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,7 +46,7 @@ public class ProcessorMcn  implements ItemProcessor<McnDTO, ImpayesCDLModel>  {
         	impayesCdlRejetModel.setDateEcheance(item.getDateEcheance());
         	impayesCdlRejetModel.setDateMiseImpaye(item.getDateMiseImpaye());
         	impayesCdlRejetModel.setRefferenceValeur(item.getRefferenceValeur());
-        	impayesCdlRejetModel.setDateRejet(null);//date rejet
+        	impayesCdlRejetModel.setDateRejet(Calendar.getInstance().getTime());//date rejet
         	impayesCdlRejetModel.setMotifRejet("la valeur du colonne NATENG est different a MCN ");
         	impayesCDLRejetRepository.save(impayesCdlRejetModel);
 			//impayesCDLRejetRepository.insert(impayesCDLRejetModel);

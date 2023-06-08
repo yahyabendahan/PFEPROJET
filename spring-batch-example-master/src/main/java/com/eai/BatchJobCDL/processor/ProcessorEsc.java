@@ -8,6 +8,9 @@ import com.eai.BatchJobCDL.model.TypeDossierModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Calendar;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.eai.BatchJobCDL.DTO.EscDTO;
@@ -79,7 +82,7 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
 	            	impayesCdlRejetModel.setReferenceLiaison(item.getReferenceLiaison());
 	            	impayesCdlRejetModel.setCodeRejet(item.getCodeRejet());
 	            	impayesCdlRejetModel.setCommission(item.getCommission());
-	            	impayesCdlRejetModel.setDateRejet(null);
+	            	impayesCdlRejetModel.setDateRejet(Calendar.getInstance().getTime());
 	                impayesCdlRejetModel.setMotifRejet("la valeur du colonne TYPE n exist pas  dans la table TYPE_DOSSIERLIBELLE_COURT ");
 	                impayesCDLRejetRepository.save(impayesCdlRejetModel);
 	    			//impayesCDLRejetRepository.insert(impayesCDLRejetModel);	    		
@@ -102,7 +105,7 @@ public class ProcessorEsc implements ItemProcessor<EscDTO, ImpayesCDLModel>{
             	impayesCdlRejetModel.setReferenceLiaison(item.getReferenceLiaison());
             	impayesCdlRejetModel.setCodeRejet(item.getCodeRejet());
             	impayesCdlRejetModel.setCommission(item.getCommission());
-            	impayesCdlRejetModel.setDateRejet(null);//date rejet
+            	impayesCdlRejetModel.setDateRejet(Calendar.getInstance().getTime());//date rejet
     		    impayesCdlRejetModel.setMotifRejet("la valeur du colonne NATENG est different à ESC "); 
     		    impayesCDLRejetRepository.save(impayesCdlRejetModel);
     			//impayesCDLRejetRepository.insert(impayesCDLRejetModel);
