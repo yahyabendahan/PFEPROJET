@@ -7,16 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.eai.BatchJobCDL.DTO.EchDTO;
-import com.eai.BatchJobCDL.model.ImpayesCDLModel;
-import com.eai.BatchJobCDL.model.ImpayesCdlRejetModel;
-import com.eai.BatchJobCDL.model.TypeDossierModel;
-import com.eai.BatchJobCDL.repository.ImpayesCDLRejetRepository;
-import com.eai.BatchJobCDL.repository.TypeDossierRepository;
+import com.eai.BatchJobCDL.model.*;
+import com.eai.BatchJobCDL.repository.*;
 
 @Component
 public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
-
-	//private final TypeDossierRepositoryImpl TypeDossierRepository = new TypeDossierRepository();
 
 	@Autowired
 	private TypeDossierRepository typeDOsRepo;
@@ -24,11 +19,23 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
     
 	@Autowired
 	private ImpayesCDLRejetRepository impayesCDLRejetRepository;
+	
+	@Autowired
+	private CreanceRepository creanceRepository;
+	    
+	@Autowired
+	private ImpayesCDLRepository impayesCDLRepository;
 
-
+	//4.2. Comparaison et chargement créances
+	//"Nous pouvons effectuer ce traitement dans le processeur de créances,
+	// sans les séparer en fonction des six natures d'engagement."
     
 	
     public ImpayesCDLModel process(EchDTO item) {
+    	
+//    	 ImpayesCDLModel existingImpaye = creanceRepository.findByCodeNatEngAndCodeDossierAndDateEcheanceAndNumeroLigneAndNumeroTirage(
+//                 item.getCodeNatEng(), item.getCodeDossier(), item.getDateEcheance(), item.getNumeroLigne(), item.getNumeroTirage());
+
 		
     	
     	ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
@@ -158,8 +165,7 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
         ImpayesCDLModel impayesCDLModel = new ImpayesCDLModel();
 
         // Check if impayé exists in the CREANCE table
-        ImpayesCDLModel existingImpaye = creanceRepository.findByCodeNatEngAndCodeDossierAndDateEcheanceAndNumeroLigneAndNumeroTirage(
-                item.getCodeNatEng(), item.getCodeDossier(), item.getDateEcheance(), item.getNumeroLigne(), item.getNumeroTirage());
+       
 
         if (existingImpaye != null) {
             // Update the existing impayé

@@ -7,8 +7,10 @@ import org.springframework.stereotype.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import com.eai.BatchJobCDL.model.*;
 import com.eai.BatchJobCDL.repository.*;
@@ -26,10 +28,11 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
 	
 	@Autowired
 	DossierRepository dossierRepo;
-
 	
 	int i = 0;
 	
+	// 	private Set<String> numdossierset = new HashSet<> ();
+	// pour verifier si les entrers exist deja dans la table creance !!!!
 	public CreanceModel process(ImpayesCDLModel item) throws Exception {
 
 		CreanceModel creancemodel = new CreanceModel();      
@@ -38,19 +41,9 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
         TypeDossierModel typeDossier = typeDOsRepo.findAllByLibelleCourt(item.getType());
         NatEngModel natengcdl = natgRepo.findAllByLibelleCourt(item.getNateng());
         
-        //BigDecimal dossierCodes = dossierRepo.findOneByCODE(item.getNoDossier());
         List<BigDecimal> dossierCodes = dossierRepo.findAllCODEs();
         
-       // System.out.println("dossierCodes: " + dossierCodes);
-	
-//        Optional<BigDecimal> dossierCodeOptional = dossierRepo.findFirstByCODE();
-//        BigDecimal dossierCode = dossierCodeOptional.orElse(null); // or handle the absence of a result accordingly
-//        System.out.println("    creancemodel.setcodeDossier( dossierCode ) =   "+ dossierCode);
 
-    	//DossierModel dossiermodel = new DossierModel();
-        //DossierModel dossiermodel = SharedDataDossier.sharedDossierModel;      
-        //dossierrepo = dossierRepo.findOneByCODE(); // Adjust the criteria to retrieve the appropriate DossierModel
-        //int i = 0;
        if((natengcdl!=null)&&(typeDossier!=null)&&(dossierCodes!=null))       
         {        
             creancemodel.setCodeTypeDossier(typeDossier.getCODE());
@@ -64,7 +57,6 @@ public class ProcessorTCreance implements ItemProcessor<ImpayesCDLModel, Creance
             		    i++;
             }
             
-           //creancemodel.setcodeDossier(dossiermodel.getCODE());
             
          
             String StringMiseImpaye = item.getDateMiseImpaye();
