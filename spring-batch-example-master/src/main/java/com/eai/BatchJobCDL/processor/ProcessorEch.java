@@ -20,11 +20,11 @@ public class ProcessorEch implements ItemProcessor<EchDTO, ImpayesCDLModel> {
 	@Autowired
 	private ImpayesCDLRejetRepository impayesCDLRejetRepository;
 	
-	@Autowired
-	private CreanceRepository creanceRepository;
-	    
-	@Autowired
-	private ImpayesCDLRepository impayesCDLRepository;
+//	@Autowired
+//	private CreanceRepository creanceRepository;
+//	    
+//	@Autowired
+//	private ImpayesCDLRepository impayesCDLRepository;
 
 	//4.2. Comparaison et chargement créances
 	//"Nous pouvons effectuer ce traitement dans le processeur de créances,
