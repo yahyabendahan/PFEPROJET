@@ -22,7 +22,7 @@ public class WriterTCompte extends JdbcBatchItemWriter<CompteModel>{
 	//@Autowired
 	//private DataSource dataSource;
 	
-	    @Autowired
+	    @Autowired//shzejkfjb
 	    @SuppressWarnings("unlikely-arg-type")
 		public WriterTCompte(DataSource dataSource) {
 
