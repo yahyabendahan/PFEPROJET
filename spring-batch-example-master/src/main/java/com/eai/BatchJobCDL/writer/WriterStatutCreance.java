@@ -19,11 +19,10 @@ public class WriterStatutCreance extends JdbcBatchItemWriter<Statut_Creance_Hist
 	@Autowired
 	   public WriterStatutCreance(DataSource dataSource) {
 	    	
-		    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-//		    	jdbcTemplate.setDataSource(dataSource);
+		    	//JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);//TEMPORAIRE
 		    	
 		    	 String deleteSql = "DELETE FROM STATUT_CREANCE_HIST";//TEMPORAIRE
-		         new JdbcTemplate(dataSource).update(deleteSql);
+		         new JdbcTemplate(dataSource).update(deleteSql);//TEMPORAIRE
 		         
 		         System.out.println("WriterStatut_Creance_HistModel: ");
 		    	
