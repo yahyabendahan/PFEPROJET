@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -18,11 +19,11 @@ public class Statut_Creance_HistModel {
 
 	@Id
 	@SequenceGenerator(name = "statutcreanceSeqGen", sequenceName = "SEQ_HIST_CREANCE", initialValue = 0, allocationSize = 17599000)
-	@GeneratedValue(generator = "statutcreanceSeqGen")
+	@GeneratedValue(generator = "statutcreanceSeqGen",strategy=GenerationType.SEQUENCE)
 	@Column(name = "CODE")
 	private BigDecimal code;
 	//It is possible that the database is expecting a different data type for the "CODE" column. 
-	//checked 
+	//checked 	
 	
 	//You could also check if the sequence generator is set up correctly and if the sequence exists in the database.
 	//checked

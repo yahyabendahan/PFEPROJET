@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,7 +19,7 @@ public class CreanceModel {
 
 	@Id
 	@SequenceGenerator(name = "creanceSeqGen", sequenceName = "SEQ_CREANCE", initialValue = 1, allocationSize = 11727000)
-	@GeneratedValue(generator = "creanceSeqGen")
+	@GeneratedValue(generator = "creanceSeqGen",strategy=GenerationType.SEQUENCE)
 	@Column(name = "CODE")
 	private BigDecimal code;
 	

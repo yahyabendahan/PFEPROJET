@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 public class CompteModel {
 	@Id
 	@SequenceGenerator(name = "compteSeqGen", sequenceName = "SEQ_COMPTE", initialValue = 1, allocationSize = 10000)
-	@GeneratedValue(generator = "compteSeqGen")
+	@GeneratedValue(generator = "compteSeqGen",strategy=GenerationType.SEQUENCE)
 	@Column(name = "CODE")
 	private BigDecimal code;
 

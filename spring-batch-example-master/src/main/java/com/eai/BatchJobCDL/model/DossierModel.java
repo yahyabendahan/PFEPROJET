@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,7 +20,7 @@ public class DossierModel {
 
 	@Id
 	@SequenceGenerator(name = "dossierSeqGen", sequenceName = "SEQ_DOSSIER", initialValue = 1, allocationSize = 10377915)
-	@GeneratedValue(generator = "dossierSeqGen")
+	@GeneratedValue(generator = "dossierSeqGen",strategy=GenerationType.SEQUENCE)
 	@Column(name = "CODE")
 	private BigDecimal CODE;
 	

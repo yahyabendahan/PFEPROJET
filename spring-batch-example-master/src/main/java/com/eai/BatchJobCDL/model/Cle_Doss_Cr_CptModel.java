@@ -1,8 +1,11 @@
 package com.eai.BatchJobCDL.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Column;
 
 import java.math.BigDecimal;
@@ -13,6 +16,8 @@ import java.util.Date;
 public class Cle_Doss_Cr_CptModel {
 
 		@Id
+		@SequenceGenerator(name = "cleDossCrCptGen", sequenceName = "SEQ_CLEDOSS", initialValue = 1, allocationSize = 16992500)
+		@GeneratedValue(generator = "cleDossCrCptGen",strategy=GenerationType.SEQUENCE)
 		@Column(name = "CODE")
 		private BigDecimal  code;
 
