@@ -23,8 +23,8 @@ public class WriterTCreance  extends JdbcBatchItemWriter<CreanceModel>{
 //    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 //    	jdbcTemplate.setDataSource(dataSource);
 
-    	String deleteSql = "DELETE FROM CREANCE";//TEMPORAIRE
-        new JdbcTemplate(dataSource).update(deleteSql);//TEMPORAIRE
+    	//String deleteSql = "DELETE FROM CREANCE";//TEMPORAIRE
+       // new JdbcTemplate(dataSource).update(deleteSql);//TEMPORAIRE
 
 			  
 		this.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());

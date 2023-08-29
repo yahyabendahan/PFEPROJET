@@ -34,8 +34,9 @@ public class WriterCleDossCrCpt  extends JdbcBatchItemWriter<Cle_Doss_Cr_CptMode
 		    	//jdbcTemplate.setDataSource(dataSource);
 		    	
 		    	// this.cleDossCrCptRepository = cleDossCrCptRepository;
-				String deleteSql = "DELETE FROM CLE_DOSS_CR_CPT";//TEMPORAIRE
-		         new JdbcTemplate(dataSource).update(deleteSql);//TEMPORAIRE
+			 
+			 //	String deleteSql = "DELETE FROM CLE_DOSS_CR_CPT";//TEMPORAIRE
+		     //    new JdbcTemplate(dataSource).update(deleteSql);//TEMPORAIRE
 		         
 		         System.out.println("WriterCle_Doss_Cr_CptModel: ");
 		    	
@@ -50,7 +51,7 @@ public class WriterCleDossCrCpt  extends JdbcBatchItemWriter<Cle_Doss_Cr_CptMode
 		        this.setDataSource(dataSource);
 		    }
 		
-		/*  @Override
+		/*  @Override //
     public void write(List<? extends Cle_Doss_Cr_CptModel> items) throws Exception {
         cleDossCrCptRepository.saveAll(items);
     } */

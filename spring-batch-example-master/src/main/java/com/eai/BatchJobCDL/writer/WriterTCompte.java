@@ -30,9 +30,9 @@ public class WriterTCompte extends JdbcBatchItemWriter<CompteModel>{
 
 	    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 	    	
-	    	 String deleteSql = "DELETE FROM COMPTE";//TEMPORAIRE
+	    	 //String deleteSql = "DELETE FROM COMPTE";//TEMPORAIRE
 	    	 
-	         new JdbcTemplate(dataSource).update(deleteSql);//TEMPORAIRE
+	         //new JdbcTemplate(dataSource).update(deleteSql);//TEMPORAIRE
 	         
 	         System.out.println("WriterCompte: ");
 	    	

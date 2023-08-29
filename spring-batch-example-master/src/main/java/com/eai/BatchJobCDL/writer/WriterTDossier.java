@@ -32,8 +32,8 @@ public class WriterTDossier extends JdbcBatchItemWriter<DossierModel>{
 	    	DossierModel d = new DossierModel();
 	    	JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 	    	
-	    	 String deleteSql = "DELETE FROM DOSSIER";//TEMPORAIRE
-	         new JdbcTemplate(dataSource).update(deleteSql);//TEMPORAIRE
+	    	// String deleteSql = "DELETE FROM DOSSIER";//TEMPORAIRE
+	        // new JdbcTemplate(dataSource).update(deleteSql);//TEMPORAIRE
 	         
 	         System.out.println("Writerdossier: ");
 	    	
